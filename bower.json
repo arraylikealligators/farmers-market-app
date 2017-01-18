@@ -1,0 +1,17 @@
+{
+  "name": "fazzar",
+  "description": "tells you where the closest farmers markets are in your area",
+  "main": "index.js",
+  "authors": [
+    "Nino <rekhviasnino@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
