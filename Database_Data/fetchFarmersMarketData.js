@@ -1,6 +1,8 @@
 // here is the script to make the API requests to Farmer's Market API to grab all market data based on zip code
 var request = require('request');
 var zipCodesNYC = require('./zipCodesNYC');
+var fs = require('fs');
+// console.log(zipCodesNYC);
 
 exports.fetchAllData = function(zipCodes) {
   // iterate through all zip codes and save response to a unique JSON file
@@ -9,6 +11,8 @@ exports.fetchAllData = function(zipCodes) {
       if(!error) {
         console.error(error);
       }
-    }).pipe(`${zipCode}_Data.json`);
+    }).pipe(fs.createWriteStream(`realData/${zipCode}_Data.json`));
   })
 }
+
+// exports.fetchAllData(zipCodesNYC.zipCodesNYC);
