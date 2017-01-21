@@ -6,13 +6,29 @@ var path = require('path');
 var fs = require('fs');
 
 
-exports.fetchIndividualMarketData = function() {
-  dir.readFiles(path.join(__dirname, '/realData'), function(err, content, next) {
-    if(err) throw err;
+exports.fetchIndividualMarketData = () => {
+  var marketIDs = [];
+  dir.readFiles(path.join(__dirname, '/realData'), (err, content, next) => {
+    if(err) {
+      throw err;
+    } else {
+      console.log(marketIDs.slice(-1));
+      var results = JSON.parse(content);
+      marketID = getMarketID(results.results);
+      marketIDs = marketIDs.concat(marketID);
+    }
 
-    console.log(content);
     next();
-  })
+  }, (err, files) => {
+    
+  });
+}
+
+var getMarketID = (results) => {
+  return results.reduce((iDs, market) => {
+    iDs.push(market.id);
+    return iDs;
+  }, []);
 }
 
 exports.fetchIndividualMarketData();

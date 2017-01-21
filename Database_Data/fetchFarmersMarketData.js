@@ -4,10 +4,10 @@ var zipCodesNYC = require('./zipCodesNYC');
 var fs = require('fs');
 // console.log(zipCodesNYC);
 
-exports.fetchAllData = function(zipCodes) {
+exports.fetchAllData = (zipCodes) => {
   // iterate through all zip codes and save response to a unique JSON file
-  zipCodes.forEach(function(zipCode) {
-    request(`http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=${zipCode}`, function(error, res, body) {
+  zipCodes.forEach((zipCode) => {
+    request(`http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=${zipCode}`, (error, res, body) => {
       if(!error) {
         console.error(error);
       }

@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/arraylikealligators/farmers-market-app#readme",
   "dependencies": {
-    "request": "^2.79.0"
+    "node-dir": "^0.1.16",
+    "path": "^0.12.7",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1"
   }
 }
