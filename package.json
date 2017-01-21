@@ -17,11 +17,14 @@
   },
   "homepage": "https://github.com/arraylikealligators/farmers-market-app#readme",
 
+
   "devDependencies": {
     "angular": "^1.6.1",
     "body-parser": "^1.16.0",
     "express": "^4.14.0",
     "mongoose": "^4.7.7"
+},
+  "dependencies": {
+    "request": "^2.79.0"
   }
 }
-
