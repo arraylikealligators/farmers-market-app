@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/arraylikealligators/farmers-market-app/issues"
   },
-  "homepage": "https://github.com/arraylikealligators/farmers-market-app#readme"
+  "homepage": "https://github.com/arraylikealligators/farmers-market-app#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.7"
+  }
 }
+
