@@ -1,11 +1,7 @@
 // here are NYC zip code retrieved from (http://nyc.pediacities.com/New_York_City_ZIP_Codes)
 
-<<<<<<< HEAD
-exports.zipCodesNYC = [10001,
-=======
 exports.zipCodesNYC =
 [10001,
->>>>>>> realData
 10002,
 10003,
 10004,
