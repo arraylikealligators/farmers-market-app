@@ -11,7 +11,7 @@ var replaceSpaceInAddress = (address) => {
 
 module.exports = {
 
-	allMarkets: function(req,res, next){
+	allMarkets: function(req, res, next){
 		console.log("allMarkets....")
 		getAllFarms({})
 		  .then(function(farms){
@@ -30,7 +30,8 @@ module.exports = {
 		).then((data) => {
 			var coordinates = JSON.parse(data).results[0].geometry.location;
 			// console.log('successfully got geocode', lat);
-			MarketQuery.fetchMarkets(coordinates);
+			var marketsDetails = MarketQuery.fetchMarkets(coordinates);
+      res.send(marketDetails);
 		}).catch((err) => {
 			console.error('Failed', err);
 		});
