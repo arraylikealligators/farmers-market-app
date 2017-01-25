@@ -5,18 +5,46 @@
     <title>The Farmer's Market App</title>
     <link rel="stylesheet" href="style.css">
   </head>
+
   <body>
+    <div ng-view></div>
+
     <header>
       <h1>FAZZER</h1>
     </header>
+
     <main>
 
+      <div class="search-display">
+        <h1 class="search-header">Enter Your Location To Find Farmer's Markets Around You</h1>
+        <div>
+          <form>
+            <div>
+              <input type="search" placeholder="Enter your address..." />
+            </div>
+            <div>
+            </div>
+            <div>
+              <button>Search</button>
+            </div>
+    		  </form>
+        </div>
+      </div>
+
     </main>
+
+
     <footer>
     </footer>
+
+
     <!-- FOR PRODUCTION: REPLACE THIS SCRIPT TAG WITH GOOGLE CDN SOURCE -->
     <script src="../node_modules/angular/angular.js"></script>
     <!-- Google Angular.js CDN source for production below -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script> -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
+
   </body>
+
 </html>
