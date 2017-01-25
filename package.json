@@ -4,7 +4,7 @@
   "description": "tells you where the closest farmers markets are in your area",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --ignore node_modules server.js",
+    "start": "nodemon --ignore node_modules server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,5 +1,5 @@
 var serverRoutes = require('express').Router();
-var marketController = require('./marketController');
+var marketController = require('../controllers/marketController');
 
 
 
