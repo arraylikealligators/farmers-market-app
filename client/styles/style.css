@@ -1,0 +1,50 @@
+body {
+  background: url(../assets/veggiedisplay.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+header {
+  color: rgb(232, 232, 232);
+  text-align: center;
+  height: 50px;
+  background: rgba(#f2f3fc, 0.82) center center fixed;
+  margin: 100px 0px;
+}
+
+main {
+  /*background: url(images/veggiedisplay.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  max-height: 1100px;*/
+}
+
+.search-display {
+  background: rgba(255, 255, 255, 0.95) center center fixed;
+  margin: 20px;
+  padding: 30px;
+  border-radius: 5px;
+  max-width: 750px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.25);
+}
+
+.search-header {
+  background: -webkit-linear-gradient(left bottom, #f6682F, #FFB729);
+  background: linear, to right top, #f6682F, #FFB729;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 200;
+  color: #f6682F;
+  text-align: center;
+}
