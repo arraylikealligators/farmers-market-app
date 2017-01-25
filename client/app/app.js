@@ -1,5 +1,5 @@
 angular.module('farmer', ['ngRoute'])
-.config(function ($routeProvider, $httpProvider) {
+.config(($routeProvider) => {
   $routeProvider
     .when('/', {
       templateUrl: 'app/auth/signin.html',
@@ -24,28 +24,10 @@ angular.module('farmer', ['ngRoute'])
     .otherwise({
       redirectTo: '/links'
     });
+})
 
-    // We add our $httpInterceptor into the array
-    // of interceptors. Think of it like middleware for your ajax calls
-  $httpProvider.interceptors.push('AttachTokens');
-})
-.factory('AttachTokens', function ($window) {
-  // this is an $httpInterceptor
-  // its job is to stop all out going request
-  // then look in local storage and find the user's token
-  // then add it to the header so the server can validate the request
-  var attach = {
-    request: function (object) {
-      var jwt = $window.localStorage.getItem('com.shortly');
-      if (jwt) {
-        object.headers['x-access-token'] = jwt;
-      }
-      object.headers['Allow-Control-Allow-Origin'] = '*';
-      return object;
-    }
-  };
-  return attach;
-})
+/* Code from Shortly Angular Sprint for redirects
+
 .run(function ($rootScope, $location, Auth) {
   // here inside the run phase of angular, our services and controllers
   // have just been registered and our app is ready
@@ -60,3 +42,5 @@ angular.module('farmer', ['ngRoute'])
     }
   });
 });
+
+*/
