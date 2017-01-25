@@ -15,5 +15,9 @@ module.exports = {
 		  .fail(function(error){
 		  	next(error);
 		  });
+	},
+
+	getRadiusMarkets: (req, res, next) => {
+		// some function to get a list of farms that match the DB query
 	}
 };
