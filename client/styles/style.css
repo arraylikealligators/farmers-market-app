@@ -1,50 +1,67 @@
 body {
-  background: url(../assets/veggiedisplay.jpg) no-repeat center center fixed;
+  background: url(../assets/farmer-bg.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+header {
+  color: #F4FFFD;
+  font-family: 'Cookie', cursive;
+  font-size: 3em;
+  text-align: center;
+  /*height: 50px;*/
+  text-shadow: 0 4px 4px rgba(50, 50, 50, .95);
+  /*background: rgba(#f2f3fc, 0.82) center center fixed;*/
+  /*margin-top: 50px;
+  margin-bottom: 50px;*/
+}
+
+.search-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-header {
-  color: rgb(232, 232, 232);
-  text-align: center;
-  height: 50px;
-  background: rgba(#f2f3fc, 0.82) center center fixed;
-  margin: 100px 0px;
-}
-
-main {
-  /*background: url(images/veggiedisplay.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  max-height: 1100px;*/
+  /*flex-wrap: wrap;*/
+  font-family: 'Open Sans', sans-serif;
 }
 
 .search-display {
   background: rgba(255, 255, 255, 0.95) center center fixed;
-  margin: 20px;
-  padding: 30px;
-  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
   max-width: 750px;
-  display: flex;
+  /*display: flex;
   align-content: center;
   justify-content: center;
+  flex-direction: column;*/
   box-shadow: 0 1px 3px 0 rgba(0,0,0,.25);
 }
 
 .search-header {
-  background: -webkit-linear-gradient(left bottom, #f6682F, #FFB729);
+  background: -webkit-linear-gradient(left bottom, #73BA9B, #63C132);
+  background: linear, to right top, #73BA9B, #63C132;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 300;
+  font-size: 2.5em;
+  font-color: #73BA9B;
+  text-align: center;
+}
+
+.search-button {
+  font-weight: 400;
+  font-size: 1.2em;
+  /*display: flex;
+  align-content: center;;
+  justify-content: center;*/
+  /*background: -webkit-linear-gradient(left bottom, #f6682F, #FFB729);
   background: linear, to right top, #f6682F, #FFB729;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 200;
-  color: #f6682F;
-  text-align: center;
+  color: #f6682F;*/
+  /*text-align: center;*/
 }
