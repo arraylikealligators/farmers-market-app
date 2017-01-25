@@ -1,11 +1,11 @@
 angular.module('farmer.services', [])
 
 .factory('Search', ($http) => {
-  
-  var search = (params) => {
+
+  const search = (params) => {
     return $http({
       method: 'GET',
-      url: '/api/search'
+      url: '/api/search',
       data: {
         address: params.address
       }
