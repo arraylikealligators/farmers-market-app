@@ -4,6 +4,7 @@
   "description": "tells you where the closest farmers markets are in your area",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --ignore node_modules server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,11 +17,29 @@
     "url": "https://github.com/arraylikealligators/farmers-market-app/issues"
   },
   "homepage": "https://github.com/arraylikealligators/farmers-market-app#readme",
+<<<<<<< HEAD
   "dependencies": {
     "body-parser": "^1.16.0",
     "express": "^4.14.0",
     "mongoose": "^4.7.7",
+=======
+  "devDependencies": {
+    "angular": "^1.6.1",
+    "body-parser": "^1.16.0",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.7",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "async": "^2.1.4",
+    "body-parser": "^1.16.0",
+    "express": "^4.14.0",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.7.8",
+    "node-dir": "^0.1.16",
+>>>>>>> server
     "path": "^0.12.7",
+    "q": "^1.4.1",
     "request": "^2.79.0",
     "request-promise": "^4.1.1"
   },
