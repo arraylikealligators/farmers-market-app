@@ -1,25 +1,13 @@
 var serverRoutes = require('express').Router();
-var marketController = require('./marketController.js');
+var marketController = require('./marketController');
 
 
-serverRoutes.route('/api/markets/:address')
-.get((req, res) => {
-	// convert the `req.url` and `req.body` (which will be the radius with the address as center) into a longitutude/latitude
-	// invoke marketController.getRadiusMarkets to make query to DB
-	// send the query result to front-end as res.json()
+
+serverRoutes.route('/api/markets')
+.get(/* [,some middleware] */ (req, res) => {
+  // invoke marketController.getRadiusMarkets to make query to DB
+  marketController.getLocationMarkets(req, res);
 })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
