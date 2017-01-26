@@ -1,9 +1,26 @@
 
 var data = require('./bulkData.js');
-var Market = require('./farmModel.js');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://user1:user1@ds117899.mlab.com:17899/fazzar');
+
+var market = new mongoose.Schema({
+  Address: String,
+  GoogleLink: String,
+  Products: String,
+  Schedule: String,
+  Lat: Number,
+  Long: Number,
+  Name: String  
+}); 
+
+const Market = mongoose.model('market', market);
+var Q = require('q');
+var createMarket = Q.nbind(Market.create, Market);
+
 
 
 function convert(markets){
+ 
   for(var i=0; i < markets.length; i++){
     var string = markets[i]['marketdetails']['GoogleLink'];
     var newString = "";
@@ -41,15 +58,28 @@ function convert(markets){
  
 var dataz= convert(data);
 
-console.log(dataz);
-///needs editing 
-for(var i =0; i < dataz.length; i++){
-  var newMarket = new Market(dataz[i]);
-  newMarket.save(function(err){
-    if(err) { return "error"; }
-  });
+var newdataz = [];
+
+for(var z=0; z < dataz.length; z++){
+  newdataz.push(dataz[z]['marketdetails']);
 }
 
+
+Market.collection.insert(newdataz);
+
+
+// });
+// }
+
+
+// var dummyMark = { marketdetails: 
+//      { Address: '18th Ave between 81st & 82nd Streets, Brooklyn, New York, 11214',
+//        GoogleLink: 'http://maps.google.com/?q=40.6155350%2C%20-74.0109559%20(%22Bensonhurst%22)',
+//        Products: 'Baked goods; Fresh fruit and vegetables; Honey',
+//        Schedule: '07/07/2013 to 11/23/2013 Sun: 9:00 AM-4:00 PM',
+//        Lat: 40.615535,
+//        Long: -74.0109559,
+//        Name: 'Bensonhurst' } };
 
 
 

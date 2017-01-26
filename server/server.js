@@ -6,6 +6,8 @@ var app = express();
 var port = process.env.PORT || 8080;
 
 var mongoose = require('mongoose');
+
+
 mongoose.connect('mongodb://user1:user1@ds117899.mlab.com:17899/fazzar');
                 
 
