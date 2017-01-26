@@ -1,6 +1,6 @@
 angular.module('farmer.services', [])
 
-.factory('Search', ($http) => {
+.factory('Search', function ($http) {
 
   const search = (params) => {
     return $http({

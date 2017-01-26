@@ -1,6 +1,6 @@
 angular.module('farmer.search', ['farmer.services'])
 
-.controller('SearchController', ($scope, $location, Search) => {
+.controller('SearchController', function ($scope, $location, Search) {
   // Scope variable to store user address input
   $scope.address = '';
 

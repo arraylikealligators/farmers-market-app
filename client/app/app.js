@@ -1,30 +1,18 @@
 angular.module('farmer', ['farmer.search','ngMaterial','ngRoute'])
-// .config(($routeProvider) => {
-//   $routeProvider
-//     .when('/', {
-//       templateUrl: 'app/auth/signin.html',
-//       controller: 'AuthController'
-//     })
-//     .when('/signup', {
-//       templateUrl: 'app/auth/signup.html',
-//       controller: 'AuthController'
-//     })
-//     // Your code here
-//
-//     .when('/links', {
-//       templateUrl: 'app/links/links.html',
-//       controller: 'LinksController',
-//       authenticate: true
-//     })
-//     .when('/shorten', {
-//       templateUrl: 'app/shorten/shorten.html',
-//       controller: 'ShortenController',
-//       authenticate: true
-//     })
-//     .otherwise({
-//       redirectTo: '/links'
-//     });
-// })
+.config(($routeProvider) => {
+  $routeProvider
+    .when('/search', {
+      templateUrl: 'app/views/search.html',
+      controller: 'SearchController'
+    })
+    .when('/map', {
+      templateUrl: 'app/views/search.html',
+      controller: 'SearchController'
+    })
+    .otherwise({
+      redirectTo: '/search'
+    });
+})
 
 /* Code from Shortly Angular Sprint for redirects
 
