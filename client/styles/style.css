@@ -1,9 +1,9 @@
 body {
-  background: url(../assets/farmer-bg.jpg) no-repeat center center fixed;
+  /*background: url(../assets/farmer-bg.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: cover;*/
 }
 
 header {
@@ -20,11 +20,17 @@ header {
 
 .search-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;;
   align-items: center;
   flex-direction: column;
   /*flex-wrap: wrap;*/
   font-family: 'Open Sans', sans-serif;
+  background: url(../assets/farmer-bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
 }
 
 .search-display {
