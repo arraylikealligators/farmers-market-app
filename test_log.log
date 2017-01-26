@@ -1,0 +1,15 @@
+*****This log is a preliminary exploration of testing of all kinds for the app. Everything in this log is to be manually inserted, based on this `12 step guide on writing effective test summary report` (http://www.softwaretestinghelp.com/test-summary-report-template-download-sample/).*****
+
+
+
+Document Purpose: Summary of the various tests used to test the rigidity of the app
+
+Application Overview: This application allows users to enter a valid address into the search bar. The address will be converted into longitude and latitude, which will then be used to query against our mongo database for farmers' markets location within a specified radius. The results of the query will be displayed along with a map of all the location pinpoints.
+
+Testing Scope:
+* In Scope:
+  unit tests ==> front-end, server, database
+* Out of Scope:
+  performance testing was not done on this app
+* Items Not Tested:
+  Verification of the google API calls

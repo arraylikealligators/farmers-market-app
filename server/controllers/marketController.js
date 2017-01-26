@@ -23,15 +23,18 @@ module.exports = {
 	},
 
 	getLocationMarkets: (req, res, next) => {
-		var address = replaceSpaceInAddress('1216 Broadway New York, NY');
+		var address = replaceSpaceInAddress('1216 Broadway New York, NY'); //req.body
 		// var address =
 		rp.get(
 			`https://maps.googleapis.com/maps/api/geocode/json?address=${address}`
 		).then((data) => {
 			var coordinates = JSON.parse(data).results[0].geometry.location;
 			// console.log('successfully got geocode', lat);
+
+      
+
 			var marketsDetails = MarketQuery.fetchMarkets(coordinates);
-      res.send(marketDetails);
+      res.send(marketsDetails);
 		}).catch((err) => {
 			console.error('Failed', err);
 		});

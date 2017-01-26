@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Market = require('../model/farmModel.js');
 var Q = require('q');
 
-var queryMarkets = Q.nbind(Market.findAll, Market);
+var queryMarkets = Q.nbind(Market.find, Market);
 
 module.exports = {
   fetchMarkets: (coordinates) => {
@@ -10,7 +10,7 @@ module.exports = {
     queryMarkets(coordinates)
     .then((markets) => {
       marketsDetails = markets;
-      console.log('successful query to mongoDB for markets');
+      console.log('successful query to mongoDB for markets', marketsDetails);
     })
     .catch((err) => {
       console.error(err);
