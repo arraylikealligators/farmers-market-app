@@ -9,6 +9,7 @@ Application Overview: This application allows users to enter a valid address int
 Testing Scope:
 * In Scope:
   unit tests ==> front-end, server, database
+  - googleapi geocode, GET longitude/latitude coordinates
 * Out of Scope:
   performance testing was not done on this app
 * Items Not Tested:
