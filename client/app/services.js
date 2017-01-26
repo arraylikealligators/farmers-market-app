@@ -1,6 +1,8 @@
 angular.module('farmer.services', [])
 
-.factory('Search', ($http) => {
+.factory('Search', function ($http) {
+
+  const searchResults = [];
 
   const search = (params) => {
     return $http({
@@ -15,12 +17,13 @@ angular.module('farmer.services', [])
     })
   };
 
-
-
-
+  const retrieveResults = () => {
+    return searchResults;
+  }
 
 
   return {
-    search: search
+    search: search,
+    retrieveResults: retrieveResults
   }
 })

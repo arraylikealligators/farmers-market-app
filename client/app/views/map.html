@@ -1,0 +1,36 @@
+<div>
+
+  <header layout="row">
+  </header>
+
+</div>
+
+<div layout="row">
+
+  <section flex="35" layout="column">
+
+    <div name="food type div filter">
+      <div ng-repeat="market in results | filter:1 | filter:2 | orderBy">
+        <div layout="row">
+          <div>{{$index + 1}}</div>
+          <div>{{ market.marketdetails.Name }}</div>
+        </div>
+        <div>{{ market.marketdetails.Address }}</div>
+        <div>{{ market.marketdetails.Schedule }}</div>
+      </div>
+    </div>
+
+
+
+
+  </section>
+
+  <div name="map" flex="65"></div>
+
+
+
+
+
+
+
+</div>
