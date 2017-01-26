@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "async": "^2.1.4",
+    "bluebird": "^3.4.7",
     "cookie-parser": "^1.4.3",
     "express-session": "^1.15.0",
     "lodash": "^4.17.4",
