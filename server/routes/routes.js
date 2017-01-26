@@ -3,7 +3,7 @@ var marketController = require('../controllers/marketController');
 
 
 
-serverRoutes.route('/api/markets')
+serverRoutes.route('/api/search')
 .get(/* [,some middleware] */ (req, res) => {
   // invoke marketController.getRadiusMarkets to make query to DB
   marketController.getLocationMarkets(req, res);
