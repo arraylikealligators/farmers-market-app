@@ -20,7 +20,7 @@ angular.module('farmer.map', ['farmer.services'])
 
 });
 
-
+/*
 {
   "marketdetails":{
     "Address": "St. James Church, 391 Delaware Ave,, Albany, New York",
@@ -54,3 +54,4 @@ angular.module('farmer.map', ['farmer.services'])
     "Name":"Bensonhurst"
   }
 }
+*/
