@@ -3,12 +3,12 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var routes = require('./routes/routes.js');
 var mongoose = require('mongoose');
-var keys = require('./../API_KEYS');
+var keys = require('../API_KEYS.js');
 
 var app = express();
 var port = process.env.PORT || 8080;
 
-mongoURI = keys.mongoURI || process.env.mongoURI
+mongoURI = process.env.mongoURI || keys.mongoURI;
 
 var mongoose = require('mongoose');
 
