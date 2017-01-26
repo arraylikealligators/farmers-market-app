@@ -6,16 +6,13 @@ angular.module('farmer', ['farmer.search','ngMaterial','ngRoute'])
       controller: 'SearchController'
     })
     .when('/map', {
-      templateUrl: 'app/views/search.html',
-      controller: 'SearchController'
+      templateUrl: 'app/views/map.html',
+      controller: 'MapController'
     })
     .otherwise({
       redirectTo: '/search'
     });
 })
-
-/* Code from Shortly Angular Sprint for redirects
-
 .run(function ($rootScope, $location, Auth) {
   // here inside the run phase of angular, our services and controllers
   // have just been registered and our app is ready
@@ -30,5 +27,3 @@ angular.module('farmer', ['farmer.search','ngMaterial','ngRoute'])
     }
   });
 });
-
-*/
