@@ -14,8 +14,8 @@ angular.module('farmer.services', [])
       }
     })
     .then(function (response) {
-      // console.log('response data', response);
-      searchResults = response.data;
+      console.log('response data', response);
+      // searchResults = response.data;
 
       return response.data;
     })
