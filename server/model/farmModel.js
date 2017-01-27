@@ -1,15 +1,14 @@
 var mongoose = require('mongoose');
 
-//time should maybe stored as seconds 
-var marketSchema = new mongoose.Schema({
-	Address: String,
-	GoogleLink: String,
-	Products: String,
-	Schedule: String,
-	Lat: Number,
-	Long: Number,
-	Name: String	
 
+
+var market = new mongoose.Schema({
+  Address: String,
+  GoogleLink: String,
+  Products: String,
+  Schedule: String,
+  geometry: {  type: { type: String } , coordinates: { type: [Number] } },
+  Name: String  
 }); 
 
-module.exports = mongoose.model('Market', marketSchema);
+module.exports = mongoose.model('market', market);
