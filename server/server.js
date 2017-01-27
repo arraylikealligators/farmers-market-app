@@ -7,13 +7,12 @@ var path = require('path');
 var keys = require('../API_KEYS.js');
 
 
-
 var app = express();
 var port = process.env.PORT || 8080;
 
-mongoURI = process.env.mongoURI || keys.mongoURI;
-mongoose.connect(mongoURI);
+var mongoURI = process.env.mongoURI || keys.mongoURI;
 
+mongoose.connect(mongoURI);
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
