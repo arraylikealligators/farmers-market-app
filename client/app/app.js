@@ -1,33 +1,18 @@
 angular.module('farmer', ['farmer.search','ngMaterial','ngRoute'])
-// .config(($routeProvider) => {
-//   $routeProvider
-//     .when('/', {
-//       templateUrl: 'app/auth/signin.html',
-//       controller: 'AuthController'
-//     })
-//     .when('/signup', {
-//       templateUrl: 'app/auth/signup.html',
-//       controller: 'AuthController'
-//     })
-//     // Your code here
-//
-//     .when('/links', {
-//       templateUrl: 'app/links/links.html',
-//       controller: 'LinksController',
-//       authenticate: true
-//     })
-//     .when('/shorten', {
-//       templateUrl: 'app/shorten/shorten.html',
-//       controller: 'ShortenController',
-//       authenticate: true
-//     })
-//     .otherwise({
-//       redirectTo: '/links'
-//     });
-// })
-
-/* Code from Shortly Angular Sprint for redirects
-
+.config(($routeProvider) => {
+  $routeProvider
+    .when('/search', {
+      templateUrl: 'app/views/search.html',
+      controller: 'SearchController'
+    })
+    .when('/map', {
+      templateUrl: 'app/views/map.html',
+      controller: 'MapController'
+    })
+    .otherwise({
+      redirectTo: '/search'
+    });
+})
 .run(function ($rootScope, $location, Auth) {
   // here inside the run phase of angular, our services and controllers
   // have just been registered and our app is ready
@@ -42,5 +27,3 @@ angular.module('farmer', ['farmer.search','ngMaterial','ngRoute'])
     }
   });
 });
-
-*/
