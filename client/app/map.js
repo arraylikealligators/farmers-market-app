@@ -5,11 +5,12 @@ angular.module('farmer.map', ['farmer.services'])
   // Functionality for search bar on the results page
 
   $scope.address = ''; // Scope variable to store user address input
+  $scope.radius = 10; // Scope variable to store search radius input
 
 
   $scope.submit = () => { // Sends search request to server
     console.log("Submission sent!")
-    Search.search({ address: $scope.address})
+    Search.search({ address: $scope.address, radius: $scope.radius})
     .then((results) => {
       $scope.results = results;
       $location.path('/map');

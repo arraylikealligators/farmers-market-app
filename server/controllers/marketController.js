@@ -2,12 +2,10 @@ var Market = require('../model/farmModel.js');
 var Q = require('q');
 var rp = require('request-promise');
 var MarketQuery = require('../methods/marketMethods');
+var util = require('../util/util_functions');
 var getAllFarms = Q.nbind(Market.find, Market);
 var queryMarkets = Q.nbind(Market.find, Market);
 
-var replaceSpaceInAddress = (address) => {
-  return address.split(' ').join('+');
-}
 
 module.exports = {
 
@@ -23,9 +21,11 @@ module.exports = {
 	},
 
 	getLocationMarkets: (req, res, next) => {
-		var ad = replaceSpaceInAddress(req.query.address);
-    // console.log('inside getLocationMarkets controller', req.query.address);
-		var address = replaceSpaceInAddress(ad);
+		var address = util.replaceSpaceInAddress(req.query.address);
+    // console.log('inside getLocationMarkets controller', address);
+    var radius = util.convertMilesToKm(req.query.radius);
+    console.log('here is the radius', radius)
+
 		rp.get(
 			`https://maps.googleapis.com/maps/api/geocode/json?address=${address}`
 		).then((data) => {
@@ -48,7 +48,7 @@ module.exports = {
 				              coordinates : [ lng, lat ]
 				           },
 				           $minDistance: 0,
-				           $maxDistance: 16093
+				           $maxDistance: radius || 1609.3 //distance must be in meters
 				        }
 				     }
 				   }
