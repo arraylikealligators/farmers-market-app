@@ -1,12 +1,12 @@
 body {
-  background: url(../assets/farmer-bg.jpg) no-repeat center center fixed;
+  /*background: url(../assets/farmer-bg.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: cover;*/
 }
 
-header {
+.logo {
   color: #F4FFFD;
   font-family: 'Cookie', cursive;
   font-size: 3em;
@@ -18,13 +18,27 @@ header {
   margin-bottom: 50px;*/
 }
 
+.logo-small {
+  color: #19381F;
+  font-size: 2.5em;
+  text-align: center;
+  text-shadow: 0 1px 0px rgba(50, 50, 50, .25);
+  padding: 15px 10px;
+}
+
 .search-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;;
   align-items: center;
   flex-direction: column;
   /*flex-wrap: wrap;*/
   font-family: 'Open Sans', sans-serif;
+  background: url(../assets/farmer-bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
 }
 
 .search-display {
@@ -64,4 +78,12 @@ header {
   font-weight: 200;
   color: #f6682F;*/
   /*text-align: center;*/
+}
+
+.map-header {
+  background-color: #F7F7F7;
+}
+
+.searchbar {
+
 }

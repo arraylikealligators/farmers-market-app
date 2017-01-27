@@ -13,6 +13,7 @@ angular.module('farmer.services', [])
       }
     })
     .then(function (response) {
+      searchResults = response.data;
       return response.data;
     })
   };

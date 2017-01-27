@@ -1,36 +1,46 @@
 <div>
 
-  <header layout="row">
+  <header class="map-header" layout="row">
+    <div class="logo logo-small">
+      City Sprout
+    </div>
+    <div class="searchbar">
+      <form ng-submit="submit()">
+        <input type="text" ng-model="address"/>
+      </form>
+    </div>
   </header>
 
 </div>
 
 <div layout="row">
 
-  <section flex="35" layout="column">
-
-    <div name="food type div filter">
-      <div ng-repeat="market in results | filter:1 | filter:2 | orderBy">
-        <div layout="row">
-          <div>{{$index + 1}}</div>
-          <div>{{ market.marketdetails.Name }}</div>
-        </div>
-        <div>{{ market.marketdetails.Address }}</div>
-        <div>{{ market.marketdetails.Schedule }}</div>
-      </div>
-    </div>
+  <section class="md-padding" flex="35" layout="column">
+      <md-input-container>
+        <label>Filter Farmers Markets by Products</label>
+        <input type="text" ng-model="prodFilter.marketdetails.Products">
+      </md-input-container>
 
 
-
-
+    <md-content>
+      <md-list flex>
+        <md-list-item class="md-3-line animate-repeat" ng-repeat="market in results | filter:prodFilter:strict">
+          <div class="md-list-item-text" layout="row">
+            <div>
+              <h3>{{$index + 1}}.&ensp;</h3>
+            </div>
+            <div layout="column">
+              <h3>{{ market.marketdetails.Name }}</h3>
+              <p>{{ market.marketdetails.Address }}</p>
+              <p>{{ market.marketdetails.Schedule }}</p>
+            </div>
+          </div>
+        </md-list-item>
+      </md-list>
+    </md-content>
   </section>
 
-  <div name="map" flex="65"></div>
+  <div name="map" flex="65">
 
-
-
-
-
-
-
+  </div>
 </div>

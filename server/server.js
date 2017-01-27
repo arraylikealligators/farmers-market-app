@@ -4,7 +4,7 @@ var morgan = require('morgan');
 var routes = require('./routes/routes.js');
 var mongoose = require('mongoose');
 var path = require('path');
-var keys = require('./../API_KEYS');
+var keys = require('../API_KEYS.js');
 
 
 
