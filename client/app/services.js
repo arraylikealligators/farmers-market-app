@@ -5,7 +5,7 @@ angular.module('farmer.services', [])
   const searchResults = [];
 
   const search = (params) => {
-    return $http({
+    $http({
       method: 'GET',
       url: '/api/search',
       data: {
@@ -14,6 +14,7 @@ angular.module('farmer.services', [])
     })
     .then(function (response) {
       searchResults = response.data;
+
       return response.data;
     })
   };
@@ -90,7 +91,7 @@ angular.module('farmer.services', [])
   //
   // }
   //
-  // 
+  //
 
 
 

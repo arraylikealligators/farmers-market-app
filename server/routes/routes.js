@@ -9,13 +9,12 @@ serverRoutes.route('/api/search')
   marketController.getLocationMarkets(req, res);
 });
 
-		
+serverRoutes.route('/api/create')
+.post(/* [,some middleware] */ (req, res) => {
+  // invoke marketController.createMarket to add a new market to DB
+  marketController.createMarket(req, res);
+});
 
 
 
 module.exports = serverRoutes;
-// module.exports = function(app, express) {
-//
-// 	app.get('/api/getAllMarkets/', market.allMarkets);
-//
-// };
