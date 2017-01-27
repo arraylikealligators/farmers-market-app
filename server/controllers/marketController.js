@@ -79,7 +79,7 @@ module.exports = {
 
   createMarket: (req, res, next) => {
     // fetch the geocode first from req.body.address
-
+    console.log(req.body);
 
 
     // create a new market
