@@ -87,3 +87,11 @@ body {
 .searchbar {
 
 }
+
+.results-display {
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+}
