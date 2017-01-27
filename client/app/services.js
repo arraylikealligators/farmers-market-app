@@ -9,7 +9,8 @@ angular.module('farmer.services', [])
       method: 'GET',
       url: '/api/search',
       params: {
-        address: params.address
+        address: params.address,
+        radius: params.radius
       }
     })
     .then(function (response) {
