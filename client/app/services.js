@@ -5,15 +5,17 @@ angular.module('farmer.services', [])
   const searchResults = [];
 
   const search = (params) => {
-    return $http({
+    $http({
       method: 'GET',
       url: '/api/search',
-      data: {
+      params: {
         address: params.address
       }
     })
     .then(function (response) {
+      // console.log('response data', response);
       searchResults = response.data;
+
       return response.data;
     })
   };
@@ -26,6 +28,24 @@ angular.module('farmer.services', [])
   return {
     search: search,
     retrieveResults: retrieveResults
+  }
+})
+
+.factory('Add', function($http) {
+  const add = (market) => {
+    $http({
+      method: 'POST',
+      url: '/api/add',
+      data: {
+        marketData: market
+      }
+    })
+    .then(function() {
+      console.log('successful post to server');
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
   }
 })
 
@@ -90,7 +110,7 @@ angular.module('farmer.services', [])
   //
   // }
   //
-  // 
+  //
 
 
 
