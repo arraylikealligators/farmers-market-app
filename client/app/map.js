@@ -1,12 +1,13 @@
 angular.module('farmer.map', ['farmer.services'])
 
-.controller('MapController', function ($scope, $location, Search) {
-  // Scope variable to store user address input
-  $scope.address = '';
+.controller('MapController', function ($scope, $location, Search, SampleData, GoogleMaps) {
 
-  $scope.results = Search.retrieveResults();
+  // Functionality for search bar on the results page
 
-  $scope.submit = () => {
+  $scope.address = ''; // Scope variable to store user address input
+
+
+  $scope.submit = () => { // Sends search request to server
     console.log("Submission sent!")
     Search.search({ address: $scope.address})
     .then((results) => {
@@ -18,39 +19,67 @@ angular.module('farmer.map', ['farmer.services'])
     });
   };
 
+
+  // Functionality for search results
+
+  const sampleData = SampleData.data;
+
+  $scope.results = sampleData || Search.retrieveResults(); // Stores markets that return from the search request
+
+
+  // Functionality for Google Map
+
+  const mapOptions = {
+    zoom: 10,
+    center: new google.maps.LatLng(40.7058253, -74.1180872), // Filled in with coordinates for the center of NYC
+    mapTypeControl: false,
+    fullscreenControl: false,
+    zoomControlOptions: {
+      position: google.maps.ControlPosition.TOP_RIGHT
+    },
+    streetViewControlOptions: {
+      position: google.maps.ControlPosition.TOP_RIGHT
+    }
+  };
+
+  $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+  $scope.markers = [];
+
+  // var infoWindow = new google.maps.InfoWindow();
+
+    // var createMarker = function (info){
+    //
+    //     var marker = new google.maps.Marker({
+    //         map: $scope.map,
+    //         position: new google.maps.LatLng(info.lat, info.long),
+    //         title: info.city
+    //     });
+    //     marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+    //
+    //     google.maps.event.addListener(marker, 'click', function(){
+    //         infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+    //         infoWindow.open($scope.map, marker);
+    //     });
+    //
+    //     $scope.markers.push(marker);
+    //
+    // }
+    //
+    // for (i = 0; i < cities.length; i++){
+    //     createMarker(cities[i]);
+    // }
+
+    // $scope.openInfoWindow = function(e, selectedMarker){
+    //     e.preventDefault();
+    //     google.maps.event.trigger(selectedMarker, 'click');
+    // }
+
+
+
+
+
+
+
+
 });
-
-
-{
-  "marketdetails":{
-    "Address": "St. James Church, 391 Delaware Ave,, Albany, New York",
-    "GoogleLink":"http://maps.google.com/?q=40.5767%2C%20-73.9839%20(%22Delaware+Area+Neighborhood+Farmers+Market%22)",
-    "Products":"",
-    "Schedule":"",
-    "Lat":40.5767,
-    "Long":-73.9839,
-    "Name":"Delaware Area Neighborhood Farmers Market"
-  }
-},
-{
-  "marketdetails":{
-  "Address":"WEST 16 STREET SURF AVE, BROOKLYN, New York, 11224",
-  "GoogleLink":"http://maps.google.com/?q=40.581106%2C%20-73.983650%20(%22Coney+Island+Farmers+Market%22)",
-  "Products":"Cut flowers; Eggs; Fresh fruit and vegetables; Fresh and/or dried herbs; Honey; Maple syrup and/or maple products; Plants in containers",
-  "Schedule":"06/15/2014 to 10/26/2014 Sun: 8:00 AM-3:30 PM",
-  "Lat":40.581106,
-  "Long":-73.98365,
-  "Name":"Coney Island Farmers Market"
-  }
-},
-{
-  "marketdetails":{
-    "Address":"18th Ave between 81st & 82nd Streets, Brooklyn, New York, 11214",
-    "GoogleLink":"http://maps.google.com/?q=40.6155350%2C%20-74.0109559%20(%22Bensonhurst%22)",
-    "Products":"Baked goods; Fresh fruit and vegetables; Honey",
-    "Schedule":"07/07/2013 to 11/23/2013 Sun: 9:00 AM-4:00 PM",
-    "Lat":40.615535,
-    "Long":-74.0109559,
-    "Name":"Bensonhurst"
-  }
-}
