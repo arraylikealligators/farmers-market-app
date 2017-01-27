@@ -23,8 +23,8 @@ module.exports = {
 	},
 
 	getLocationMarkets: (req, res, next) => {
-		var ad = replaceSpaceInAddress('1216 Broadway New York, NY'); //req.body
-    // console.log('inside getLocationMarkets controller', req);
+		var ad = replaceSpaceInAddress(req.query.address);
+    // console.log('inside getLocationMarkets controller', req.query.address);
 		var address = replaceSpaceInAddress(ad);
 		rp.get(
 			`https://maps.googleapis.com/maps/api/geocode/json?address=${address}`
@@ -79,7 +79,7 @@ module.exports = {
 
   createMarket: (req, res, next) => {
     // fetch the geocode first from req.body.address
-    
+
 
 
     // create a new market

@@ -8,11 +8,12 @@ angular.module('farmer.services', [])
     $http({
       method: 'GET',
       url: '/api/search',
-      data: {
+      params: {
         address: params.address
       }
     })
     .then(function (response) {
+      console.log('response data', response);
       searchResults = response.data;
 
       return response.data;
