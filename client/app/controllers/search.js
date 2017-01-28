@@ -1,17 +1,17 @@
 angular.module('farmer.search', ['farmer.services'])
 
-.controller('SearchController', ($scope, $location, Search) => {
+.controller('SearchController', function ($scope, $location, Search) {
   // Scope variable to store user address input
   $scope.address = '';
-
-  $scope.results = [];
+  // Scope variable to store search radius input (default 10 miles)
+  $scope.radius = 10;
 
   $scope.submit = () => {
     console.log("Submission sent!")
-    Search.search({ address: $scope.address})
+    Search.search({ address: $scope.address, radius: $scope.radius})
     .then((results) => {
       $scope.results = results;
-      $location.path('/map'); // TODO: Need to update this with proper route once it has been set up
+      $location.path('/map');
     })
     .catch(function (error) {
       console.error(error);

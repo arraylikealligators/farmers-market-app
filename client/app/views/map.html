@@ -1,0 +1,44 @@
+<div>
+
+  <header class="map-header" layout="row">
+    <div class="logo logo-small">
+      City Sprout
+    </div>
+    <div class="searchbar">
+      <form ng-submit="submit()">
+        <input type="text" ng-model="address"/>
+      </form>
+    </div>
+  </header>
+
+</div>
+
+<div class="results-display" layout="row">
+
+  <section class="md-padding" flex="30" layout="column">
+      <md-input-container>
+        <label>Filter Farmers Markets by Products</label>
+        <input type="text" ng-model="prodFilter.marketdetails.Products">
+      </md-input-container>
+
+
+    <md-content>
+      <md-list flex>
+        <md-list-item class="md-3-line animate-repeat" ng-repeat="market in results | filter:prodFilter:strict">
+          <div class="md-list-item-text" layout="row">
+            <div>
+              <h3>{{$index + 1}}.&ensp;</h3>
+            </div>
+            <div layout="column">
+              <h3>{{ market.marketdetails.Name }}</h3>
+              <p>{{ market.marketdetails.Address }}</p>
+              <p>{{ market.marketdetails.Schedule }}</p>
+            </div>
+          </div>
+        </md-list-item>
+      </md-list>
+    </md-content>
+  </section>
+
+  <div id="map" flex="70"></div>
+</div>

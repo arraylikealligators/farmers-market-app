@@ -1,23 +1,21 @@
-
-var data = require('./bulkData.js');
+var data = require('./data.js');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://user1:user1@ds117899.mlab.com:17899/fazzar');
+var GeoJSON = require('mongoose-geojson-schema');
+var mongoURI = require('./../../API_KEYS.js').mongoURI;
+mongoose.connect(mongoURI);
 
 var market = new mongoose.Schema({
   Address: String,
   GoogleLink: String,
   Products: String,
   Schedule: String,
-  Lat: Number,
-  Long: Number,
+  geometry: {  type: { type: String } , coordinates: { type: [Number] } },
   Name: String  
 }); 
 
+
+        
 const Market = mongoose.model('market', market);
-var Q = require('q');
-var createMarket = Q.nbind(Market.create, Market);
-
-
 
 function convert(markets){
  
@@ -32,11 +30,9 @@ function convert(markets){
     var longitudeWithPercentages = coordString.slice(scissorIndex);
     var percentLatIndex = latitudeWithPercentages.indexOf("%");
     var percentLongIndex = longitudeWithPercentages.indexOf("%");
-    var latitude = latitudeWithPercentages.slice(0,percentLatIndex);
-    var longitude = longitudeWithPercentages.slice(0, percentLongIndex);
-    markets[i]['marketdetails']['Lat'] = Number(latitude);
-    markets[i]['marketdetails']['Long'] = Number(longitude);
-    
+    var longitude = Number(longitudeWithPercentages.slice(0, percentLongIndex));
+    var latitude = Number(latitudeWithPercentages.slice(0,percentLatIndex));
+    markets[i]['marketdetails']['geometry'] = { type: "Point" , coordinates: [ longitude, latitude ] }
     if(markets[i]['marketdetails']['Schedule'].includes('<br> <br> <br>')){
       var delIndex = markets[i]['marketdetails']['Schedule'].indexOf("<br> <br> <br>");
       markets[i]['marketdetails']['Schedule']= markets[i]['marketdetails']['Schedule'].slice(0, delIndex-1);
@@ -49,7 +45,6 @@ function convert(markets){
     markets[i]['marketdetails']['Name'] = link;
     
   }
-   
 
   return markets; 
 
@@ -66,23 +61,7 @@ for(var z=0; z < dataz.length; z++){
 
 
 Market.collection.insert(newdataz);
-
-
-// });
-// }
-
-
-// var dummyMark = { marketdetails: 
-//      { Address: '18th Ave between 81st & 82nd Streets, Brooklyn, New York, 11214',
-//        GoogleLink: 'http://maps.google.com/?q=40.6155350%2C%20-74.0109559%20(%22Bensonhurst%22)',
-//        Products: 'Baked goods; Fresh fruit and vegetables; Honey',
-//        Schedule: '07/07/2013 to 11/23/2013 Sun: 9:00 AM-4:00 PM',
-//        Lat: 40.615535,
-//        Long: -74.0109559,
-//        Name: 'Bensonhurst' } };
-
-
-
+Market.collection.createIndex( { geometry : "2dsphere" } );
 
 
 

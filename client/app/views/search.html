@@ -1,0 +1,26 @@
+<div class="search-container">
+  <header class="logo">
+    <h1>Sprouts City</h1>
+  </header>
+  <main class="search-display">
+    <h1 class="search-header">Enter Your Location To Find A Farmer's Market Near You</h1>
+      <form ng-submit="submit()" name="searchForm">
+        <div layout="row">
+
+          <md-input-container flex>
+            <label>Location</label>
+            <input type="text" ng-model="address">
+          </md-input-container>
+
+          <md-input-container flex>
+            <label>Radius</label>
+            <input type="number" name="radius" min="1" max="20" ng-model="radius"/>
+          </md-input-container>
+
+          <md-button type="submit" class="search-button md-raised md-primary">Search</md-button>
+        </div>
+      </form>
+  </main>
+  <footer>
+  </footer>
+</div>
