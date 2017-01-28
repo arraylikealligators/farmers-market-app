@@ -2,10 +2,10 @@ angular.module('farmer.services', [])
 
 .factory('Search', function ($http) {
 
-  const searchResults = [];
+  let searchResults = [];
 
   const search = (params) => {
-    $http({
+    return $http({   // You need to return the promise here so that .then method in the control is able to receive a result
       method: 'GET',
       url: '/api/search',
       params: {
@@ -15,7 +15,7 @@ angular.module('farmer.services', [])
     })
     .then(function (response) {
       console.log('response data', response);
-      // searchResults = response.data;
+      searchResults = response.data; // I'm saving return response to a variable in this factory so that we can use it across controllers
 
       return response.data;
     })
@@ -34,7 +34,7 @@ angular.module('farmer.services', [])
 
 .factory('Add', function($http) {
   const add = (market) => {
-    $http({
+    return $http({
       method: 'POST',
       url: '/api/add',
       data: {

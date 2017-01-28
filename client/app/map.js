@@ -24,8 +24,10 @@ angular.module('farmer.map', ['farmer.services'])
   // Functionality for search results
 
   const sampleData = SampleData.data;
+  let storedResults = Search.retrieveResults(); // Pulls any stored results in Search factory
+  console.log(storedResults);
 
-  $scope.results = sampleData || Search.retrieveResults(); // Stores markets that return from the search request
+  $scope.results = storedResults.length !== 0 ? storedResults : sampleData; // Stores markets that return from the search requests on search.html or map.html pages
 
 
   // Functionality for Google Map
