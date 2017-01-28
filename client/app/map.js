@@ -13,7 +13,7 @@ angular.module('farmer.map', ['farmer.services'])
     Search.search({ address: $scope.address, radius: $scope.radius})
     .then((results) => {
       $scope.results = results;
-      $location.path('/map');
+      // $location.path('/map');
     })
     .catch(function (error) {
       console.error(error);

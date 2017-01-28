@@ -7,6 +7,7 @@
     <div class="searchbar">
       <form ng-submit="submit()">
         <input type="text" ng-model="address"/>
+        <md-button type="submit" class="md-raised md-primary">Search</md-button>
       </form>
     </div>
   </header>
@@ -18,7 +19,7 @@
   <section class="md-padding" flex="30" layout="column">
       <md-input-container>
         <label>Filter Farmers Markets by Products</label>
-        <input type="text" ng-model="prodFilter.marketdetails.Products">
+        <input type="text" ng-model="prodFilter.Products">
       </md-input-container>
 
 
@@ -30,9 +31,9 @@
               <h3>{{$index + 1}}.&ensp;</h3>
             </div>
             <div layout="column">
-              <h3>{{ market.marketdetails.Name }}</h3>
-              <p>{{ market.marketdetails.Address }}</p>
-              <p>{{ market.marketdetails.Schedule }}</p>
+              <h3>{{ market.Name }}</h3>
+              <p>{{ market.Address }}</p>
+              <p>{{ market.Schedule }}</p>
             </div>
           </div>
         </md-list-item>

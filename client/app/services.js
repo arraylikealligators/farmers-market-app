@@ -53,7 +53,6 @@ angular.module('farmer.services', [])
 .factory('SampleData', function () {
 
   const sampleData = [{
-    "marketdetails":{
       "Address": "St. James Church, 391 Delaware Ave,, Albany, New York",
       "GoogleLink":"http://maps.google.com/?q=40.5767%2C%20-73.9839%20(%22Delaware+Area+Neighborhood+Farmers+Market%22)",
       "Products":"",
@@ -61,10 +60,8 @@ angular.module('farmer.services', [])
       "Lat":40.5767,
       "Long":-73.9839,
       "Name":"Delaware Area Neighborhood Farmers Market"
-    }
   },
   {
-    "marketdetails":{
     "Address":"WEST 16 STREET SURF AVE, BROOKLYN, New York, 11224",
     "GoogleLink":"http://maps.google.com/?q=40.581106%2C%20-73.983650%20(%22Coney+Island+Farmers+Market%22)",
     "Products":"Cut flowers; Eggs; Fresh fruit and vegetables; Fresh and/or dried herbs; Honey; Maple syrup and/or maple products; Plants in containers",
@@ -72,10 +69,8 @@ angular.module('farmer.services', [])
     "Lat":40.581106,
     "Long":-73.98365,
     "Name":"Coney Island Farmers Market"
-    }
   },
   {
-    "marketdetails":{
       "Address":"18th Ave between 81st & 82nd Streets, Brooklyn, New York, 11214",
       "GoogleLink":"http://maps.google.com/?q=40.6155350%2C%20-74.0109559%20(%22Bensonhurst%22)",
       "Products":"Baked goods; Fresh fruit and vegetables; Honey",
@@ -83,7 +78,6 @@ angular.module('farmer.services', [])
       "Lat":40.615535,
       "Long":-74.0109559,
       "Name":"Bensonhurst"
-    }
   }];
 
   return {
