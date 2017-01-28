@@ -53,13 +53,17 @@ angular.module('farmer.services', [])
 .factory('SampleData', function () {
 
   const sampleData = [{
-      "Address": "St. James Church, 391 Delaware Ave,, Albany, New York",
-      "GoogleLink":"http://maps.google.com/?q=40.5767%2C%20-73.9839%20(%22Delaware+Area+Neighborhood+Farmers+Market%22)",
-      "Products":"",
-      "Schedule":"",
-      "Lat":40.5767,
-      "Long":-73.9839,
-      "Name":"Delaware Area Neighborhood Farmers Market"
+    "Address": "St. James Church, 391 Delaware Ave,, Albany, New York",
+    "GoogleLink":"http://maps.google.com/?q=40.5767%2C%20-73.9839%20(%22Delaware+Area+Neighborhood+Farmers+Market%22)",
+    "Products":"",
+    "Schedule":"",
+    "Lat":40.5767,
+    "Long":-73.9839,
+    "Name":"Delaware Area Neighborhood Farmers Market",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.9839, 40.5767]
+    }
   },
   {
     "Address":"WEST 16 STREET SURF AVE, BROOKLYN, New York, 11224",
@@ -68,16 +72,24 @@ angular.module('farmer.services', [])
     "Schedule":"06/15/2014 to 10/26/2014 Sun: 8:00 AM-3:30 PM",
     "Lat":40.581106,
     "Long":-73.98365,
-    "Name":"Coney Island Farmers Market"
+    "Name":"Coney Island Farmers Market",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.98365, 40.581106]
+    }
   },
   {
-      "Address":"18th Ave between 81st & 82nd Streets, Brooklyn, New York, 11214",
-      "GoogleLink":"http://maps.google.com/?q=40.6155350%2C%20-74.0109559%20(%22Bensonhurst%22)",
-      "Products":"Baked goods; Fresh fruit and vegetables; Honey",
-      "Schedule":"07/07/2013 to 11/23/2013 Sun: 9:00 AM-4:00 PM",
-      "Lat":40.615535,
-      "Long":-74.0109559,
-      "Name":"Bensonhurst"
+    "Address":"18th Ave between 81st & 82nd Streets, Brooklyn, New York, 11214",
+    "GoogleLink":"http://maps.google.com/?q=40.6155350%2C%20-74.0109559%20(%22Bensonhurst%22)",
+    "Products":"Baked goods; Fresh fruit and vegetables; Honey",
+    "Schedule":"07/07/2013 to 11/23/2013 Sun: 9:00 AM-4:00 PM",
+    "Lat":40.615535,
+    "Long":-74.0109559,
+    "Name":"Bensonhurst",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [ -74.0109559, 40.615535]
+    }
   }];
 
   return {
@@ -86,6 +98,92 @@ angular.module('farmer.services', [])
 })
 
 .factory('GoogleMaps', function() {
+
+  const Marker = {
+    // Sets the map on all markers in the markers array
+    setMapOnAll: (map, storage) => {
+      for(let i = 0; i < storage.length; i++) {
+        storage[i].setMap(map);
+      }
+    },
+
+    // Removes the markers from the map, but keeps them in the array
+    clearAll: (storage) => {
+      Marker.setMapOnAll(null, storage);
+    },
+
+    // Deletes all markers in the array by removing references to them.
+    deleteAll: (storage) => {
+      Marker.clearAll(storage);
+      storage = [];
+    },
+
+    // Creates a marker and inserts in the storage array
+    create: (map, storage, market) => {
+      let marker = new google.maps.Marker({
+        map: map,
+        animation: google.maps.Animation.DROP,
+        position: new google.maps.LatLng(market.geometry.coordinates[1], market.geometry.coordinates[0]),
+        title: market.Name
+      })
+
+      marker.content = '<div class="infoWindowContent">Test!</div>';
+
+      google.maps.event.addListener(marker, 'click', () => {
+        infoWindow.setContent(marker.content);
+        infoWindow.open(map, marker);
+      });
+
+      storage.push(marker);
+    }
+  };
+
+
+
+  // const createMarker = (map, storage, market) => {
+  //
+  //   let marker = new google.maps.Marker({
+  //     map: map,
+  //     animation: google.maps.Animation.DROP,
+  //     position: new google.maps.LatLng(market.geometry.coordinates[1], market.geometry.coordinates[0]),
+  //     title: market.Name
+  //   })
+  //
+  //   marker.content = '<div class="infoWindowContent">Test!</div>';
+  //
+  //   google.maps.event.addListener(marker, 'click', () => {
+  //     infoWindow.setContent(marker.content);
+  //     infoWindow.open(map, marker);
+  //   });
+  //
+  //   storage.push(marker);
+  //
+  // };
+
+
+
+
+
+    // <div class=info"WindowContent">
+    //   <h3>` + market.Name + `</h3>
+    //   <h4>Schedule</h4>
+    //   <p>` + market.Schedule </p>
+    //   <h4> Products </h4>
+    //   <p> market.Products </p>
+    //   <md-button class="md-primary" ng-href= market.GoogleLink target="_blank">Google Maps Link</md-button>`
+    //
+    //
+    //
+    //
+    //
+    // '<div class="info_content">' +
+    //     '<h3>London Eye</h3>' +
+    //     '<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' +        '</div>'],
+    //     ['<div class="info_content">' +
+    //     '<h3>Palace of Westminster</h3>' +
+    //     '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
+    //     '</div>']
+    // ]
 
   // var createMarker = function (info){
   //
@@ -113,8 +211,7 @@ angular.module('farmer.services', [])
 
 
   return {
-
+    Marker: Marker,
   }
-
 
 })
