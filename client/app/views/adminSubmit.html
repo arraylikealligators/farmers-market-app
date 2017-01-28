@@ -1,0 +1,50 @@
+<div class="logo logo-small">
+      City Sprout
+</div>
+<div class="admin-body">
+  <div><h2>Welcome, Admin!</h2></div>
+
+  <form ng-submit = "retrieveMarket()">
+    <h3>Update an existing farm</h3>
+    <h4 class = welcome >Enter Farm ID</h4>
+    <input type="text" placeholder= "id" ng-model="marketID">
+    <br>
+    <div .alertbox ng-show ="alertView === true">Please make sure you are entering a farm ID</div>
+    <br />
+    <input type="submit" value="Submit" />
+    <br />
+    <br />
+    <div class = "retrieval-display" ng-show= "singleObjView===true">
+      <h3>Click on a description to edit</h3>
+      <span class= form-output>Name</span> 
+      <br />
+      <button type= text class= editKey onClick = "">{{singleObj.data.Name}} </button>
+      <br />
+      <span class= form-output>Address
+      <br />
+      </span><button class= editKey onClick = "">{{singleObj.data.Address}}</button>
+      <br />
+      <span class= form-output >Products
+      <br />
+      <button class= editKey onClick = "">{{singleObj.data.Products}}</button>
+      <br />
+      <span class= form-output>Schedule
+      <br />
+      <button class= editKey onClick = "">{{singleObj.data.Schedule}}</button>
+      <br />
+      <span class= form-output>GoogleLink
+      <br />
+      <button class= editKey onClick = "">{{singleObj.data.GoogleLink}}</button>
+      <br />
+      <span class= form-output>Id 
+      <br />
+      {{singleObj.data._id}}
+      <br />
+      <br />
+      <button>UPDATE</button> <button>DELETE THIS LISTING</button>
+    </div>
+  </form>
+</div>
+</div><!--end retrieval display-->
+
+

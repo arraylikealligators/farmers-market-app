@@ -5,6 +5,7 @@ var MarketQuery = require('../methods/marketMethods');
 var util = require('../util/util_functions');
 var getAllFarms = Q.nbind(Market.find, Market);
 var queryMarkets = Q.nbind(Market.find, Market);
+var queryById = Q.nbind(Market.findById, Market);
 
 
 module.exports = {
@@ -99,6 +100,14 @@ module.exports = {
         console.log('added market to database!');
       }
     });
+  },
+
+  fetchOne: (req, res) => {
+  	console.log("above fetch");
+  	console.log(req.body.marketId);
+  	queryById(req.body.marketId)
+  		.then((doc)=>{ console.log( "in fetch one", doc); 
+  		res.send(doc); });
   }
 
 };

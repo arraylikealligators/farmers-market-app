@@ -95,3 +95,19 @@ body {
 #map {
   height: 100%;
 }
+
+.welcome {
+  color: blue;
+}
+
+.retrieval-display {
+  border: dotted;
+}
+
+.form-output {
+  font-family: sans-serif;
+  color: gray;
+  padding: 2em;
+  padding-bottom: auto;
+  
+}

@@ -1,4 +1,4 @@
-angular.module('farmer', ['farmer.search', 'farmer.map', /* 'farmer.add', */ 'ngMaterial', 'ngRoute', 'ngAnimate'])
+angular.module('farmer', ['farmer.search', 'farmer.services', 'farmer.adminServices', 'farmer.map', 'farmer.adminUpdate', 'ngMaterial', 'ngRoute', 'ngAnimate'])
 .config(($routeProvider) => {
   $routeProvider
     .when('/search', {
@@ -8,6 +8,10 @@ angular.module('farmer', ['farmer.search', 'farmer.map', /* 'farmer.add', */ 'ng
     .when('/map', {
       templateUrl: 'app/views/map.html',
       controller: 'MapController'
+    })
+    .when('/adminUpdate', {
+      templateUrl: 'app/views/adminSubmit.html',
+      controller: 'AdminController'
     })
     .otherwise({
       redirectTo: '/search'
