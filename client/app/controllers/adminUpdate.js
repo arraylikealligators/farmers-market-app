@@ -3,20 +3,36 @@
       $scope.list = [];
       $scope.marketID = ''
       $scope.singleObj;
-      // $scope.dummyTest = function() {
-      //   if ($scope.marketID) {
-      //     $scope.list.push($scope.marketID);
-      //     $scope.marketID = "";
-      //   }
-      // };
+      $scope.singleObjView = false;
+      $scope.alertView = false;
+      $scope.flipObjView = function(){
+        $scope.singleObjView = !$scope.singleObjView;
+      };
+
+      $scope.flipAlert = function(){
+        $scope.alertView = !$scope.alertView;
+      };
+     
       $scope.retrieveMarket = function(){
 
         if($scope.marketID){
-          console.log($scope.marketID);
+          console.log('marketId in scope: ', $scope.marketID);
           httpAdminFactory.getOne($scope.marketID)
-            .then((obj)=> {$scope.singleObj= obj})
-          console.log($scope.singleObj);
-        }
-      };
+            .then((obj)=> { 
+              console.log("first log", obj)
+              $scope.singleObj= obj; 
+              if($scope.singleObj === undefined){
+                $scope.flipAlert();
+              }else{
+                $scope.flipObjView();
+                $scope.marketID = "";
+              }
+            })
+            .then(()=>{console.log("doing something");});
 
-    });
+      }
+    };
+  });
+
+
+

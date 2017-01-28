@@ -1,35 +1,50 @@
-<div><h2>Welcome, Admin!</h2></div>
+<div class="logo logo-small">
+      City Sprout
+</div>
+<div class="admin-body">
+  <div><h2>Welcome, Admin!</h2></div>
 
-<form ng-submit = "retrieveMarket()">
-<h4>Update an existing farm</h4>
-<h5>Enter Farm ID<h5>
-<input type="text" placeholder= "id" ng-model="marketID"><br>
-<input type="submit" value="Submit" />
-<div>{{list}}</div>
-<div>Is this the farm you were looking for? <br />
-{{singleObj}}
-</form>
+  <form ng-submit = "retrieveMarket()">
+    <h3>Update an existing farm</h3>
+    <h4 class = welcome >Enter Farm ID</h4>
+    <input type="text" placeholder= "id" ng-model="marketID">
+    <br>
+    <div .alertbox ng-show ="alertView === true">Please make sure you are entering a farm ID</div>
+    <br />
+    <input type="submit" value="Submit" />
+    <br />
+    <br />
+    <div class = "retrieval-display" ng-show= "singleObjView===true">
+      <h3>Click on a description to edit</h3>
+      <span class= form-output>Name</span> 
+      <br />
+      <button type= text class= editKey onClick = "">{{singleObj.data.Name}} </button>
+      <br />
+      <span class= form-output>Address
+      <br />
+      </span><button class= editKey onClick = "">{{singleObj.data.Address}}</button>
+      <br />
+      <span class= form-output >Products
+      <br />
+      <button class= editKey onClick = "">{{singleObj.data.Products}}</button>
+      <br />
+      <span class= form-output>Schedule
+      <br />
+      <button class= editKey onClick = "">{{singleObj.data.Schedule}}</button>
+      <br />
+      <span class= form-output>GoogleLink
+      <br />
+      <button class= editKey onClick = "">{{singleObj.data.GoogleLink}}</button>
+      <br />
+      <span class= form-output>Id 
+      <br />
+      {{singleObj.data._id}}
+      <br />
+      <br />
+      <button>UPDATE</button> <button>DELETE THIS LISTING</button>
+    </div>
+  </form>
+</div>
+</div><!--end retrieval display-->
 
-<!-- 
-<form ng-submit="submit()" ng-controller="ExampleController">
-  Enter text and hit enter:
-  <input type="text" ng-model="text" name="text" />
-  <input type="submit" id="submit" value="Submit" />
-  <pre>list={{list}}</pre>
-</form>
 
-
-<script>
-  angular.module('submitExample', [])
-    .controller('ExampleController', ['$scope', function($scope) {
-      $scope.list = [];
-      $scope.text = 'hello';
-      $scope.submit = function() {
-        if ($scope.text) {
-          $scope.list.push(this.text);
-          $scope.text = '';
-        }
-      };
-    }]);
-</script>
- -->
