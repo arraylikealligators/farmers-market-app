@@ -1,0 +1,35 @@
+<div><h2>Welcome, Admin!</h2></div>
+
+<form ng-submit = "retrieveMarket()">
+<h4>Update an existing farm</h4>
+<h5>Enter Farm ID<h5>
+<input type="text" placeholder= "id" ng-model="marketID"><br>
+<input type="submit" value="Submit" />
+<div>{{list}}</div>
+<div>Is this the farm you were looking for? <br />
+{{singleObj}}
+</form>
+
+<!-- 
+<form ng-submit="submit()" ng-controller="ExampleController">
+  Enter text and hit enter:
+  <input type="text" ng-model="text" name="text" />
+  <input type="submit" id="submit" value="Submit" />
+  <pre>list={{list}}</pre>
+</form>
+
+
+<script>
+  angular.module('submitExample', [])
+    .controller('ExampleController', ['$scope', function($scope) {
+      $scope.list = [];
+      $scope.text = 'hello';
+      $scope.submit = function() {
+        if ($scope.text) {
+          $scope.list.push(this.text);
+          $scope.text = '';
+        }
+      };
+    }]);
+</script>
+ -->

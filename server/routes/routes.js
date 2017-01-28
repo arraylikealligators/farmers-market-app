@@ -15,6 +15,12 @@ serverRoutes.route('/api/create')
   marketController.createMarket(req, res);
 });
 
+serverRoutes.route('/api/getOne')
+.post((req,res) => {
+
+  marketController.fetchOne(req, res)
+
+})
 
 
 module.exports = serverRoutes;
