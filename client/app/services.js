@@ -119,7 +119,7 @@ angular.module('farmer.services', [])
     },
 
     // Creates a marker and inserts in the storage array
-    create: (map, storage, market) => {
+    create: (map, storage, infoWindow, market) => {
       let marker = new google.maps.Marker({
         map: map,
         animation: google.maps.Animation.DROP,
@@ -127,7 +127,13 @@ angular.module('farmer.services', [])
         title: market.Name
       })
 
-      marker.content = '<div class="infoWindowContent">Test!</div>';
+      marker.content = '<div class="infoWindowContent">' +
+        '<h3>' + market.Name + '</h3>' +
+        '<h4> Schedule </h4>' +
+        '<p>' + market.Schedule + '</p>' +
+        '<h4> Products </h4>' +
+        '<p>' + market.Products + '</p>' +
+        '<a href=' + market.GoogleLink + ' target="_blank">Google Maps Link</a>';
 
       google.maps.event.addListener(marker, 'click', () => {
         infoWindow.setContent(marker.content);
@@ -137,6 +143,18 @@ angular.module('farmer.services', [])
       storage.push(marker);
     }
   };
+
+  // Zoom and centers map around all markers in storage
+  const autoCenter = (map, storage) => {
+    let bounds = new google.maps.LatLngBounds();
+
+    for (let i = 0; i < storage.length; i++) {
+      bounds.extend(storage[i].position);
+    }
+    map.setCenter(bounds.getCenter());
+
+    map.fitBounds(bounds);
+  }
 
 
 
@@ -212,6 +230,7 @@ angular.module('farmer.services', [])
 
   return {
     Marker: Marker,
+    autoCenter: autoCenter
   }
 
 })

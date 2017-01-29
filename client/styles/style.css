@@ -96,6 +96,28 @@ body {
   height: 100%;
 }
 
+.infoWindowContent {
+
+}
+
+.infoWindowContent h3 {
+  -webkit-margin-before: .5em;
+  -webkit-margin-after: 1em;
+  font-size: 1.33em;
+}
+
+.infoWindowContent h4 {
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: .5em;
+  font-size: 1.1em;
+}
+
+.infoWindowContent p {
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 1em;
+  font-size: 1.2em;
+}
+
 .welcome {
   color: blue;
 }
@@ -109,5 +131,5 @@ body {
   color: gray;
   padding: 2em;
   padding-bottom: auto;
-  
+
 }

@@ -5,7 +5,7 @@ angular.module('farmer.map', ['farmer.services'])
 // Functionality for search bar on the results page
 
   $scope.address = ''; // Scope variable to store user address input
-  $scope.radius = 10; // Scope variable to store search radius input
+  $scope.radius = 2; // Scope variable to store search radius input
 
 
   $scope.submit = () => { // Sends search request to server
@@ -14,12 +14,16 @@ angular.module('farmer.map', ['farmer.services'])
     .then((results) => {
       $scope.results = results;
 
+      // Deletes markers currently on the map
       GoogleMaps.Marker.deleteAll($scope.markers);
 
+      // Adds markers from new results
       for(let i = 0; i < $scope.results.length; i++) {
-        GoogleMaps.Marker.create($scope.map, $scope.markers, $scope.results[i]);
+        GoogleMaps.Marker.create($scope.map, $scope.markers, infoWindow, $scope.results[i]);
       }
 
+      // Centers map view on new markers
+      GoogleMaps.autoCenter($scope.map, $scope.markers);
     })
     .catch(function (error) {
       console.error(error);
@@ -64,50 +68,12 @@ angular.module('farmer.map', ['farmer.services'])
   // Stores all the farmer marker's markers created based on search results
   $scope.markers = [];
 
-  // $scope.openInfoWindow = (e, selectedMarker) => {
-  //   e.preventDefault();
-  //   google.maps.event.trigger(selectedMarker, 'click');
-  // };
-
+  // Creates markers for sample data on initial page load (For Development Purposes)
   for(let i = 0; i < $scope.results.length; i++) {
-    GoogleMaps.Marker.create($scope.map, $scope.markers, $scope.results[i]);
+    GoogleMaps.Marker.create($scope.map, $scope.markers, infoWindow, $scope.results[i]);
   }
 
-
-
-
-
-
-
-
-
-  // var infoWindow = new google.maps.InfoWindow();
-
-    // var createMarker = function (info){
-    //
-    //     var marker = new google.maps.Marker({
-    //         map: $scope.map,
-    //         position: new google.maps.LatLng(info.lat, info.long),
-    //         title: info.city
-    //     });
-    //     marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
-    //
-    //     google.maps.event.addListener(marker, 'click', function(){
-    //         infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
-    //         infoWindow.open($scope.map, marker);
-    //     });
-    //
-    //     $scope.markers.push(marker);
-    //
-    // }
-    //
-    // for (i = 0; i < cities.length; i++){
-    //     createMarker(cities[i]);
-    // }
-
-    // $scope.openInfoWindow = function(e, selectedMarker){
-    //     e.preventDefault();
-    //     google.maps.event.trigger(selectedMarker, 'click');
-    // }
-
+  if($scope.results.length !== 0) {
+    GoogleMaps.autoCenter($scope.map, $scope.markers);
+  }
 });
