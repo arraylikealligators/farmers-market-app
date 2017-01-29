@@ -10,11 +10,8 @@ var keys = require('../API_KEYS.js');
 var app = express();
 var port = process.env.PORT || 8080;
 
-var mongoURI = process.env.mongoURI || keys.mongoURI;
-
-// instead of just connecting to mlabs, we will be connecting to databse with a secret attached so jwt can be sent back
-var database = keys.database;
-mongoose.connect(database.database);
+var mongoURI = process.env.mongoURI || keys.database.database;
+mongoose.connect(mongoURI);
 
 app.set('superSecret', database.secret);
 app.use(morgan('dev'));
