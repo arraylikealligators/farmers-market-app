@@ -107,7 +107,12 @@ module.exports = {
   	console.log(req.body.marketId);
   	queryById(req.body.marketId)
   		.then((doc)=>{ console.log( "in fetch one", doc); 
-  		res.send(doc); });
+  		  res.send(doc); 
+  		})
+  		.catch((err)=>{ 
+  			console.log(err);
+  			res.send('not found');
+  		});
   }
 
 };

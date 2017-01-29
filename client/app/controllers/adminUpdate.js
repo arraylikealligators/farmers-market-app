@@ -19,16 +19,18 @@
           console.log('marketId in scope: ', $scope.marketID);
           httpAdminFactory.getOne($scope.marketID)
             .then((obj)=> { 
-              console.log("first log", obj)
-              $scope.singleObj= obj; 
-              if($scope.singleObj === undefined){
-                $scope.flipAlert();
+              console.log("http request returned an obj");
+              if(obj.data === "not found"){
+                console.log("farm not found!")
+                $scope.alertView = true;
               }else{
+                $scope.alertView = false;
+                $scope.singleObj= obj; 
                 $scope.flipObjView();
                 $scope.marketID = "";
-              }
+             } 
             })
-            .then(()=>{console.log("doing something");});
+            .catch(()=>{console.log("doing something");});
 
       }
     };

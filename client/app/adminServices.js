@@ -15,7 +15,8 @@ angular.module('farmer.adminServices', [])
       //   return singleObj;
       // }
 
-      });
+      })
+        .catch(()=>{console.log("not working")})
     };
 
     return {
