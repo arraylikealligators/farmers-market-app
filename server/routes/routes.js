@@ -6,7 +6,7 @@ var bcrypt = require('bcrypt-nodejs');
 // this single, one-time admin setup should only be invoked once. As long as the database has 1 instance of the admin, this route should never ever be visited a second time.
 serverRoutes.route('/setup')
 .get((req, res) => {
-  
+
 })
 
 serverRoutes.route('/api/search')
@@ -17,7 +17,7 @@ serverRoutes.route('/api/search')
 
 serverRotes.route('api/login')
 .get(util.checkAdmin, (req, res) => {
-  //
+  
 })
 
 serverRoutes.route('/api/create')
