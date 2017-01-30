@@ -43,8 +43,14 @@ serverRoutes.route('/api/update')
 serverRoutes.route('/api/delete')
 .put((req,res)=>{
 	console.log("in serverRoutes at delete");
-	console.log(req.body, "obj in routes")
+	console.log(req.body, "obj in routes");
 	marketController.delete(req,res);
-})
+});
+
+
+serverRoutes.route('/api/add')
+.put((req,res)=>{
+	marketController.addMarket(req,res);
+});
 
 module.exports = serverRoutes;

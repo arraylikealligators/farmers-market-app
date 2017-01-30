@@ -31,10 +31,21 @@ angular.module('farmer.adminServices', [])
       });
     };
 
+    var addMarket = function(market){
+      console.log("in service factory adding");
+      console.log("new market:", market);
+      return $http({
+        method: 'PUT',
+        url: '/api/add',
+        data: { market: market}
+      });
+    }
+
     return {
       getOne : getOne,
       update: update,
-      deleteMarket: deleteMarket
+      deleteMarket: deleteMarket,
+      addMarket: addMarket
     };
 
 
