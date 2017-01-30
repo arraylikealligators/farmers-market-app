@@ -48,7 +48,7 @@
   -webkit-text-fill-color: transparent;
   font-weight: 300;
   font-size: 2.5em;
-  font-color: #73BA9B;
+  color: #73BA9B;
   text-align: center;
   -webkit-margin-before: 0.67em;
   -webkit-margin-after: 0.3em;
@@ -80,8 +80,13 @@
   height: 100%;
 }
 
-.infoWindowContent {
+.footer {
+  margin-top: 100px;
+  color: #F4FFFD;
+}
 
+.material-icons.md-light {
+  color: rgba(245, 81, 81, 1);
 }
 
 .infoWindowContent h3 {
@@ -101,6 +106,7 @@
   -webkit-margin-after: 1em;
   font-size: 1.2em;
 }
+
 
 .welcome {
   color: blue;
