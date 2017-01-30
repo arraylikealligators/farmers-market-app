@@ -85,6 +85,11 @@
   color: #F4FFFD;
 }
 
+.adminbutton {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
 .material-icons.md-light {
   color: rgba(245, 81, 81, 1);
 }

@@ -22,13 +22,16 @@
         </div>
       </form>
 
-      <!-- Need a button here for admin to go to login page -->
-      <md-button ng-click="redirectToLogin();" class="search-button md-raised md-primary">Admin Login</md-button>
+
 
   </main>
-  <footer class="footer">
+  <footer class="md-padding footer">
     <div>
       Made with <span><md-icon class="material-icons md-light"> favorite </md-icon></span> by Array Like Alligators
+    </div>
+    <!-- Need a button here for admin to go to login page -->
+    <div class="adminbutton" layout="row" layout-align="center">
+      <md-button ng-click="redirectToLogin();" class="md-raised md-primary ">Admin Login</md-button>
     </div>
   </footer>
 </div>
