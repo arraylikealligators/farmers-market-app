@@ -10,10 +10,10 @@ var keys = require('../API_KEYS.js');
 var app = express();
 var port = process.env.PORT || 8080;
 
-var mongoURI = process.env.mongoURI || keys.database.database;
+var mongoURI = process.env.mongoURI || keys.mongoURI;
 mongoose.connect(mongoURI);
 
-app.set('superSecret', keys.database.secret);
+app.set('superSecret', keys.secret);
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
