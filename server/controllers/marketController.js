@@ -6,6 +6,8 @@ var util = require('../util/util_functions');
 var getAllFarms = Q.nbind(Market.find, Market);
 var queryMarkets = Q.nbind(Market.find, Market);
 var queryById = Q.nbind(Market.findById, Market);
+var findAndUpdate = Q.nbind(Market.update, Market);
+var findAndRemove = Q.nbind(Market.remove, Market);
 
 
 module.exports = {
@@ -107,7 +109,37 @@ module.exports = {
   	console.log(req.body.marketId);
   	queryById(req.body.marketId)
   		.then((doc)=>{ console.log( "in fetch one", doc); 
-  		res.send(doc); });
+  		  res.send(doc); 
+  		})
+  		.catch((err)=>{ 
+  			console.log(err);
+  			res.send('not found');
+  		});
+  },
+
+  updateOne: (req, res) =>{
+  	console.log("put request through to 'updateOne' func in market controller");
+  	console.log("obj received: ", req.body.updatedObj.data);
+  	console.log(req.body.updatedObj.data._id, "id"); 
+  	console.log(typeof req.body.updatedObj.data.geometry.coordinates);
+  	findAndUpdate({ _id: req.body.updatedObj.data._id},
+  		{ '$set': { 'Address': req.body.updatedObj.data.Address,
+  				  'Products': req.body.updatedObj.data.Products,
+  				  'Schedule': req.body.updatedObj.data.Schedule,
+  				  'Name': req.body.updatedObj.data.Name,
+  				  'GoogleLink': req.body.updatedObj.data.GoogleLink,
+  				  'geometry.coordinates' : req.body.updatedObj.data.geometry.coordinates
+  				  }
+  		},
+  		()=> { res.send("updated");
+  	})
+  // res.send("OK");
+  },
+
+  delete: (req, res) => {
+  	console.log(req.body, "req.body!!")
+  	findAndRemove({ _id: req.body.market.data._id},
+  		()=>{ res.send("item removed"); });
   }
 
 };
