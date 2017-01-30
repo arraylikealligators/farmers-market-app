@@ -33,14 +33,11 @@ serverRoutes.route('/api/getOne')
   marketController.fetchOne(req, res);
 
 });
-<<<<<<< HEAD
 
 serverRoutes.route('/api/update')
 .put((req,res)=>{
-=======
->>>>>>> adminauth
 
-	marketController.updateOne(req, res);	
+	marketController.updateOne(req, res);
 });
 
 serverRoutes.route('/api/delete')

@@ -1,5 +1,5 @@
 angular.module('farmer', ['xeditable','farmer.search', 'farmer.services', 'farmer.adminServices', 'farmer.map', 'farmer.login', 'farmer.adminUpdate', 'ngMaterial', 'ngRoute', 'ngAnimate'])
-.config(($routeProvider) => {
+.config(($routeProvider, $httpProvider) => {
   $routeProvider
     .when('/search', {
       templateUrl: 'app/views/search.html',
