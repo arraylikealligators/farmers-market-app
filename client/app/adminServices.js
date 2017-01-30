@@ -4,23 +4,38 @@ angular.module('farmer.adminServices', [])
 
 
     var getOne = function(marketId){
-      console.log("in http request fact")
+      console.log("retrieving an object http request ");
         return $http({
         method: 'POST',
         url: '/api/getOne',
         data: { marketId : marketId}
-      // })
-      // .then(function(singleObj){
-      //   console.log(singleObj)
-      //   return singleObj;
-      // }
-
       })
-        .catch(()=>{console.log("not working")})
+        .catch(()=>{console.log("not working");})
+    };
+
+    var update = function(updatedObj){
+      console.log("updating an object http request")
+      return $http({
+        method: 'PUT',
+        url: '/api/update',
+        data: { updatedObj : updatedObj }
+      });
+
+    };
+
+    var deleteMarket = function(market){
+      console.log("in service factory ", market)
+      return $http({
+        method: 'PUT',
+        url: '/api/delete',
+        data: { market: market}
+      });
     };
 
     return {
-      getOne : getOne
+      getOne : getOne,
+      update: update,
+      deleteMarket: deleteMarket
     };
 
 
