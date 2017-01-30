@@ -8,6 +8,7 @@ var queryMarkets = Q.nbind(Market.find, Market);
 var queryById = Q.nbind(Market.findById, Market);
 var findAndUpdate = Q.nbind(Market.update, Market);
 var findAndRemove = Q.nbind(Market.remove, Market);
+var createMarket = Q.nbind(Market.create, Market)
 
 
 module.exports = {
@@ -80,29 +81,29 @@ module.exports = {
 		// send the query result to front-end as res.json()
 	},
 
-  createMarket: (req, res, next) => {
-    // fetch the geocode first from req.body.address
-    console.log(req.body);
-
-
-    // create a new market
-    var newMarket = Market({
-      Address: req.body.address,
-      GoogleLink: req.body.link,
-      Products: req.body.products,
-      Schedule: req.body.schedule,
-      Name: req.body.name,
-      geometry: {type: 'Point', coordinates: req.body.coordinates}
-    });
-
-    newMarket.save((err) => {
-      if(err) {
-        console.error(err);
-      } else {
-        console.log('added market to database!');
-      }
-    });
+  addMarket: (req, res, next) => {
+    console.log("req.body", req.body);
+    console.log("geo coords", req.body.geometry);
+    Market.create({ Address: req.body.market.Address,
+        GoogleLink: req.body.market.Link,
+        Products: req.body.market.Products,
+        Schedule: req.body.market.Schedule,
+        Name: req.body.market.Name,
+        geometry: req.body.market.geometry }, 
+        function(err, newMarket){
+          if(err){
+            console.log("Error creating object!", err);
+            res.send("error creating object!");
+          }else{
+            Market.collection.createIndex( { geometry : "2dsphere" } );
+            res.send(newMarket);
+            
+          }
+   });
   },
+        //may not be necessary
+        
+  
 
   fetchOne: (req, res) => {
   	console.log("above fetch");
@@ -116,6 +117,7 @@ module.exports = {
   			res.send('not found');
   		});
   },
+  
 
   updateOne: (req, res) =>{
   	console.log("put request through to 'updateOne' func in market controller");
@@ -141,5 +143,6 @@ module.exports = {
   	findAndRemove({ _id: req.body.market.data._id},
   		()=>{ res.send("item removed"); });
   }
+
 
 };

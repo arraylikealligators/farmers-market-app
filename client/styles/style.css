@@ -1,3 +1,8 @@
+.adminform {
+  padding: 10px;
+  font-family: 'Open Sans', sans-serif;
+}
+
 .logo {
   color: #F4FFFD;
   font-family: 'Cookie', cursive;
@@ -13,6 +18,37 @@
   text-shadow: 0 1px 0px rgba(50, 50, 50, .25);
   padding: 15px 10px;
 }
+
+.logo-admin {
+  color: #F4FFFD;
+  font-size: 2.5em;
+  text-align: center;
+  text-shadow: 0 1px 0px rgba(50, 50, 50, .25);
+  padding: 15px 10px;
+}
+
+.login-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Open Sans', sans-serif;
+  background: url(../assets/veggiedisplay.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+}
+
+.login-display {
+  background: rgba(255, 255, 255, 0.95) center center fixed;
+  margin: 10px;
+  border-radius: 10px;
+  max-width: 750px;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.25);
+}
+
 
 .search-container {
   display: flex;
@@ -43,7 +79,7 @@
   -webkit-text-fill-color: transparent;
   font-weight: 300;
   font-size: 2.5em;
-  font-color: #73BA9B;
+  color: #73BA9B;
   text-align: center;
   -webkit-margin-before: 0.67em;
   -webkit-margin-after: 0.3em;
@@ -75,8 +111,18 @@
   height: 100%;
 }
 
-.infoWindowContent {
+.footer {
+  margin-top: 100px;
+  color: #F4FFFD;
+}
 
+.adminbutton {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.material-icons.md-light {
+  color: rgba(245, 81, 81, 1);
 }
 
 .infoWindowContent h3 {
@@ -96,6 +142,7 @@
   -webkit-margin-after: 1em;
   font-size: 1.2em;
 }
+
 
 .welcome {
   color: blue;
@@ -154,17 +201,6 @@ button {
   -webkit-transform-origin: 50% 50%;
 }
 
-p {
-  font-family: sans-serif;
-  color: pink;
-  font-size: 30px;
-  font-weight: bold;
-  margin: 20px auto;
-  text-align: center;
-  animation: text .5s linear .4s;
-  -webkit-animation: text .4s linear .3s;
-}
-
 @-webkit-keyframes dash {
  0% {
    stroke-dashoffset: 1000;
@@ -208,18 +244,11 @@ p {
     opacity: 1;
   }
 
-  
+
   @keyframes text {
   0% {
     opacity: 0; }
   100% {
     opacity: 1;
   }
-}
-
-.entirePage {
-  float: center;
-  padding: 30px;
-  margin: 30px;
-  align-items: center;
 }
