@@ -2,7 +2,6 @@ angular.module('farmer.adminServices', [])
 
 .factory('httpAdminFactory', function ($http) {
 
-
     var getOne = function(marketId){
       console.log("retrieving an object http request ");
         return $http({
@@ -50,4 +49,36 @@ angular.module('farmer.adminServices', [])
     };
 
 
+})
+.factory('Auth', function($http, $window, $location) {
+  var login = function(credentials) {
+    console.log('inside factory, Auth');
+    return $http({
+      method: 'POST',
+      url: '/api/login',
+      data: {
+        username: credentials.username,
+        password: credentials.password
+      }
+    })
+    .then(function(response) {
+      console.log('adminServices>Login Factory>response', response);
+      return response.data.token;
+    });
+  }
+
+  var isAuth = function() {
+    return !!$window.localStorage.getItem('token');
+  }
+
+  var signout = function() {
+    $window.localStorage.removeItem('token');
+    $location.path('/search');
+  }
+
+  return {
+    login: login,
+    isAuth: isAuth,
+    signout: signout
+  }
 });

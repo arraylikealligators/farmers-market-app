@@ -1,3 +1,8 @@
+.adminform {
+  padding: 10px;
+  font-family: 'Open Sans', sans-serif;
+}
+
 .logo {
   color: #F4FFFD;
   font-family: 'Cookie', cursive;
@@ -197,18 +202,11 @@ button {
     opacity: 1;
   }
 
-  
+
   @keyframes text {
   0% {
     opacity: 0; }
   100% {
     opacity: 1;
   }
-}
-
-.entirePage {
-  float: center;
-  padding: 30px;
-  margin: 30px;
-  align-items: center;
 }
