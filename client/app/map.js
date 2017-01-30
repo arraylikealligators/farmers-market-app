@@ -90,7 +90,6 @@ angular.module('farmer.map', ['farmer.services'])
 
   const options = {
     bounds: defaultBounds,
-    types: ['geocode']
   };
 
   $scope.autocomplete = new google.maps.places.Autocomplete(input, options);
