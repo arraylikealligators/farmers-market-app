@@ -8,7 +8,7 @@
                         <!--initial 'Enter Farm ID' form -->
 
 <form ng-submit = "retrieveMarket()">
-    <h3>Update an existing farm</h3>
+    <h3>Update an existing market</h3>
     <h4 class = welcome >Enter Farm ID</h4>
     <input type="text" placeholder= "id" ng-model="marketID">
     <br>
@@ -33,7 +33,7 @@
 
 </svg>
   
-<p>Update Successful!</p>
+<p>Success!</p>
 </div>
 
 
@@ -116,6 +116,88 @@
 </div> <!--Retrieval display ends-->
 
 
+                  <!--ADDING MARKET FEATURE-->
+<div>
+
+<form ng-submit = "flipAdd()" >
+    <h3>Add a new market</h3>
+    <input type="submit" value="Enter Information" />
+</form>
+<br />
+<div ng-show = "addView===true">
+  <form editable-form name="editableForm">
+      <div>
+        <!-- editable farm name -->
+        <span class="editKey">Farm Name </span>
+        <span editable-textarea="addObject.Name" e-name="Name" e-required><li>{{  'empty' }}</li></span>
+      </div> 
+      <br />
+      <div>
+        <!-- editable address  -->
+        <span class="editKey">Address </span>
+        <span editable-textarea="addObject.Address" e-name="Address" e-required><li>{{ 'empty' }}</li></span>
+      </div>
+      <br /> 
+      <div>
+        <!-- editable coordinates  -->
+        <span class="editKey">Longitude Coordinate </span>
+        <span editable-text="addObject.geometry.coordinates[0]" e-name="Longitude" e-required><li>{{ 'empty' }}</li></span>
+      </div>
+      <div>
+        <span class="editKey">Latitude Coordinate </span>
+        <span editable-text="addObject.geometry.coordinates[1]" e-name="Latitude" e-required><li>{{ 'empty' }}</li></span>
+      </div>
+      <br />
+      <div>
+        <!-- editable products  -->
+        <span class="editKey">Products </span>
+        <span editable-textarea="addObject.Products" e-name="Products" e-required><li>{{  'empty' }}</li></span>
+      </div>
+      <br /> 
+      <div>
+        <!-- editable schedule  -->
+        <span class="editKey">Schedule </span>
+        <span editable-textarea="addObject.Schedule" e-name="Schedule" e-required><li>{{ 'empty' }}</li></span>
+      </div> 
+      <br />
+      <div>
+        <!-- editable GoogleLink  -->
+        <span class="editKey">GoogleLink </span>
+        <span editable-textarea="addObject.GoogleLink" e-name="GoogleLink" e-required><li>{{ 'empty' }}</li></span>
+      </div> 
+      <br />
+      <div>
+      <!-- non-editable ID  -->
+        <span class="editKey">ID </span>
+        <span><li>Automated</li></span>
+      </div> 
+
+                         <!-- button to show form -->
+      <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+        Edit
+      </button>
+
+                   <!-- buttons to submit or delete market data -->
+      <button type="button" class="btn btn-default" ng-click="addMarket()" ng-show="!editableForm.$visible">
+        Add Market
+      </button>
+
+      <button type="button" class="btn btn-default" ng-click="flipAdd();
+      addObject= {} " ng-show="!editableForm.$visible">
+        Cancel
+      </button>
+
+                      <!-- buttons to save / cancel form -->
+      <span ng-show="editableForm.$visible">
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+          Save
+        </button>
+        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+          Cancel Add
+        </button>
+      </span>
+  </form>  <!--Form ends-->
+</div>
 
 
 
