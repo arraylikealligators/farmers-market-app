@@ -1,3 +1,8 @@
+.adminform {
+  padding: 10px;
+  font-family: 'Open Sans', sans-serif;
+}
+
 .logo {
   color: #F4FFFD;
   font-family: 'Cookie', cursive;
@@ -154,17 +159,6 @@ button {
   -webkit-transform-origin: 50% 50%;
 }
 
-p {
-  font-family: sans-serif;
-  color: pink;
-  font-size: 30px;
-  font-weight: bold;
-  margin: 20px auto;
-  text-align: center;
-  animation: text .5s linear .4s;
-  -webkit-animation: text .4s linear .3s;
-}
-
 @-webkit-keyframes dash {
  0% {
    stroke-dashoffset: 1000;
@@ -208,18 +202,11 @@ p {
     opacity: 1;
   }
 
-  
+
   @keyframes text {
   0% {
     opacity: 0; }
   100% {
     opacity: 1;
   }
-}
-
-.entirePage {
-  float: center;
-  padding: 30px;
-  margin: 30px;
-  align-items: center;
 }
