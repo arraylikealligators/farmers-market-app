@@ -18,9 +18,21 @@ serverRoutes.route('/api/create')
 serverRoutes.route('/api/getOne')
 .post((req,res) => {
 
-  marketController.fetchOne(req, res)
+  marketController.fetchOne(req, res);
 
+});
+
+serverRoutes.route('/api/update')
+.put((req,res)=>{
+
+	marketController.updateOne(req, res);	
+});
+
+serverRoutes.route('/api/delete')
+.put((req,res)=>{
+	console.log("in serverRoutes at delete");
+	console.log(req.body, "obj in routes")
+	marketController.delete(req,res);
 })
-
 
 module.exports = serverRoutes;

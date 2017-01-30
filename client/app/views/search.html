@@ -1,19 +1,19 @@
 <div class="search-container">
   <header class="logo">
-    <h1>Sprouts City</h1>
+    <h1>Sprout City</h1>
   </header>
   <main class="search-display">
-    <h1 class="search-header">Enter Your Location To Find A Farmer's Market Near You</h1>
+    <div class="search-header">Enter your location to find a farmers market near you</div>
       <form ng-submit="submit()" name="searchForm">
-        <div layout="row">
+        <div class="md-padding" layout="row" layout-align="end">
 
-          <md-input-container flex>
-            <label>Location</label>
+          <md-input-container flex="80">
+            <label>Address</label>
             <input type="text" ng-model="address">
           </md-input-container>
 
-          <md-input-container flex>
-            <label>Radius</label>
+          <md-input-container flex="20">
+            <label>Radius (Miles)</label>
             <input type="number" name="radius" min="1" max="20" ng-model="radius"/>
           </md-input-container>
 
