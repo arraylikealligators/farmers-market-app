@@ -15,7 +15,7 @@ angular.module('farmer', ['farmer.search', 'farmer.services', 'farmer.adminServi
     })
     .when('/adminLogin', {
       templateUrl: 'app/views/adminLogin.html',
-      controller: 'AdminLoginController'
+      controller: 'LoginController'
     })
     .otherwise({
       redirectTo: '/search'
