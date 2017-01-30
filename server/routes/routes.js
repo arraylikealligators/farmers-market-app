@@ -16,8 +16,8 @@ serverRoutes.route('/api/search')
   marketController.getLocationMarkets(req, res);
 });
 
-serverRotes.route('api/login')
-.get(util.checkAdmin, (req, res) => {
+serverRoutes.route('api/login')
+.get((req, res) => {
 
   adminController.login(req, res);
 });

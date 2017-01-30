@@ -16,7 +16,7 @@ module.exports = {
       if(!user) {
         next(new Error('admin does not exist'));
       } else {
-        return user.comparePassword(password);
+        return user.comparePassword(password)
         .then(function(valid) {
           if(valid) {
             var token = jwt.encode(user, 'aFarmerSecret');
