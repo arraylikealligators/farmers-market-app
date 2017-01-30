@@ -82,6 +82,20 @@ angular.module('farmer.map', ['farmer.services'])
   }
 
 
+// Address Autocomplete Functionality
+
+  const defaultBounds = new google.maps.LatLngBounds( new google.maps.LatLng(-33.8902, 151.1759), new google.maps.LatLng(-33.8474, 151.2631));
+
+  const input = document.getElementById('searchTextField');
+
+  const options = {
+    bounds: defaultBounds,
+    types: ['geocode']
+  };
+
+  $scope.autocomplete = new google.maps.places.Autocomplete(input, options);
+
+
 // Functionality for autocomplete filter functionailty
 
   $scope.transformChip = (chip) => {
