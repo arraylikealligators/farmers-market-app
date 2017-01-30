@@ -13,12 +13,12 @@ module.exports = {
     return miles * 1609.34;
   },
 
-  checkAdmin: (req, res, next) => {
-    var usn = req.body.username;
-    var pw = req.body.password;
-
-    if(!isLoggedIn(req)) {
-      res.redirect('/login')
-    }
-  }
+  // checkAdmin: (req, res, next) => {
+  //   var usn = req.body.username;
+  //   var pw = req.body.password;
+  //
+  //   if(!isLoggedIn(req)) {
+  //     res.redirect('/api/login')
+  //   }
+  // }
 }
