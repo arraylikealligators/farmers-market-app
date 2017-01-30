@@ -13,6 +13,10 @@ angular.module('farmer', ['farmer.search', 'farmer.services', 'farmer.adminServi
       templateUrl: 'app/views/adminSubmit.html',
       controller: 'AdminController'
     })
+    .when('/adminLogin', {
+      templateUrl: 'app/views/adminLogin.html',
+      controller: 'AdminLoginController'
+    })
     .otherwise({
       redirectTo: '/search'
     });
