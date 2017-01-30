@@ -24,6 +24,10 @@ angular.module('farmer.map', ['farmer.services'])
 
       // Centers map view on new markers
       GoogleMaps.autoCenter($scope.map, $scope.markers);
+
+      allProducts = getProdList($scope.results);
+      console.log(allProducts);
+
     })
     .catch(function (error) {
       console.error(error);
@@ -76,4 +80,67 @@ angular.module('farmer.map', ['farmer.services'])
   if($scope.results.length !== 0) {
     GoogleMaps.autoCenter($scope.map, $scope.markers);
   }
+
+
+// Functionality for autocomplete filter functionailty
+
+  $scope.transformChip = (chip) => {
+    // If it is an object, it's already a known chip
+    if (angular.isObject(chip)) {
+      return chip;
+    }
+
+    // Otherwise, create a new one
+    return { name: chip, type: 'new' }
+  }
+
+  let allProducts = getProdList($scope.results);
+
+  $scope.selectedProducts = [];
+
+  $scope.selectedItem = null;
+
+  $scope.searchText = null;
+
+  $scope.querySearch = (query) => {
+    var results = query ? allProducts.filter(createFilterFor(query)) : [];
+    return results;
+  }
+
+  /**
+   * Create filter function for a query string
+   */
+   let createFilterFor = (query) => {
+     let lowercaseQuery = angular.lowercase(query);
+
+     return function filterFn(product) {
+       return product._lowerproduct.indexOf(lowercaseQuery) === 0;
+     }
+   }
+
+  function getProdList (markets) {
+    // Loop through each results in results array
+      // Split Products String into an Array
+        // Loop through each product in array and check to see if it's in the list
+
+    // Loop through each option in the list
+      // Create an object with name and lowername case keys
+      // Add object to results array
+    let list = new Set();
+
+    markets.forEach((market) => {
+      let products = market.Products.split(/\s*;\s*/);
+      for (let product of products) {
+        list.add(product);
+      }
+    });
+
+    return [...list].map((product) => {
+      let obj = {};
+      obj.product = product;
+      obj._lowerproduct = product.toLowerCase();
+      return obj;
+    });
+  };
+
 });
