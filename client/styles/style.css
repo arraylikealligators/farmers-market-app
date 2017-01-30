@@ -33,6 +33,22 @@
   height: 100%;
 }
 
+.login-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Open Sans', sans-serif;
+  background: url(../assets/veggiedisplay.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+}
+
+
+
 .search-display {
   background: rgba(255, 255, 255, 0.95) center center fixed;
   margin: 10px;
