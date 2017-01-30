@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt-nodejs');
 const SALT = 5;
 
 var adminSchema = new mongoose.Schema({
-  name: String,
+  username: String,
   password: {
     type: String,
     required: true
@@ -33,7 +33,7 @@ adminSchema.methods.comparePassword = function(adminInputPassword) {
 adminSchema.pre('save', function(next) {
   var admin = this;
 
-  if(!user.isModified('password')) {
+  if(!admin.isModified('password')) {
     return next();
   }
 
@@ -44,14 +44,14 @@ adminSchema.pre('save', function(next) {
     }
 
     // hash password with salt
-    bcrypt.hash(user.password, salt, null, function(err, hash) {
+    bcrypt.hash(admin.password, salt, null, function(err, hash) {
       if(err) {
         return next(err);
       }
 
-      // update the user password with the newly generated hash
-      user.password = hash;
-      user.salt = salt;
+      // update the admin password with the newly generated hash
+      admin.password = hash;
+      admin.salt = salt;
       next();
     });
   });
