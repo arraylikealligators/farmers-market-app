@@ -18,4 +18,8 @@ angular.module('farmer.search', ['farmer.services'])
     });
   };
 
+  $scope.redirectToLogin = () => {
+    $location.path('/adminLogin');
+  }
+
 });

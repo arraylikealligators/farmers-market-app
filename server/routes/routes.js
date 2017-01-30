@@ -16,9 +16,8 @@ serverRoutes.route('/api/search')
   marketController.getLocationMarkets(req, res);
 });
 
-serverRoutes.route('api/login')
-.get((req, res) => {
-
+serverRoutes.route('/api/login')
+.post((req, res) => {
   adminController.login(req, res);
 });
 

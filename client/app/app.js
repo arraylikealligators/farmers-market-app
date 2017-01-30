@@ -1,4 +1,13 @@
-angular.module('farmer', ['farmer.search', 'farmer.services', 'farmer.adminServices', 'farmer.map', 'farmer.adminUpdate', 'ngMaterial', 'ngRoute', 'ngAnimate'])
+angular.module('farmer', [
+  'farmer.search',
+  'farmer.services',
+  'farmer.adminServices',
+  'farmer.map',
+  'farmer.adminUpdate',
+  'farmer.login',
+  'ngMaterial',
+  'ngRoute',
+  'ngAnimate'])
 .config(($routeProvider, $httpProvider) => {
   $routeProvider
     .when('/search', {

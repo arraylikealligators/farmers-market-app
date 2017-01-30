@@ -15,6 +15,6 @@ angular.module('farmer.login', ['farmer.adminServices'])
     })
     .catch((err) => {
       console.error(err);
-    })
-  }
-})
+    });
+  };
+});

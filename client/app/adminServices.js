@@ -24,6 +24,7 @@ angular.module('farmer.adminServices', [])
 })
 .factory('Auth', function($http, $window, $location) {
   var login = function(credentials) {
+    console.log('inside factory, Auth');
     return $http({
       method: 'POST',
       url: '/api/login',
