@@ -1,16 +1,31 @@
 <div>
 
-  <header class="map-header" layout="row">
+  <header class="map-header" layout="row" layout-align="none end">
     <div class="logo logo-small">
-      City Sprout
+      Sprout City
     </div>
-    <div class="searchbar">
-      <form ng-submit="submit()">
-        <label>Address:</label>
+    <div class="searchbar" flex>
+      <form ng-submit="submit()" layout="row" layout-align="end" flex>
+        <!-- <label>Address:</label>
         <input type="text" ng-model="address"/>
         <label>Radius:</label>
-        <input type="number" name="radius" min="1" max="20" ng-model="radius"/>
-        <md-button type="submit" class="md-raised md-primary">Search</md-button>
+        <input type="number" name="radius" min="1" max="20" ng-model="radius"/> -->
+        <md-input-container flex="10">
+          <label>Radius (Miles)</label>
+          <md-icon class="material-icons md-48"> search </md-icon>
+          <input type="number" name="radius" min="1" max="20" ng-model="radius"/>
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Address</label>
+          <input type="text" ng-model="address">
+        </md-input-container>
+
+
+
+
+
+
       </form>
     </div>
   </header>
