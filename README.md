@@ -13,20 +13,26 @@ Where are the closest farmers' markets?!?!?
 2. Requirements
 3. Development
   * installing dependencies
-4. Roadmap
-5. Contributing
+4. Contributing
+5. Notes
+6. License
 
 
 ## Usage
-Welcome to [City Sprouts](http://citysprouts.herokuapp.com)! A website where you can enter an address and a radius and it will give you the results to all the farmer's markets in the area!
+Welcome to [City Sprouts](http://citysprouts.herokuapp.com)! A website where you can enter an address and a radius and it will give you the location to all the farmer's markets and the products and schedule provided at that market in the area!
 
 
 ## Requirements
 * Node 6.x.x
 * MongoDB 3.x
+  * mlabs account (free tier)
+* google developers console
+  * google maps API
+  * google autocomplete
 
 
 ## Development
+Create `API_KEYS.js` file with `google API key` and `mongoURI`.
 
 ### Installing Dependencies
 ```
@@ -35,12 +41,12 @@ $ gulp start
 ```
 
 
-## Roadmap
-View the project [roadmap](https://google.com)
-
-
 ## Contributing
 View the [contribution document](./CONTRIBUTING.md)
+
+
+## Notes
+If you would like to create your own mongoDB, please visit the [README](./Database_Data/README.md) in Database_Data directory for instructions on how you can populate your own mongoDB.
 
 
 ## License
