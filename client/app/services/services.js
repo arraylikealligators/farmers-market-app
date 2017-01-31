@@ -1,11 +1,14 @@
 angular.module('farmer.services', [])
 
+// Creates factory with methods for search requests
 .factory('Search', function ($http) {
-
+  // Stores markets returned from search requests to be used across controllers
   let searchResults = [];
 
+  // Search request function
   const search = (params) => {
-    return $http({   // You need to return the promise here so that .then method in the control is able to receive a result
+    // Creates a http promise that sends an address string and radius #
+    return $http({
       method: 'GET',
       url: '/api/search',
       params: {
@@ -15,16 +18,16 @@ angular.module('farmer.services', [])
     })
     .then(function (response) {
       console.log('response data', response);
-      searchResults = response.data; // I'm saving return response to a variable in this factory so that we can use it across controllers
-
+      // Saves results to interal variable
+      searchResults = response.data;
       return response.data;
     })
   };
 
+  // Retrives stored search results to be used in a controller
   const retrieveResults = () => {
     return searchResults;
   }
-
 
   return {
     search: search,
@@ -97,6 +100,7 @@ angular.module('farmer.services', [])
   }
 })
 
+// Methods to use Google Maps API
 .factory('GoogleMaps', function() {
 
   const Marker = {
@@ -127,6 +131,7 @@ angular.module('farmer.services', [])
         title: market.Name
       })
 
+      // Defines HTML and styling for marker infoboxes
       marker.content = '<div class="infoWindowContent">' +
         '<h3>' + market.Name + '</h3>' +
         '<h4> Schedule </h4>' +

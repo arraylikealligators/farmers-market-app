@@ -1,18 +1,20 @@
 <div>
 
   <header class="map-header" layout="row" layout-align="none end">
+    <!-- Logo -->
     <div class="logo logo-small">
       City Sprouts
     </div>
+    <!-- Header Search Bar -->
     <div class="searchbar" flex>
       <form ng-submit="submit()" layout="row" layout-align="end" flex>
-
+        <!-- Radius Input -->
         <md-input-container flex="10">
           <label>Radius (Miles)</label>
           <md-icon class="material-icons md-48"> search </md-icon>
           <input type="number" name="radius" min="1" max="20" ng-model="radius"/>
         </md-input-container>
-
+        <!-- Address Input -->
         <md-input-container flex>
           <!-- <label>Address</label> -->
           <input id="searchTextField" type="text" ng-model="address">
@@ -27,14 +29,14 @@
 </div>
 
 <div class="results-display" layout="row">
-
+  <!-- Product Filter Input -->
   <section class="md-padding" flex="30" layout="column">
       <md-input-container>
         <label>Filter Farmers Markets by Products</label>
         <input type="text" ng-model="prodFilter.Products">
       </md-input-container>
 
-
+<!-- Filter with Autocomplete without using chips - Experiement 1 -->
         <!-- <md-autocomplete
           ng-model="prodFilter.Products"
           md-selected-item="selectedItem"
@@ -43,9 +45,10 @@
           md-item-text="item.product"
           placeholder="Filter Farmers Markets by Products">
           <span md-highlight-text="searchText">{{item.product}}</span>
-        </md-autocomplete>
+        </md-autocomplete> -->
 
-      <md-chips ng-model="selectedProducts.Products" md-autocomplete-snap md-transform-chip="transformChip($chip)" md-require-match="true">
+<!-- Filter with Autocomplete using chips - Experiment 2 -->
+      <!-- <md-chips ng-model="selectedProducts.Products" md-autocomplete-snap md-transform-chip="transformChip($chip)" md-require-match="true">
         <md-autocomplete
           md-selected-item="selectedItem"
           md-search-text="searchText"
@@ -61,6 +64,7 @@
         </md-chip-template>
       </md-chips> -->
 
+<!-- Left-Panel Results Output -->
     <md-content>
       <md-list flex>
         <md-list-item class="md-3-line animate-repeat" ng-repeat="market in results | filter:prodFilter:startsWith">
@@ -80,6 +84,7 @@
     </md-content>
   </section>
 
+<!-- Google Maps -->
   <div flex="70">
     <div id="map">
     </div>
