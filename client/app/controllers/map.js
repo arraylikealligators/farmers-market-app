@@ -84,19 +84,24 @@ angular.module('farmer.map', ['farmer.services'])
 
 // Address Autocomplete Functionality
 
+  // Sets geographic bounds for autocomplete address lookup
   const defaultBounds = new google.maps.LatLngBounds( new google.maps.LatLng(-33.8902, 151.1759), new google.maps.LatLng(-33.8474, 151.2631));
-
+  // Finds element on page to associate autocomplete input funcationlity with
   const input = document.getElementById('searchTextField');
-
+  // Autocomplete configuration options - see maps API docs for more info
   const options = {
     bounds: defaultBounds,
   };
-
+  // Creates new autocomplete input object
   $scope.autocomplete = new google.maps.places.Autocomplete(input, options);
 
 
 // Functionality for autocomplete filter functionailty
+// This code that utlizes this functionality is currently commented out on the map.html page
+// This is related to creating autocomplete feature to help users filter different types of
+// producs they are looking for
 
+  // This creates a chip object for a product type - See Angular Material Chip documentation - Refer to Custom Input example in Demo
   $scope.transformChip = (chip) => {
     // If it is an object, it's already a known chip
     if (angular.isObject(chip)) {
@@ -106,23 +111,22 @@ angular.module('farmer.map', ['farmer.services'])
     // Otherwise, create a new one
     return { name: chip, type: 'new' }
   }
-
+  // Stores an array of unique product categories
   let allProducts = getProdList($scope.results);
-
+  // See Angular Material Chip documentation - Refer to Custom Input example in Demo for more info on the variables belwow
   $scope.selectedProducts = [];
 
   $scope.selectedItem = null;
 
   $scope.searchText = null;
 
+  // Query function for string being typed into autocomplete filter input
   $scope.querySearch = (query) => {
     var results = query ? allProducts.filter(createFilterFor(query)) : [];
     return results;
   }
 
-  /**
-   * Create filter function for a query string
-   */
+   // Create filter function for a query string
    let createFilterFor = (query) => {
      let lowercaseQuery = angular.lowercase(query);
 
@@ -131,14 +135,9 @@ angular.module('farmer.map', ['farmer.services'])
      }
    }
 
+  // Parses, checks and returns an array of unique product categories the results contain
+  // The time complexity could be better on this function...
   function getProdList (markets) {
-    // Loop through each results in results array
-      // Split Products String into an Array
-        // Loop through each product in array and check to see if it's in the list
-
-    // Loop through each option in the list
-      // Create an object with name and lowername case keys
-      // Add object to results array
     let list = new Set();
 
     markets.forEach((market) => {
