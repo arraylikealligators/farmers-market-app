@@ -40,21 +40,19 @@ module.exports = {
 					userZip = item.long_name;
 				}
 			})
-			console.log(userZip)
-
 			var coordinates = JSON.parse(data).results[0].geometry.location;
 			console.log('successfully got geocode' + coordinates );
 			zipQuery({Zip:userZip})
 			.then((result) => {
-				if(result.length === 0) {
+				// if(result.length === 0) {
 				zip.collection.insert({Zip:userZip})
 				.then(() => {
 					console.log('here in market controller')
 					fetcher.fetchAllData(userZip)
 				})
-				} else {
-					console.log(result)
-				}
+				// } else {
+				// 	console.log(result)
+				// }
 			})
 			marketLocation(coordinates, radius, res)
 			// var marketsDetails = MarketQuery.fetchMarkets(coordinates);

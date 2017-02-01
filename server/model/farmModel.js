@@ -1,11 +1,16 @@
 var mongoose = require('mongoose');
-var market = new mongoose.Schema({
+var cacheMarket = new mongoose.Schema({
   Address: String,
   GoogleLink: String,
   Products: String,
   Schedule: String,
   geometry: {  type: { type: String } , coordinates: { type: [Number] } },
-  Name: String  
+  Name: String,
+  Comments: [{
+    comment: String,
+    author: String,
+    timestamp: { type: Date, default: Date.now }
+  }]
 }); 
 
-module.exports = mongoose.model('market', market);
+module.exports = mongoose.model('cacheMarket', cacheMarket);
