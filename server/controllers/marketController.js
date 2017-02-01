@@ -12,8 +12,8 @@ var createMarket = Q.nbind(Market.create, Market)
 var api = require('../../API_KEYS');
 var zip = require('../model/zipModel');
 var zipQuery = Q.nbind(zip.find, zip);
+var fetcher = require('../../Database_Data/fetchFarmersMarketData')
 module.exports = {
-
 	allMarkets: function(req, res, next){
 		console.log("allMarkets....")
 		getAllFarms({})
@@ -47,10 +47,10 @@ module.exports = {
 			zipQuery({Zip:userZip})
 			.then((result) => {
 				if(result.length === 0) {
-
 				zip.collection.insert({Zip:userZip})
-				.then((data) => {
-					console.log('promise',data)
+				.then(() => {
+					console.log('here in market controller')
+					fetcher.fetchAllData(userZip)
 				})
 				} else {
 					console.log(result)
