@@ -2,7 +2,7 @@
   "name": "fazzar",
   "version": "1.0.0",
   "description": "tells you where the closest farmers markets are in your area",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "start": "nodemon --ignore node_modules server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"

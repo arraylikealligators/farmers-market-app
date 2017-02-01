@@ -9,8 +9,9 @@ var queryById = Q.nbind(Market.findById, Market);
 var findAndUpdate = Q.nbind(Market.update, Market);
 var findAndRemove = Q.nbind(Market.remove, Market);
 var createMarket = Q.nbind(Market.create, Market)
-
-
+var api = require('../../API_KEYS');
+var zip = require('../model/zipModel');
+var zipQuery = Q.nbind(zip.find, zip);
 module.exports = {
 
 	allMarkets: function(req, res, next){
@@ -33,9 +34,19 @@ module.exports = {
 		rp.get(
 			`https://maps.googleapis.com/maps/api/geocode/json?address=${address}`
 		).then((data) => {
+			var userZip = JSON.parse(data).results[0].address_components[7].long_name;
 			var coordinates = JSON.parse(data).results[0].geometry.location;
 			console.log('successfully got geocode' + coordinates );
+			console.log(userZip)
+			zipQuery({Zip:userZip})
+			.then((result) => {
+				if(result.length === 0) {
 
+				zip.collection.insert({Zip:userZip})
+				} else {
+					console.log(result)
+				}
+			})
 			// var marketsDetails = MarketQuery.fetchMarkets(coordinates);
 			var lng = Number(coordinates.lng);
 		    var lat = Number(coordinates.lat);

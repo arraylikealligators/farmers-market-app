@@ -1,7 +1,4 @@
 var mongoose = require('mongoose');
-
-
-
 var market = new mongoose.Schema({
   Address: String,
   GoogleLink: String,
