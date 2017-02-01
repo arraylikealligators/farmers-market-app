@@ -56,38 +56,9 @@ module.exports = {
 					console.log(result)
 				}
 			})
+			marketLocation(coordinates, radius, res)
 			// var marketsDetails = MarketQuery.fetchMarkets(coordinates);
-			var lng = Number(coordinates.lng);
-		    var lat = Number(coordinates.lat);
-		   console.log("typeof lng,", typeof lng, typeof lat, lng)
-		    var marketsDetails;
-
-		    queryMarkets(
-
-				   {
-				     geometry: {
-				        $nearSphere: {
-				           $geometry: {
-				              type : "Point",
-				              coordinates : [ lng, lat ]
-				           },
-				           $minDistance: 0,
-				           $maxDistance: radius || 1609.3 //distance must be in meters
-				        }
-				     }
-				   }
-
-		    //   {loc: { $geoWithin: { $centerSphere: [ [ lng, lat ], 15/3963.2 ] } } }
-		    )
-		    .then((markets) => {
-		      marketsDetails = markets;
-		      // console.log('successful query to mongoDB for markets', marketsDetails, typeof marketsDetails);
-		      res.json(marketsDetails);
-		    })
-		    .catch((err) => {
-		      console.error('Failed', err);
-		    });
-
+		
 			// marketsDetails.then((markets)=> {
 			// 	console.log("marketsDetails in da club", marketsDetails)
 			// 	console.log(typeof marketsDetails, marketsDetails, "back in the controller");
@@ -166,3 +137,37 @@ module.exports = {
 
 
 };
+
+function marketLocation (coordinates, radius, res) {
+		var lng = Number(coordinates.lng);
+		    var lat = Number(coordinates.lat);
+		   console.log("typeof lng,", typeof lng, typeof lat, lng)
+		    var marketsDetails;
+
+		    queryMarkets(
+
+				   {
+				     geometry: {
+				        $nearSphere: {
+				           $geometry: {
+				              type : "Point",
+				              coordinates : [ lng, lat ]
+				           },
+				           $minDistance: 0,
+				           $maxDistance: radius || 1609.3 //distance must be in meters
+				        }
+				     }
+				   }
+
+		    //   {loc: { $geoWithin: { $centerSphere: [ [ lng, lat ], 15/3963.2 ] } } }
+		    )
+		    .then((markets) => {
+		      marketsDetails = markets;
+		      // console.log('successful query to mongoDB for markets', marketsDetails, typeof marketsDetails);
+		      res.json(marketsDetails);
+		    })
+		    .catch((err) => {
+		      console.error('Failed', err);
+		    });
+
+}
