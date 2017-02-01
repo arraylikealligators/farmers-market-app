@@ -34,15 +34,24 @@ module.exports = {
 		rp.get(
 			`https://maps.googleapis.com/maps/api/geocode/json?address=${address}`
 		).then((data) => {
-			var userZip = JSON.parse(data).results[0].address_components[7].long_name;
+			var userZip
+			JSON.parse(data).results[0].address_components.find((item) => {
+				if (item.types[0] === 'postal_code') {
+					userZip = item.long_name;
+				}
+			})
+			console.log(userZip)
+
 			var coordinates = JSON.parse(data).results[0].geometry.location;
 			console.log('successfully got geocode' + coordinates );
-			console.log(userZip)
 			zipQuery({Zip:userZip})
 			.then((result) => {
 				if(result.length === 0) {
 
 				zip.collection.insert({Zip:userZip})
+				.then((data) => {
+					console.log('promise',data)
+				})
 				} else {
 					console.log(result)
 				}
