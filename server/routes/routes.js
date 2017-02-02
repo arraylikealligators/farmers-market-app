@@ -1,8 +1,10 @@
-var serverRoutes = require('express').Router();
+// var serverRoutes = require('express').Router();
 var marketController = require('../controllers/marketController');
 var adminController = require('../controllers/adminController');
 var util = require('../util/util_functions');
 var bcrypt = require('bcrypt-nodejs');
+
+var User = require('../controllers/userController');
 
 // this single, one-time admin setup should only be invoked once. As long as the database has 1 instance of the admin, this route should never ever be visited a second time.
 serverRoutes.route('/setup')
@@ -52,5 +54,19 @@ serverRoutes.route('/api/add')
 .put((req,res)=>{
 	marketController.addMarket(req,res);
 });
+
+
+ /************************************
+ * new routes for passport and auth *
+************************************/
+serverRoutes.route('/signup')
+.post((req, res) => {
+  User.signup(req.body)
+});
+
+serverRoutes.route('/login');
+serverRoutes.route('/logout');
+
+
 
 module.exports = serverRoutes;
