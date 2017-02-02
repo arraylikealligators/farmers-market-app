@@ -3,16 +3,18 @@ var Q = require('q');
 var rp = require('request-promise');
 var MarketQuery = require('../methods/marketMethods');
 var util = require('../util/util_functions');
+var api = require('../../API_KEYS');
+var zip = require('../model/zipModel');
+var Promise = require("bluebird");
+var fetcher = require('../../Database_Data/fetchFarmersMarketData');
 var getAllFarms = Q.nbind(Market.find, Market);
 var queryMarkets = Q.nbind(Market.find, Market);
 var queryById = Q.nbind(Market.findById, Market);
 var findAndUpdate = Q.nbind(Market.update, Market);
 var findAndRemove = Q.nbind(Market.remove, Market);
-var createMarket = Q.nbind(Market.create, Market)
-var api = require('../../API_KEYS');
-var zip = require('../model/zipModel');
+var createMarket = Q.nbind(Market.create, Market);
 var zipQuery = Q.nbind(zip.find, zip);
-var fetcher = require('../../Database_Data/fetchFarmersMarketData')
+
 module.exports = {
 	allMarkets: function(req, res, next){
 		console.log("allMarkets....")
@@ -44,17 +46,20 @@ module.exports = {
 			console.log('successfully got geocode' + coordinates );
 			zipQuery({Zip:userZip})
 			.then((result) => {
-				// if(result.length === 0) {
+				if(result.length === 0) {
 				zip.collection.insert({Zip:userZip})
 				.then(() => {
 					console.log('here in market controller')
-					fetcher.fetchAllData(userZip)
+					fetcher.fetchAllData(userZip,coordinates, radius, res, (coordinates, radius, res) => {
+						console.log(coordinates)
+						marketLocation(coordinates, radius, res)
+					})
 				})
-				// } else {
-				// 	console.log(result)
-				// }
+				} else {
+					marketLocation(coordinates, radius, res)
+				}
 			})
-			marketLocation(coordinates, radius, res)
+		
 			// var marketsDetails = MarketQuery.fetchMarkets(coordinates);
 		
 			// marketsDetails.then((markets)=> {
@@ -124,7 +129,6 @@ module.exports = {
   		},
   		()=> { res.send("updated");
   	})
-  // res.send("OK");
   },
 
   delete: (req, res) => {
@@ -141,7 +145,6 @@ function marketLocation (coordinates, radius, res) {
 		    var lat = Number(coordinates.lat);
 		   console.log("typeof lng,", typeof lng, typeof lat, lng)
 		    var marketsDetails;
-
 		    queryMarkets(
 
 				   {
