@@ -5,7 +5,6 @@ var MarketQuery = require('../methods/marketMethods');
 var util = require('../util/util_functions');
 var api = require('../../API_KEYS');
 var zip = require('../model/zipModel');
-var Promise = require("bluebird");
 var fetcher = require('../../Database_Data/fetchFarmersMarketData');
 var getAllFarms = Q.nbind(Market.find, Market);
 var queryMarkets = Q.nbind(Market.find, Market);
@@ -29,15 +28,11 @@ module.exports = {
 
 	getLocationMarkets: (req, res, next) => {
 		var address = util.replaceSpaceInAddress(req.query.address);
-    // console.log('inside getLocationMarkets controller', address);
     var radius = util.convertMilesToKm(req.query.radius);
-		console.log(address)
     console.log('here is the radius', radius)
-
 		rp.get(
 			`https://maps.googleapis.com/maps/api/geocode/json?address=${address}`
 		).then((data) => {
-			console.log(data)
 			var userZip
 			JSON.parse(data).results[0].address_components.find((item) => {
 				if (item.types[0] === 'postal_code') {
@@ -62,15 +57,6 @@ module.exports = {
 					marketLocation(coordinates, radius, res)
 				}
 			})
-		
-			// var marketsDetails = MarketQuery.fetchMarkets(coordinates);
-		
-			// marketsDetails.then((markets)=> {
-			// 	console.log("marketsDetails in da club", marketsDetails)
-			// 	console.log(typeof marketsDetails, marketsDetails, "back in the controller");
-			// 	res.send(markets)})
-			// console.log(typeof marketsDetails, marketsDetails, "back in the controller");
-   //    	res.send(marketsDetails);
 		});
 		// some function to get a list of farms that match the DB query
 
@@ -161,12 +147,9 @@ function marketLocation (coordinates, radius, res) {
 				        }
 				     }
 				   }
-
-		    //   {loc: { $geoWithin: { $centerSphere: [ [ lng, lat ], 15/3963.2 ] } } }
 		    )
 		    .then((markets) => {
 		      marketsDetails = markets;
-		      // console.log('successful query to mongoDB for markets', marketsDetails, typeof marketsDetails);
 		      res.json(marketsDetails);
 		    })
 		    .catch((err) => {

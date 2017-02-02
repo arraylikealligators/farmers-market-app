@@ -4,7 +4,6 @@ var rp = require('request-promise');
 var mongoose = require('mongoose');
 var GeoJSON = require('mongoose-geojson-schema');
 var market = require('../server/model/farmModel');
-var Promise = require("bluebird");
 var async = require('async');
 
 exports.fetchAllData = function (zipCode,coordinates, radius, res, cb) {
@@ -54,7 +53,6 @@ exports.fetchAllData = function (zipCode,coordinates, radius, res, cb) {
               geometry: "2dsphere"
             });
           })
-          // console.log(index, JSON.parse(body).length -1)
           if(index === JSON.parse(body).results.length -1) {
             cb(coordinates, radius, res);
           }
