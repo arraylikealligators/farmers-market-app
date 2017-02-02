@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, '../client')));
  /*********************
  * setup passport.js *
 *********************/
- // require('./config/passport')(passport);
+require('./config/passport')(passport);
 app.use(session({ secret: 'amazingBongoBand'}));
 app.use(passport.initialize());
 app.use(passport.session());

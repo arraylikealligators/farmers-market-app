@@ -25,7 +25,7 @@ module.exports = function(passport) {
       process.nextTick(function() {
 
         // on signup, check if email is already in db
-        User.findOne({ 'local.email': email });
+        User.findOne({ 'local.email': email })
         .catch(err => done(err))
         .then(user => {
           if (user) {
@@ -41,7 +41,7 @@ module.exports = function(passport) {
             .catch(err => done(err));
           }
         });
-      };
+      });
     })
   );
 };
