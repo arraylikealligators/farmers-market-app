@@ -1,61 +1,25 @@
-// here is the mongoDB model for admin(s) so that they can login and make changes to the DB
+// here is the mongoDB model for user(s) so that they can login and make changes to the DB
 var mongoose = require('mongoose');
-var Q = require('q');
 var bcrypt = require('bcrypt-nodejs');
+
 const SALT = 5;
 
 var userSchema = new mongoose.Schema({
-  username: String,
-  password: {
-    type: String,
-    required: true
+  local: {
+    email: String,
+    password: String,
   },
-  salt: String,
-  admin: Boolean
+  // facebook: {},
+  // google: {},
 });
 
-// the comparePassword will live as a method inside the admin model
-userSchema.methods.comparePassword = function(adminInputPassword) {
-  var savedPassword = this.password;
-
-  return Q.promise(function(resolve, reject) {
-    bcrypt.compare(adminInputPassword, savedPassword, function(err, isMatch) {
-      if(err) {
-        reject(err);
-      } else {
-        resolve(isMatch);
-      }
-    });
-  });
+// the comparePassword will live as a method inside the user model
+userSchema.methods.generateHash = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(SALT), null);
 };
 
-// set up a listener to salt the password right before it gets saved into the DB
-userSchema.pre('save', function(next) {
-  var admin = this;
+userSchema.methods.validPassword = function(password) {
+  return bcrypt.compareSync(password, this.local.password);
+};
 
-  if(!admin.isModified('password')) {
-    return next();
-  }
-
-  // generate salt
-  bcrypt.genSalt(SALT, function(err, salt) {
-    if(err) {
-      return next(err);
-    }
-
-    // hash password with salt
-    bcrypt.hash(admin.password, salt, null, function(err, hash) {
-      if(err) {
-        return next(err);
-      }
-
-      // update the admin password with the newly generated hash
-      admin.password = hash;
-      admin.salt = salt;
-      next();
-    });
-  });
-});
-
-
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('User', userSchema);
