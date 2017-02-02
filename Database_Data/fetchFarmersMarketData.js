@@ -6,7 +6,7 @@ var GeoJSON = require('mongoose-geojson-schema');
 var market = require('../server/model/farmModel');
 var async = require('async');
 
-exports.fetchAllData = function (zipCode,coordinates, radius, res, cb) {
+var fetchAllData = function (zipCode,coordinates, radius, res, cb) {
     rp.get(`http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=${zipCode}`)
     .then((body) => {
       console.log('got the zips')
@@ -60,4 +60,4 @@ exports.fetchAllData = function (zipCode,coordinates, radius, res, cb) {
     })
 }
 
-exports.fetchAllData;
+module.exports = fetchAllData;
