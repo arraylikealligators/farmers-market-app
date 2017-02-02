@@ -31,11 +31,13 @@ module.exports = {
 		var address = util.replaceSpaceInAddress(req.query.address);
     // console.log('inside getLocationMarkets controller', address);
     var radius = util.convertMilesToKm(req.query.radius);
+		console.log(address)
     console.log('here is the radius', radius)
 
 		rp.get(
 			`https://maps.googleapis.com/maps/api/geocode/json?address=${address}`
 		).then((data) => {
+			console.log(data)
 			var userZip
 			JSON.parse(data).results[0].address_components.find((item) => {
 				if (item.types[0] === 'postal_code') {
@@ -56,6 +58,7 @@ module.exports = {
 					})
 				})
 				} else {
+					console.log(coordinates, radius)
 					marketLocation(coordinates, radius, res)
 				}
 			})
@@ -146,7 +149,6 @@ function marketLocation (coordinates, radius, res) {
 		   console.log("typeof lng,", typeof lng, typeof lat, lng)
 		    var marketsDetails;
 		    queryMarkets(
-
 				   {
 				     geometry: {
 				        $nearSphere: {

@@ -19,6 +19,7 @@ exports.fetchAllData = function (zipCode,coordinates, radius, res, cb) {
             var Name = marketData.marketname.split('').slice(4).join("");
             marketBody = JSON.parse(marketBody)
             var Address = marketBody['marketdetails']['Address'];
+            var Products =  marketBody['marketdetails']['Products']
             var GoogleLink = marketBody['marketdetails']['GoogleLink'];
             var string = marketBody['marketdetails']['GoogleLink'];
             var start = string.indexOf("=");
@@ -35,6 +36,7 @@ exports.fetchAllData = function (zipCode,coordinates, radius, res, cb) {
             var Obj = {
               Name,
               Address,
+              Products,
               GoogleLink,
               Schedule,
               geometry: {
