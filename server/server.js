@@ -1,25 +1,48 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var morgan = require('morgan');
-var routes = require('./routes/routes.js');
+var express  = require('express');
+var session  = require('express-session');
+var passport = require('passport');
+var flash    = require('connect-flash');
 var mongoose = require('mongoose');
-var path = require('path');
-var keys = require('../API_KEYS.js');
+
+
+var path         = require('path');
+var morgan       = require('morgan');
+var bodyParser   = require('body-parser');
+var cookieParser = require('cookie-parser');
+
+
+var routes = require('./routes/routes.js');
 
 
 var app = express();
 var port = process.env.PORT || 8080;
 
+ /************
+ * db setup *
+************/
+var keys = require('../API_KEYS.js');
 var mongoURI = process.env.mongoURI || keys.mongoURI;
 mongoose.connect(mongoURI);
 
-app.set('superSecret', keys.secret);
+// app.set('superSecret', keys.secret); // what does this do??
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(routes);
 app.use(express.static(path.join(__dirname, '../client')));
-// var routes = require('./routes.js')(app, express);
+// app.use(routes); // may not need this because of passport.js
+
+ /*********************
+ * setup passport.js *
+*********************/
+ // require('./config/passport')(passport);
+app.use(session({ secret: 'amazingBongoBand'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+routes(app, passport);
+
+
+
 
 app.listen(port);
 console.log("server running on port " + port);
