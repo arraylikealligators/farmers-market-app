@@ -1,5 +1,4 @@
 <div>
-
   <header class="map-header" layout="row" layout-align="none end">
     <!-- Logo -->
     <div class="logo logo-small">
@@ -12,32 +11,27 @@
         <md-input-container flex="10">
           <label>Radius (Miles)</label>
           <md-icon class="material-icons md-48"> search </md-icon>
-          <input type="number" name="radius" min="1" max="20" ng-model="radius"/>
+          <input type="number" name="radius" min="1" max="20" ng-model="radius" />
         </md-input-container>
         <!-- Address Input -->
         <md-input-container flex>
           <!-- <label>Address</label> -->
           <input id="searchTextField" type="text" ng-model="address">
         </md-input-container>
-
         <md-button type="submit" class="md-raised md-primary">Search</md-button>
-
       </form>
     </div>
   </header>
-
 </div>
-
 <div class="results-display" layout="row">
   <!-- Product Filter Input -->
   <section class="md-padding" flex="30" layout="column">
-      <md-input-container>
-        <label>Filter Farmers Markets by Products</label>
-        <input type="text" ng-model="prodFilter.Products">
-      </md-input-container>
-
-<!-- Filter with Autocomplete without using chips - Experiement 1 -->
-        <!-- <md-autocomplete
+    <md-input-container>
+      <label>Filter Farmers Markets by Products</label>
+      <input type="text" ng-model="prodFilter.Products">
+    </md-input-container>
+    <!-- Filter with Autocomplete without using chips - Experiement 1 -->
+    <!-- <md-autocomplete
           ng-model="prodFilter.Products"
           md-selected-item="selectedItem"
           md-search-text="searchText"
@@ -46,9 +40,8 @@
           placeholder="Filter Farmers Markets by Products">
           <span md-highlight-text="searchText">{{item.product}}</span>
         </md-autocomplete> -->
-
-<!-- Filter with Autocomplete using chips - Experiment 2 -->
-      <!-- <md-chips ng-model="selectedProducts.Products" md-autocomplete-snap md-transform-chip="transformChip($chip)" md-require-match="true">
+    <!-- Filter with Autocomplete using chips - Experiment 2 -->
+    <!-- <md-chips ng-model="selectedProducts.Products" md-autocomplete-snap md-transform-chip="transformChip($chip)" md-require-match="true">
         <md-autocomplete
           md-selected-item="selectedItem"
           md-search-text="searchText"
@@ -63,39 +56,40 @@
           </span>
         </md-chip-template>
       </md-chips> -->
-
-<!-- Left-Panel Results Output -->
+    <!-- Left-Panel Results Output -->
     <md-content>
       <md-list flex>
         <md-list-item class="md-3-line animate-repeat" ng-repeat="market in results | filter:prodFilter:startsWith">
-          <div class="md-list-item-text" layout="row">
-            <div>
-              <h3>{{$index + 1}}.&ensp;</h3>
-            </div>
-            <div layout="column">
-              <h3>{{ market.Name }}</h3>
-              <p>{{ market.Address }}</p>
-              <p>{{ market.Schedule }}</p>
-              <p>ID: {{market._id }}</p>
+          <!--<li ng-click="selectedMarket(market.Name)">{{ market.Name }}</li>-->
+          <div layout="column">
+            <h3 ng-click="selectedMarket(market.Name)">{{ market.Name }}</h3>
+            <div ng-controller="AccordianCtrl">
+              <accordion>
+                <accordion-group ng-click="selectedMarket(market.Name)" heading="{{market.Name}}" is-open="market.isOpen">
+                  <accordion-heading>
+                    {{market.Name}}
+                    {{market.isOpen}}
+                  </accordion-heading>
+                  {{result.market}}
+                  <br> {{result.isOpen}}
+                  <br>
+                  <button type="submit">Add Comment!</button>
+                </accordion-group>
+              </accordion>
             </div>
           </div>
         </md-list-item>
       </md-list>
     </md-content>
   </section>
-
-<!-- Google Maps -->
+  <!-- Google Maps -->
   <div flex="70">
     <div id="map">
     </div>
-
     Market info out of date? Let us know!
-
     <md-button class="md-fab md-primary md-hue-2" md-direction="up">
       <md-icon class="material-icons"> comment </md-icon>
     </md-button>
-
   </div>
-
   <!-- <div id="map" flex="70"></div> -->
 </div>
