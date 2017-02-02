@@ -3,16 +3,18 @@ var Q = require('q');
 var rp = require('request-promise');
 var MarketQuery = require('../methods/marketMethods');
 var util = require('../util/util_functions');
+var api = require('../../API_KEYS');
+var zip = require('../model/zipModel');
+var fetcher = require('../../Database_Data/fetchFarmersMarketData');
 var getAllFarms = Q.nbind(Market.find, Market);
 var queryMarkets = Q.nbind(Market.find, Market);
 var queryById = Q.nbind(Market.findById, Market);
 var findAndUpdate = Q.nbind(Market.update, Market);
 var findAndRemove = Q.nbind(Market.remove, Market);
-var createMarket = Q.nbind(Market.create, Market)
-
+var createMarket = Q.nbind(Market.create, Market);
+var zipQuery = Q.nbind(zip.find, zip);
 
 module.exports = {
-
 	allMarkets: function(req, res, next){
 		console.log("allMarkets....")
 		getAllFarms({})
@@ -26,54 +28,35 @@ module.exports = {
 
 	getLocationMarkets: (req, res, next) => {
 		var address = util.replaceSpaceInAddress(req.query.address);
-    // console.log('inside getLocationMarkets controller', address);
     var radius = util.convertMilesToKm(req.query.radius);
     console.log('here is the radius', radius)
-
 		rp.get(
 			`https://maps.googleapis.com/maps/api/geocode/json?address=${address}`
 		).then((data) => {
+			var userZip
+			JSON.parse(data).results[0].address_components.find((item) => {
+				if (item.types[0] === 'postal_code') {
+					userZip = item.long_name;
+				}
+			})
 			var coordinates = JSON.parse(data).results[0].geometry.location;
 			console.log('successfully got geocode' + coordinates );
-
-			// var marketsDetails = MarketQuery.fetchMarkets(coordinates);
-			var lng = Number(coordinates.lng);
-		    var lat = Number(coordinates.lat);
-		   console.log("typeof lng,", typeof lng, typeof lat, lng)
-		    var marketsDetails;
-
-		    queryMarkets(
-
-				   {
-				     geometry: {
-				        $nearSphere: {
-				           $geometry: {
-				              type : "Point",
-				              coordinates : [ lng, lat ]
-				           },
-				           $minDistance: 0,
-				           $maxDistance: radius || 1609.3 //distance must be in meters
-				        }
-				     }
-				   }
-
-		    //   {loc: { $geoWithin: { $centerSphere: [ [ lng, lat ], 15/3963.2 ] } } }
-		    )
-		    .then((markets) => {
-		      marketsDetails = markets;
-		      // console.log('successful query to mongoDB for markets', marketsDetails, typeof marketsDetails);
-		      res.json(marketsDetails);
-		    })
-		    .catch((err) => {
-		      console.error('Failed', err);
-		    });
-
-			// marketsDetails.then((markets)=> {
-			// 	console.log("marketsDetails in da club", marketsDetails)
-			// 	console.log(typeof marketsDetails, marketsDetails, "back in the controller");
-			// 	res.send(markets)})
-			// console.log(typeof marketsDetails, marketsDetails, "back in the controller");
-   //    	res.send(marketsDetails);
+			zipQuery({Zip:userZip})
+			.then((result) => {
+				if(result.length === 0) {
+				zip.collection.insert({Zip:userZip})
+				.then(() => {
+					console.log('here in market controller')
+					fetcher.fetchAllData(userZip,coordinates, radius, res, (coordinates, radius, res) => {
+						console.log(coordinates)
+						marketLocation(coordinates, radius, res)
+					})
+				})
+				} else {
+					console.log(coordinates, radius)
+					marketLocation(coordinates, radius, res)
+				}
+			})
 		});
 		// some function to get a list of farms that match the DB query
 
@@ -135,7 +118,6 @@ module.exports = {
   		},
   		()=> { res.send("updated");
   	})
-  // res.send("OK");
   },
 
   delete: (req, res) => {
@@ -146,3 +128,32 @@ module.exports = {
 
 
 };
+
+function marketLocation (coordinates, radius, res) {
+		var lng = Number(coordinates.lng);
+		    var lat = Number(coordinates.lat);
+		   console.log("typeof lng,", typeof lng, typeof lat, lng)
+		    var marketsDetails;
+		    queryMarkets(
+				   {
+				     geometry: {
+				        $nearSphere: {
+				           $geometry: {
+				              type : "Point",
+				              coordinates : [ lng, lat ]
+				           },
+				           $minDistance: 0,
+				           $maxDistance: radius || 1609.3 //distance must be in meters
+				        }
+				     }
+				   }
+		    )
+		    .then((markets) => {
+		      marketsDetails = markets;
+		      res.json(marketsDetails);
+		    })
+		    .catch((err) => {
+		      console.error('Failed', err);
+		    });
+
+}
