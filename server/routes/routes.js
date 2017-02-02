@@ -79,11 +79,16 @@ module.exports = function(app, passport) {
 
 
   // serverRoutes.route('/login');
-  app.post('/login', (req, res) => {
-  });
+  app.post('/login', passport.authenticate('local-login', {
+    successRedirect: 'http://www.zombo.com', // temporary
+    failureRedirect: '/signup',
+    failureFlash: true,
+  }));
 
   // serverRoutes.route('/logout');
-  app.post('/logout', (req, res) => {
+  app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
   });
 
 
