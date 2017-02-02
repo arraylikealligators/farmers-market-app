@@ -22,12 +22,10 @@ angular.module('farmer.userServices', [])
         password: credentials.password
       }
     })
-    .then(function(res) {
-      console.log(res);
-      user = true;
-      deferred.resolve();
-    })
-    .catch();
+    .then(function(response) {
+      console.log('adminServices>Login Factory>response', response);
+      return response.data.token;
+    });
   }
 
   var isAuth = function() {

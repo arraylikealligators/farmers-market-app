@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 angular.module('farmer', ['xeditable','farmer.search', 'farmer.services', 'farmer.adminServices', 'farmer.map', 'farmer.login', 'farmer.adminUpdate', 'ngMaterial', 'ngRoute', 'ngAnimate', 'farmer.accordianController'])
+=======
+angular.module('farmer', ['xeditable','farmer.search', 'farmer.services', 'farmer.adminServices', 'farmer.map', 'farmer.login', 'farmer.adminUpdate', 'farmer.user', 'farmer.userServices', 'ngMaterial', 'ngRoute', 'ngAnimate'])
+>>>>>>> add user login page, not yet functional
 .config(($routeProvider, $httpProvider) => {
   $routeProvider
     .when('/search', {
@@ -11,13 +15,23 @@ angular.module('farmer', ['xeditable','farmer.search', 'farmer.services', 'farme
     })
     .when('/adminUpdate', {
       templateUrl: 'app/views/adminSubmit.html',
-      controller: 'AdminController'
+      controller: 'AdminController',
+      authenticate: true
     })
     .when('/adminLogin', {
       templateUrl: 'app/views/adminLogin.html',
       controller: 'LoginController',
-      authenticate: true
     })
+    /** new routes with addition of passportjs  **/
+    .when('/login', {
+      templateUrl: 'app/views/userLogin.html',
+      controller: 'UserController',
+    })
+    .when('/signup', {
+      templateUrl: 'app/views/userSignup.html',
+      controller: 'UserController',
+    })
+    // end of new routes
     .otherwise({
       redirectTo: '/search'
     });

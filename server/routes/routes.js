@@ -49,13 +49,13 @@ module.exports = function(app, passport) {
   * new routes for passport and auth *
   ************************************/
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: 'http://www.zombo.com', // temporary
+    successRedirect: '/search',
     failureRedirect: '/signup',
     failureFlash: true,
   }));
 
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect: 'http://www.zombo.com', // temporary
+    successRedirect: '/search',
     failureRedirect: '/signup',
     failureFlash: true,
   }));

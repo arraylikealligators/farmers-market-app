@@ -6,7 +6,7 @@ const SALT = 5;
 
 var userSchema = new mongoose.Schema({
   local: {
-    email: String,
+    email   : String,
     password: String,
   },
   // facebook: {},
