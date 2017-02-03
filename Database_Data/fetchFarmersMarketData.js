@@ -11,15 +11,14 @@ var fetchAllData = function (zipCode,coordinates, radius, res, cb) {
     .then((body) => {
       console.log('got the zips')
       JSON.parse(body).results.forEach((marketData, index) => {
-        var ids = marketData.id
-        rp.get(`http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=${ids}`, (error, res, marketBody) => {
-        })
+        var id = marketData.id
+        rp.get(`http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=${id}`)
           .then((marketBody) => {
             var Name = marketData.marketname.split('').slice(4).join("");
             marketBody = JSON.parse(marketBody)
-            var ID = ids;
+            var ID = id;
             var Address = marketBody['marketdetails']['Address'];
-            var Products =  marketBody['marketdetails']['Products']
+            var Products =  marketBody['marketdetails']['Products'];
             var GoogleLink = marketBody['marketdetails']['GoogleLink'];
             var string = marketBody['marketdetails']['GoogleLink'];
             var start = string.indexOf("=");
@@ -32,7 +31,7 @@ var fetchAllData = function (zipCode,coordinates, radius, res, cb) {
             var percentLongIndex = longitudeWithPercentages.indexOf("%");
             var longitude = Number(longitudeWithPercentages.slice(0, percentLongIndex));
             var latitude = Number(latitudeWithPercentages.slice(0, percentLatIndex));
-            var Schedule = marketBody['marketdetails']['Schedule'].replace(/\<br\>/g, " ");
+            var Schedule = marketBody['marketdetails']['Schedule'].replace(/\<br\>/g, "");
             var Obj = {
               ID,
               Name,
@@ -62,4 +61,10 @@ var fetchAllData = function (zipCode,coordinates, radius, res, cb) {
     })
 }
 
+var dbInput = function () {
+
+}
+
 module.exports = fetchAllData;
+
+
