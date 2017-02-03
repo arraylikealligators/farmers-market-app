@@ -23,7 +23,7 @@ var mongoURI = process.env.mongoURI || keys.mongoURI;
 mongoose.connect(mongoURI);
 
 // app.set('superSecret', keys.secret); // what does this do??
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
@@ -36,15 +36,20 @@ app.use(express.static(path.join(__dirname, '../client')));
  *********************/
 require('./config/passport')(passport);
 app.use(session({
-    secret: 'amazingBongoBand'
+  secret: 'amazingBongoBand',
+  resave: false,
+  saveUninitialized: true,
+  cookie : {}
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 routes(app, passport);
 
+
+
 cron.schedule('* * * * 7', function(){
-    refresh();
+  refresh();
 });
 
 
