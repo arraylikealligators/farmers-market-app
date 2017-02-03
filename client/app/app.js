@@ -1,8 +1,13 @@
-angular.module('farmer', ['xeditable','farmer.search', 'farmer.services', 'farmer.adminServices', 'farmer.map', 'farmer.login', 'farmer.adminUpdate', 'farmer.user', 'farmer.userServices', 'farmer.accordianController', 'ngMaterial', 'ngRoute', 'ngAnimate'])
-
+angular.module('farmer', [
+  'xeditable',                  'farmer.search', 'farmer.services',
+  'farmer.adminServices',       'farmer.map',    'farmer.login',
+  'farmer.adminUpdate',         'farmer.user',   'farmer.userServices',
+  'farmer.accordianController', 'ngMaterial',    'ngRoute',
+  'ngAnimate'
+])
 .config(($routeProvider, $httpProvider) => {
   $routeProvider
-    .when('/search', {
+    .when('/', {
       templateUrl: 'app/views/search.html',
       controller: 'SearchController'
     })
@@ -28,9 +33,12 @@ angular.module('farmer', ['xeditable','farmer.search', 'farmer.services', 'farme
       templateUrl: 'app/views/userSignup.html',
       controller: 'UserController',
     })
+    .when('/logout', {
+      controller: 'UserController',
+    })
     // end of new routes
     .otherwise({
-      redirectTo: '/search'
+      redirectTo: '/'
     });
 
     // an $httpProvider interceptor is added to all request calls so that all outgoing $http requests have the token attached

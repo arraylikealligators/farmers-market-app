@@ -49,12 +49,20 @@ module.exports = function(passport) {
     passReqToCallback: true
   },
   function(req, email, password, done) {
+    console.log('passport.js local-login');
     User.findOne({ 'local.email': email })
     .catch(err => done(err))
     .then(user => {
-      if (!user) return done(null, false, req.flash('loginMessage', 'User not found.'));
-      if (!user.validPassword(password))
+      console.log('user obj from db lookup: ', user);
+      if (!user) {
+        console.log('user not found');
+        return done(null, false, req.flash('loginMessage', 'User not found.'));
+      }
+      if (!user.validPassword(password)) {
+        console.log('incorrect password');
         return done(null, false, req.flash('loginMessage', 'Incorrect password.'))
+      }
+      console.log(user);
       return done(null, user);
     });
   }));

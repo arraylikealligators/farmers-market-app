@@ -2,7 +2,6 @@ var marketController = require('../controllers/marketController');
 var adminController = require('../controllers/adminController');
 
 var twilio = require('../controllers/twilioController');
-var util = require('../util/util_functions');
 var bcrypt = require('bcrypt-nodejs');
 
 
@@ -48,24 +47,53 @@ module.exports = function(app, passport) {
   /************************************
   * new routes for passport and auth *
   ************************************/
-  app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/search',
-    failureRedirect: '/signup',
-    failureFlash: true,
-  }));
+  app.post('/signup', function(req, res, next) {
+    passport.authenticate('local-signup', function(err, user, info) {
+      if (err) return next(err); // will generate a 500 error
+      // Generate a JSON response reflecting signup
+      if (!user) {
+        return res.send({ success : false, message : 'signupfailed' });
+      }
+      return res.send({ success : true, message : 'signup succeeded' });
+    })(req, res, next);
+  });
 
-  app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/search',
-    failureRedirect: '/signup',
-    failureFlash: true,
-  }));
+
+  // app.post('/login',
+  //   passport.authenticate('local'),
+  //   function(req, res) {
+  //     // If this function gets called, authentication was successful.
+  //     // `req.user` contains the authenticated user.
+  //     res.redirect('/users/' + req.user.username);
+  //   });
+
+  app.post('/login', function(req, res, next) {
+    passport.authenticate('local-login', function(err, user, info) {
+      if (err) {
+        console.log('err: ', err);
+        return next(err); // will generate a 500 error
+      }
+      // Generate a JSON response reflecting successful login
+      if (!user) {
+        console.log('routes.js: login failed');
+        return res.send({ success : false, message : 'login failed' });
+      }
+      console.log('routes.js: login successful');
+      req.login(user, function() {
+        return res.send({ success : true,
+          message : 'login succeeded',
+          user: user
+        });
+      })
+    })(req, res, next);
+  });
 
   app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
   });
 
-<<<<<<< HEAD
+
   app.post('/message', (req, res) => {
     var phone = req.body.phoneNum;
     var content = req.body.message;
@@ -73,14 +101,12 @@ module.exports = function(app, passport) {
     res.status(200).send();
   })
 
-=======
 }
 
 // auth middleware for protected routes
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
   res.redirect('/login');
->>>>>>> minor code cleanup
 }
 
 
