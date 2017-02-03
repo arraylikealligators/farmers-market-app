@@ -1,17 +1,5 @@
 var mongoose = require('mongoose');
 var zip = require('../server/model/zipModel');
-<<<<<<< HEAD
-var market = require('../server/model/farmModel');
-
-
-var dbRefresh = function () {
-  zip.find((err, results) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log(results)
-=======
 var markets = require('../server/model/farmModel');
 var rp = require('request-promise');
 
@@ -86,7 +74,6 @@ var dbRefresh = function () {
       }, time, market)
       time += 1000;
     })
->>>>>>> refresh
   })
 }
 

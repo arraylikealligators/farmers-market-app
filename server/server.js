@@ -43,15 +43,10 @@ app.use(passport.session());
 app.use(flash());
 routes(app, passport);
 
-<<<<<<< HEAD
-
-refresh()
-=======
-console.log(new Date())
 cron.schedule('* * * * 7', function(){
     refresh();
 });
->>>>>>> refresh
+
 
 app.listen(port);
 console.log("server running on port " + port);
