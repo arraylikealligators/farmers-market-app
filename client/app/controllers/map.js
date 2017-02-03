@@ -1,12 +1,8 @@
 angular.module('farmer.map', ['farmer.services'])
 
 .controller('MapController', function ($scope, $location, Search, SampleData, GoogleMaps) {
-
-// Functionality for search bar on the results page
-
   $scope.address = ''; // Scope variable to store user address input
   $scope.radius = 2; // Scope variable to store search radius input
-
 
   $scope.submit = () => { // Sends search request to server
     console.log("Submission sent!")
@@ -34,7 +30,10 @@ angular.module('farmer.map', ['farmer.services'])
     });
   };
 
-
+  $scope.selectedMarket = function(target) {
+    console.log(target);
+  }
+  // AccordianCtrl.fetch($scope.results)
 // Functionality for search results
 
   const sampleData = SampleData.data;
@@ -53,7 +52,7 @@ angular.module('farmer.map', ['farmer.services'])
   const mapOptions = {
     zoom: 10,
     center: new google.maps.LatLng(40.7058253, -74.1180872), // Filled in with coordinates for the center of NYC
-    mapTypeControl: false,
+    mapTypeControl: true,
     fullscreenControl: false,
     zoomControlOptions: {
       position: google.maps.ControlPosition.TOP_RIGHT

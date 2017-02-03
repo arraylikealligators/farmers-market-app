@@ -30,7 +30,6 @@
 .login-container {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
   font-family: 'Open Sans', sans-serif;
   background: url(../assets/veggiedisplay.jpg) no-repeat center center fixed;
@@ -53,7 +52,7 @@
 .search-container {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-markets: center;
   flex-direction: column;
   font-family: 'Open Sans', sans-serif;
   background: url(../assets/farmer-bg.jpg) no-repeat center center fixed;
@@ -67,7 +66,7 @@
 .login-container {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-markets: center;
   flex-direction: column;
   font-family: 'Open Sans', sans-serif;
   background: url(../assets/veggiedisplay.jpg) no-repeat center center fixed;
@@ -267,4 +266,77 @@ button {
   100% {
     opacity: 1;
   }
+}
+/*md-content {
+  background-color: #ECEFF1!important;
+  padding: 30px;
+}*/
+.selected-market ~ .market .user,
+.market:first-child .user {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+.selected-market ~ .market .user.selected,
+.market:first-child .user.selected {
+  margin-top: 0;
+}
+.market:last-child .user {
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+.market .tile .folded {
+  cursor: pointer;
+}
+.market .user {
+  background-color: white;
+  transition: all 500ms;
+}
+.market .user h3,
+.market .user p {
+  transition: all 500ms;
+}
+.market .user p {
+  opacity: 1;
+  height: inherit;
+}
+.market .user p.ng-hide {
+  opacity: 0;
+  height: 0;
+}
+.market .user.selected {
+  margin: 30px -15px;
+  border-radius: 2px;
+}
+.market .user.selected .expanded {
+  visibility: hidden;
+}
+.market .user.selected .expanded,
+.market .user.selected .expanded > * {
+  max-height: 700px;
+  opacity: 1;
+}
+.market .user.selected .expanded .md-label {
+  border: hidden;
+}
+.market .user.selected h3 {
+  font-size: 1.8em;
+}
+.market .user .expanded {
+  visibility: hidden;
+}
+.market .user .expanded,
+.market .user .expanded > * {
+  max-height: 0;
+  opacity: 0;
+  transition: all 500ms;
+}
+.market .user .expanded .split {
+  padding: 10px;
+}
+.market .user .face {
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  width: 48px;
+  height: 48px;
+  margin: 16px;
 }
