@@ -6,14 +6,13 @@ const SALT = 5;
 
 var userSchema = new mongoose.Schema({
   local: {
-    email: String,
+    email   : String,
     password: String,
   },
   // facebook: {},
   // google: {},
 });
 
-// the comparePassword will live as a method inside the user model
 userSchema.methods.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(SALT), null);
 };

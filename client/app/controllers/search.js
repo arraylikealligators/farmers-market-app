@@ -20,8 +20,12 @@ angular.module('farmer.search', ['farmer.services'])
   };
 
   $scope.autocomplete = new google.maps.places.Autocomplete(input, options);
-  $scope.redirectToLogin = () => {
+  // Redirects user to admin login page
+  $scope.redirectToAdminLogin = () => {
     $location.path('/adminLogin');
+  }
+  $scope.redirectToLogin = () => {
+    $location.path('/login');
   }
 
 });

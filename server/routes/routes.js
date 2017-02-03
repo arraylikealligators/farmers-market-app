@@ -1,67 +1,44 @@
-// var serverRoutes = require('express').Router();
 var marketController = require('../controllers/marketController');
 var adminController = require('../controllers/adminController');
-var twilio = require('../controllers/twilioController');
-var util = require('../util/util_functions');
-var bcrypt = require('bcrypt-nodejs');
 
-var User = require('../controllers/userController');
+var twilio = require('../controllers/twilioController');
+var bcrypt = require('bcrypt-nodejs');
 
 
 module.exports = function(app, passport) {
   // this single, one-time admin setup should only be invoked once. As long as the database has 1 instance of the admin, this route should never ever be visited a second time.
-
-  // serverRoutes.route('/setup')
   app.get('/setup', (req, res) => {
     adminController.setup(req, res);
   });
 
-
-  // serverRoutes.route('/api/search')
   app.get('/api/search', /* [,some middleware] */ (req, res) => {
     // invoke marketController.getRadiusMarkets to make query to DB
     marketController.getLocationMarkets(req, res);
   });
 
-
-  // serverRoutes.route('/api/login')
   app.post('/api/login', (req, res) => {
     adminController.login(req, res);
   });
 
-
-  // serverRoutes.route('/api/create')
   app.post('/api/create', /* [,some middleware] */ (req, res) => {
     // invoke marketController.createMarket to add a new market to DB
     marketController.createMarket(req, res);
   });
 
-
-  // serverRoutes.route('/api/getOne')
   app.post('/api/getOne', (req,res) => {
-
     marketController.fetchOne(req, res);
-
   });
 
-
-  // serverRoutes.route('/api/update')
   app.put('/api/update', (req,res)=>{
-
     marketController.updateOne(req, res);
   });
 
-
-  // serverRoutes.route('/api/delete')
   app.put('/api/delete', (req,res)=>{
     // console.log("in serverRoutes at delete");
     console.log(req.body, "obj in routes");
     marketController.delete(req,res);
   });
 
-
-
-  // serverRoutes.route('/api/add')
   app.put('/api/add', (req,res)=>{
     marketController.addMarket(req,res);
   });
@@ -70,27 +47,52 @@ module.exports = function(app, passport) {
   /************************************
   * new routes for passport and auth *
   ************************************/
+  app.post('/signup', function(req, res, next) {
+    passport.authenticate('local-signup', function(err, user, info) {
+      if (err) return next(err); // will generate a 500 error
+      // Generate a JSON response reflecting signup
+      if (!user) {
+        return res.send({ success : false, message : 'signupfailed' });
+      }
+      return res.send({ success : true, message : 'signup succeeded' });
+    })(req, res, next);
+  });
 
-  // serverRoutes.route('/signup')
-  app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: 'http://www.zombo.com', // temporary
-    failureRedirect: '/signup',
-    failureFlash: true,
-  }));
 
+  // app.post('/login',
+  //   passport.authenticate('local'),
+  //   function(req, res) {
+  //     // If this function gets called, authentication was successful.
+  //     // `req.user` contains the authenticated user.
+  //     res.redirect('/users/' + req.user.username);
+  //   });
 
-  // serverRoutes.route('/login');
-  app.post('/login', passport.authenticate('local-login', {
-    successRedirect: 'http://www.zombo.com', // temporary
-    failureRedirect: '/signup',
-    failureFlash: true,
-  }));
+  app.post('/login', function(req, res, next) {
+    passport.authenticate('local-login', function(err, user, info) {
+      if (err) {
+        console.log('err: ', err);
+        return next(err); // will generate a 500 error
+      }
+      // Generate a JSON response reflecting successful login
+      if (!user) {
+        console.log('routes.js: login failed');
+        return res.send({ success : false, message : 'login failed' });
+      }
+      console.log('routes.js: login successful');
+      req.login(user, function() {
+        return res.send({ success : true,
+          message : 'login succeeded',
+          user: user
+        });
+      })
+    })(req, res, next);
+  });
 
-  // serverRoutes.route('/logout');
   app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
   });
+
 
   app.post('/message', (req, res) => {
     var phone = req.body.phoneNum;
@@ -100,6 +102,13 @@ module.exports = function(app, passport) {
   })
 
 }
+
+// auth middleware for protected routes
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.redirect('/login');
+}
+
 
 
 // module.exports = serverRoutes; // relic from pre-refactor

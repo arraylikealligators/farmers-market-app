@@ -1,7 +1,13 @@
-angular.module('farmer', ['xeditable','farmer.search', 'farmer.services', 'farmer.adminServices', 'farmer.map', 'farmer.login', 'farmer.adminUpdate', 'ngMaterial', 'ngRoute', 'ngAnimate', 'farmer.accordianController'])
+angular.module('farmer', [
+  'xeditable',                  'farmer.search', 'farmer.services',
+  'farmer.adminServices',       'farmer.map',    'farmer.login',
+  'farmer.adminUpdate',         'farmer.user',   'farmer.userServices',
+  'farmer.accordianController', 'ngMaterial',    'ngRoute',
+  'ngAnimate'
+])
 .config(($routeProvider, $httpProvider) => {
   $routeProvider
-    .when('/search', {
+    .when('/', {
       templateUrl: 'app/views/search.html',
       controller: 'SearchController'
     })
@@ -11,15 +17,28 @@ angular.module('farmer', ['xeditable','farmer.search', 'farmer.services', 'farme
     })
     .when('/adminUpdate', {
       templateUrl: 'app/views/adminSubmit.html',
-      controller: 'AdminController'
+      controller: 'AdminController',
+      authenticate: true
     })
     .when('/adminLogin', {
       templateUrl: 'app/views/adminLogin.html',
       controller: 'LoginController',
-      authenticate: true
     })
+    /** new routes with addition of passportjs  **/
+    .when('/login', {
+      templateUrl: 'app/views/userLogin.html',
+      controller: 'UserController',
+    })
+    .when('/signup', {
+      templateUrl: 'app/views/userSignup.html',
+      controller: 'UserController',
+    })
+    .when('/logout', {
+      controller: 'UserController',
+    })
+    // end of new routes
     .otherwise({
-      redirectTo: '/search'
+      redirectTo: '/'
     });
 
     // an $httpProvider interceptor is added to all request calls so that all outgoing $http requests have the token attached
