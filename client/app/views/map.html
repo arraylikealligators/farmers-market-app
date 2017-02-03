@@ -34,8 +34,7 @@
     <md-content layout="row" flex layout-align="center" layout-fill>
       <div ng-controller="AccordianCtrl" flex="100" class="content" ui-view>
         <md-item ng-repeat="market in results" class="item" ng-class="{ 'selected-market': $index === selectedMarketIndex}">
-          <md-item-content class="market tile md-whiteframe-z1" ng-class="{ 'selected md-whiteframe-z2': $index === selectedMarketIndex}"
-            layout="column">
+          <md-item-content class="market tile md-whiteframe-z1" ng-class="{ 'selected md-whiteframe-z2': $index === selectedMarketIndex}" layout="column">
             <div layout="row" layout-fill class="folded">
               <div class="md-tile-content" ng-click="selectMarketIndex($index)" layout="column" layout-align="center start">
                 <h3>{{ market.Name }}</h3>
@@ -47,11 +46,10 @@
                     <br/>
                     <span>{{ market.Address }}</span>
                     <br/>
-                    <md-button type="submit" ng-model="checked" aria-label="Toggle ngShow"><br />
                     <div>
-                      <md-input-container>
+                      <md-input-container flex="100">
                         <input type="text" ng-model="user.name">
-                        <md-button type="submit" class="md-raised">Submit</md-button>
+                        <md-button ng-submit="submitComment()" md-no-ink class="md-primary">Submit</md-button>
                       </md-input-container>
                     </div>
                 </div>
