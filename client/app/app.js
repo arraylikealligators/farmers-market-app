@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-angular.module('farmer', ['xeditable','farmer.search', 'farmer.services', 'farmer.adminServices', 'farmer.map', 'farmer.login', 'farmer.adminUpdate', 'ngMaterial', 'ngRoute', 'ngAnimate', 'farmer.accordianController'])
-=======
-angular.module('farmer', ['xeditable','farmer.search', 'farmer.services', 'farmer.adminServices', 'farmer.map', 'farmer.login', 'farmer.adminUpdate', 'farmer.user', 'farmer.userServices', 'ngMaterial', 'ngRoute', 'ngAnimate'])
->>>>>>> add user login page, not yet functional
+angular.module('farmer', ['xeditable','farmer.search', 'farmer.services', 'farmer.adminServices', 'farmer.map', 'farmer.login', 'farmer.adminUpdate', 'farmer.user', 'farmer.userServices', 'farmer.accordianController', 'ngMaterial', 'ngRoute', 'ngAnimate'])
+
 .config(($routeProvider, $httpProvider) => {
   $routeProvider
     .when('/search', {
