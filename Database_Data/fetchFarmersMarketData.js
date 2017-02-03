@@ -61,14 +61,4 @@ var fetchAllData = function (zipCode,coordinates, radius, res, cb) {
     })
 }
 
-<<<<<<< HEAD
 module.exports = fetchAllData;
-=======
-var dbInput = function () {
-
-}
-
-module.exports = fetchAllData;
-
-
->>>>>>> refresh
