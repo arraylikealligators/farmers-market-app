@@ -8,8 +8,7 @@ var path = require('path');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-
-
+var cron = require('node-cron');
 var routes = require('./routes/routes.js');
 
 
@@ -44,8 +43,15 @@ app.use(passport.session());
 app.use(flash());
 routes(app, passport);
 
+<<<<<<< HEAD
 
 refresh()
+=======
+console.log(new Date())
+cron.schedule('* * * * 7', function(){
+    refresh();
+});
+>>>>>>> refresh
 
 app.listen(port);
 console.log("server running on port " + port);
