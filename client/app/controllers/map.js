@@ -29,7 +29,9 @@ angular.module('farmer.map', ['farmer.services'])
       console.error(error);
     });
   };
-
+  $scope.stop = function ($event) {
+    $event.stopPropagation();
+  }
   $scope.selectedMarket = function(target) {
     console.log(target);
   }

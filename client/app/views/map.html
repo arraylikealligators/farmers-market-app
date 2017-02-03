@@ -25,40 +25,45 @@
 </div>
 <div class="results-display" layout="row">
   <!-- Product Filter Input -->
-  <section class="md-padding" flex="30" layout="column">
-    <md-input-container>
+  <section class="md-padding" flex="50" layout="column">
+    <md-input-container flex>
       <label>Filter Farmers Markets by Products</label>
       <input type="text" ng-model="prodFilter.Products">
     </md-input-container>
     <!-- Left-Panel Results Output -->
-
     <md-content layout="row" flex layout-align="center" layout-fill>
-      <div ng-controller="AccordianCtrl" flex="70" class="content" ui-view>
-        <md-item ng-repeat="market in results" ng-click="selectMarketIndex($index)" class="item" ng-class="{ 'selected-market': $index === selectedMarketIndex}">
+      <div ng-controller="AccordianCtrl" flex="100" class="content" ui-view>
+        <md-item ng-repeat="market in results" class="item" ng-class="{ 'selected-market': $index === selectedMarketIndex}">
           <md-item-content class="market tile md-whiteframe-z1" ng-class="{ 'selected md-whiteframe-z2': $index === selectedMarketIndex}"
             layout="column">
-            <div layout="row" layout-fill ng-click="selectUserIndex($index)" class="folded">
-              <div class="md-tile-content" layout="column" layout-align="center start">
+            <div layout="row" layout-fill class="folded">
+              <div class="md-tile-content" ng-click="selectMarketIndex($index)" layout="column" layout-align="center start">
                 <h3>{{ market.Name }}</h3>
-                <p ng-show="$index === selectedMarketIndex">
-                  <span>{{market.Schedule}}</span>
-                  <br/>
-                  <span> {{market.Products}}</span>
-                  <br/>
-                  <span>{{ market.Address }}</span>
-                  <br/>
-                </p>
+                <div ng-show="$index === selectedMarketIndex" ng-click = "stop($event)">
+                  <div class="check-element animate-show-hide" ng-model="checked">
+                    <span>{{market.Schedule}}</span>
+                    <br/>
+                    <span> {{market.Products}}</span>
+                    <br/>
+                    <span>{{ market.Address }}</span>
+                    <br/>
+                    <md-button type="submit" ng-model="checked" aria-label="Toggle ngShow"><br />
+                    <div>
+                      <md-input-container>
+                        <input type="text" ng-model="user.name">
+                        <md-button type="submit" class="md-raised">Submit</md-button>
+                      </md-input-container>
+                    </div>
+                </div>
+                </md-item-content>
               </div>
             </div>
-            <md-divider layout-fill ng-show="$index === selectedMarketIndex"></md-divider>
-            </md-item-content>
-            <md-divider class="divider-inset" ng-if="!$last"></md-divider>
         </md-item>
       </div>
     </md-content>
   </section>
   <!-- Google Maps -->
-  <div flex="70">
+  <div flex="50">
     <div id="map">
     </div>
     Market info out of date? Let us know!
