@@ -58,25 +58,26 @@
     <md-content layout="row" flex layout-align="center" layout-fill>
       <div ng-controller="AccordianCtrl" flex="70" class="content" ui-view>
         <md-item ng-repeat="market in results" ng-click="selectMarketIndex($index)" class="item" ng-class="{ 'selected-market': $index === selectedMarketIndex}">
-          
           <md-item-content class="market tile md-whiteframe-z1" ng-class="{ 'selected md-whiteframe-z2': $index === selectedMarketIndex}"
             layout="column">
             <div layout="row" layout-fill ng-click="selectUserIndex($index)" class="folded">
-                <div class="md-tile-content" layout="column" layout-align="center start">
-                  <h3>{{ market.Name }}</h3>
-                  <p ng-show="$index === selectedMarketIndex">
-                    <span>{{ market.GoogleLink }}</span>
-                    <br/>
-                    <span>{{ market.Address }}</span>
-                  </p>
-                </div>
+              <div class="md-tile-content" layout="column" layout-align="center start">
+                <h3>{{ market.Name }}</h3>
+                <p ng-show="$index === selectedMarketIndex">
+                  <span>{{market.Schedule}}</span>
+                  <br/>
+                  <span> {{market.Products}}</span>
+                  <br/>
+                  <span>{{ market.Address }}</span>
+                  <br/>
+                </p>
               </div>
-              <md-divider layout-fill ng-show="$index === selectedMarketIndex"></md-divider>
-              </md-item-content>
-
-              <md-divider class="divider-inset" ng-if="!$last"></md-divider>
+            </div>
+            <md-divider layout-fill ng-show="$index === selectedMarketIndex"></md-divider>
+            </md-item-content>
+            <md-divider class="divider-inset" ng-if="!$last"></md-divider>
         </md-item>
-        </div>
+      </div>
     </md-content>
   </section>
   <!-- Google Maps -->
@@ -89,4 +90,4 @@
     </md-button>
   </div>
   <!-- <div id="map" flex="70"></div> -->
-  </div>
+</div>
