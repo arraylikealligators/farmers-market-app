@@ -55,7 +55,7 @@ var fetchAllData = function (zipCode,coordinates, radius, res, cb) {
             });
           })
           if(index === JSON.parse(body).results.length -1) {
-            setTimeout(cb,500,coordinates, radius, res);
+            setTimeout(cb,1000,coordinates, radius, res);
           }
       })
     })
