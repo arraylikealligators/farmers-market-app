@@ -30,42 +30,15 @@
       <label>Filter Farmers Markets by Products</label>
       <input type="text" ng-model="prodFilter.Products">
     </md-input-container>
-    <!-- Filter with Autocomplete without using chips - Experiement 1 -->
-    <!-- <md-autocomplete
-          ng-model="prodFilter.Products"
-          md-selected-item="selectedItem"
-          md-search-text="searchText"
-          md-items="item in querySearch(searchText)"
-          md-item-text="item.product"
-          placeholder="Filter Farmers Markets by Products">
-          <span md-highlight-text="searchText">{{item.product}}</span>
-        </md-autocomplete> -->
-    <!-- Filter with Autocomplete using chips - Experiment 2 -->
-    <!-- <md-chips ng-model="selectedProducts.Products" md-autocomplete-snap md-transform-chip="transformChip($chip)" md-require-match="true">
-        <md-autocomplete
-          md-selected-item="selectedItem"
-          md-search-text="searchText"
-          md-items="item in querySearch(searchText)"
-          md-item-text="item.product"
-          placeholder="Filter Farmers Markets by Products">
-          <span md-highlight-text="searchText">{{item.product}}</span>
-        </md-autocomplete>
-        <md-chip-template>
-          <span>
-            <strong>{{$chip.product}}</strong>
-          </span>
-        </md-chip-template>
-      </md-chips> -->
     <!-- Left-Panel Results Output -->
-    <md-content>
+    <!--<md-content>
       <md-list flex>
         <md-list-item class="md-3-line animate-repeat" ng-repeat="market in results | filter:prodFilter:startsWith">
-          <!--<li ng-click="selectedMarket(market.Name)">{{ market.Name }}</li>-->
           <div layout="column">
             <h3 ng-click="selectedMarket(market.Name)">{{ market.Name }}</h3>
             <div ng-controller="AccordianCtrl">
               <accordion>
-                <accordion-group ng-click="selectedMarket(market.Name)" heading="{{market.Name}}" is-open="market.isOpen">
+                <accordion-group ng-click="selectMarket(market.Name)" heading="{{market.Name}}" is-open="market.isOpen">
                   <accordion-heading>
                     {{market.Name}}
                     {{market.isOpen}}
@@ -81,6 +54,30 @@
         </md-list-item>
       </md-list>
     </md-content>
+  </section>-->
+    <md-content layout="row" flex layout-align="center" layout-fill>
+      <div ng-controller="AccordianCtrl" flex="70" class="content" ui-view>
+        <md-item ng-repeat="market in results" ng-click="selectMarketIndex($index)" class="item" ng-class="{ 'selected-market': $index === selectedMarketIndex}">
+          
+          <md-item-content class="market tile md-whiteframe-z1" ng-class="{ 'selected md-whiteframe-z2': $index === selectedMarketIndex}"
+            layout="column">
+            <div layout="row" layout-fill ng-click="selectUserIndex($index)" class="folded">
+                <div class="md-tile-content" layout="column" layout-align="center start">
+                  <h3>{{ market.Name }}</h3>
+                  <p ng-show="$index === selectedMarketIndex">
+                    <span>{{ market.GoogleLink }}</span>
+                    <br/>
+                    <span>{{ market.Address }}</span>
+                  </p>
+                </div>
+              </div>
+              <md-divider layout-fill ng-show="$index === selectedMarketIndex"></md-divider>
+              </md-item-content>
+
+              <md-divider class="divider-inset" ng-if="!$last"></md-divider>
+        </md-item>
+        </div>
+    </md-content>
   </section>
   <!-- Google Maps -->
   <div flex="70">
@@ -92,4 +89,4 @@
     </md-button>
   </div>
   <!-- <div id="map" flex="70"></div> -->
-</div>
+  </div>
