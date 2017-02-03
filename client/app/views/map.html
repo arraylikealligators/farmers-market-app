@@ -31,30 +31,7 @@
       <input type="text" ng-model="prodFilter.Products">
     </md-input-container>
     <!-- Left-Panel Results Output -->
-    <!--<md-content>
-      <md-list flex>
-        <md-list-item class="md-3-line animate-repeat" ng-repeat="market in results | filter:prodFilter:startsWith">
-          <div layout="column">
-            <h3 ng-click="selectedMarket(market.Name)">{{ market.Name }}</h3>
-            <div ng-controller="AccordianCtrl">
-              <accordion>
-                <accordion-group ng-click="selectMarket(market.Name)" heading="{{market.Name}}" is-open="market.isOpen">
-                  <accordion-heading>
-                    {{market.Name}}
-                    {{market.isOpen}}
-                  </accordion-heading>
-                  {{result.market}}
-                  <br> {{result.isOpen}}
-                  <br>
-                  <button type="submit">Add Comment!</button>
-                </accordion-group>
-              </accordion>
-            </div>
-          </div>
-        </md-list-item>
-      </md-list>
-    </md-content>
-  </section>-->
+
     <md-content layout="row" flex layout-align="center" layout-fill>
       <div ng-controller="AccordianCtrl" flex="70" class="content" ui-view>
         <md-item ng-repeat="market in results" ng-click="selectMarketIndex($index)" class="item" ng-class="{ 'selected-market': $index === selectedMarketIndex}">
