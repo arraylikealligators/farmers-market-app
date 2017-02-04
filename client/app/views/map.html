@@ -84,28 +84,7 @@
 </div>
 <div class="results-display" layout="row">
   <!-- Product Filter Input -->
-  <section class="md-padding" flex="50" layout="column">
-    <md-input-container flex>
-      <label>Filter Farmers Markets by Products</label>
-      <input type="text" ng-model="search.Products">
-    </md-input-container>
-    <!-- Left-Panel Results Output -->
-    <md-content layout="row" flex layout-align="center" layout-fill>
-      <uib-accordion close-others="true" style="width: 100%;">
-        <div uib-accordion-group class="panel-default" heading="{{market.Name}}" ng-repeat="market in results |filter: search track by $index">
-          <button type="button" class="btn btn-info" ng-click="show(market, $event)">Share</button>
-          <div><label>Timing: </label> {{market.Schedule}}</div>
-          <div><label>Products: </label>
-            <md-chips readonly="true" ng-model="market.Products">
-          </div>
-          <div><label>Address: </label> {{ market.Address }}</div>
-          <md-input-container flex="50" ng-show="user" ng-controller="AccordianCtrl">
-            <label>Enter a comment</label>
-            <input type="text" ng-model="user.name">
-            <md-button ng-submit="submitComment()" md-no-ink class="md-primary">Submit</md-button>
-          </md-input-container>
-        </div>
-      </uib-accordion>
+
       <!--<div ng-controller="AccordianCtrl" flex="100" class="content" ui-view>
 <md-item ng-repeat="market in results track by $index" class="item" ng-class="{ 'selected-market': $index === selectedMarketIndex}">
 <md-item-content class="market tile md-whiteframe-z1" ng-class="{ 'selected md-whiteframe-z2': $index === selectedMarketIndex}" layout="column">
