@@ -18,5 +18,3 @@ var sms = function(phone, context) {
   })
 }
 module.exports = sms;
-// 9175950033
-// 9144470426 jerry
