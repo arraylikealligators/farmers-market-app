@@ -5,7 +5,7 @@ var sms = function(phone, context) {
     var token = process.env.token
     var client = new twilio.RestClient(accountSID, token);
     console.log(phone, context)
-    client.sendSms({
+    client.messages.create({
         to: phone,
         from: '3479348362',
         body: context
