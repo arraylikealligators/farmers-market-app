@@ -77,8 +77,8 @@ angular.module('farmer.userServices', [])
 
   var signout = function() {
     user = null;
-    $rootScope.user = user;
-    
+    $rootScope.user = null;
+
     $http.get('/logout')
     .then(res => {
       console.log('logout api call response: ', res);
