@@ -13,12 +13,10 @@ angular.module('farmer.accordianController', ['farmer.services'])
       }
     };
 
-    var fetch = function (results) {
-      $scope.results = results;
-    }
-
     $scope.comment = ''
     $scope.author = 'Peter'
+    $scope.comments = []
+    var arr
 
     $scope.submitComment = function (id) {
       const newComment = {
@@ -28,8 +26,14 @@ angular.module('farmer.accordianController', ['farmer.services'])
       }
       Search.sendNewComment(newComment)
         .then(data => {
-          console.log('line 32:  ', data);
+          arr = data.Comment
+          // console.log('line 30:  ', $scope.comments);
+         
         })
         .catch(err => console.error(err))
+         $scope.$apply(() => {
+            $scope.comments = arr
+          })
     }
+
   })
