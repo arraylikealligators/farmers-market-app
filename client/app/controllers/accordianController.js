@@ -16,13 +16,20 @@ angular.module('farmer.accordianController', ['farmer.services'])
     var fetch = function (results) {
       $scope.results = results;
     }
-    
-    $scope.addNew = function () {
-      $scope.results.push({
-        market: "New One Created",
-        content: "Dynamically added new one",
-        isOpen: false
-      });
 
+    $scope.comment = ''
+    $scope.author = 'Peter'
+
+    $scope.submitComment = function (id) {
+      const newComment = {
+        id,
+        author: $scope.author,
+        comment: $scope.comment
+      }
+      Search.sendNewComment(newComment)
+        .then(data => {
+          console.log('line 32:  ', data);
+        })
+        .catch(err => console.error(err))
     }
   })
