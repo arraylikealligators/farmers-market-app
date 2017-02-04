@@ -1,4 +1,4 @@
-angular.module('farmer.map', ['farmer.services'])
+angular.module('farmer.map', ['farmer.services', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
 
 .controller('MapController', function($scope, $location, Search, SampleData, GoogleMaps, $mdDialog) {
     $scope.address = ''; // Scope variable to store user address input
