@@ -7,14 +7,19 @@ var User = require('../model/userModel');
 
 module.exports = function(passport) {
   passport.serializeUser(function (user, done) {
+    console.log('serializing User');
     done(null, user.id);
   });
 
   passport.deserializeUser(function(id, done) {
+    console.log('deserializing User');
     User.findById(id, function(err, user) {
+      console.log(user);
+      passport.user = user;
       done(err, user);
     });
   });
+
 
   passport.use('local-signup', new LocalStrategy({
     usernameField: 'email',
@@ -36,7 +41,9 @@ module.exports = function(passport) {
           newUser.local.password = newUser.generateHash(password);
 
           newUser.save()
-          .then(newUser => done(null, newUser))
+          .then(newUser => {
+            return done(null, newUser);
+          })
           .catch(err => done(err));
         }
       });
@@ -53,7 +60,7 @@ module.exports = function(passport) {
     User.findOne({ 'local.email': email })
     .catch(err => done(err))
     .then(user => {
-      console.log('user obj from db lookup: ', user);
+      // console.log('user obj from db lookup: ', user);
       if (!user) {
         console.log('user not found');
         return done(null, false, req.flash('loginMessage', 'User not found.'));
@@ -62,7 +69,7 @@ module.exports = function(passport) {
         console.log('incorrect password');
         return done(null, false, req.flash('loginMessage', 'Incorrect password.'))
       }
-      console.log(user);
+      console.log('passport.js user returned from local-login ', user);
       return done(null, user);
     });
   }));

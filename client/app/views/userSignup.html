@@ -5,8 +5,9 @@
     </header>
 
     <main class="search-display">
-        <h1 class="search-header">Login To Rate, Review, and Tag Your Favorite Farmer's Markets!</h1>
-
+        <h1 class="search-header">Sign Up to Rate, Review, and Tag Your Favorite Farmer's Markets!</h1>
+        <p ng-show="error">{{ errorMessage }}</p>
+        
         <form ng-submit="signup();" name="signupForm">
             <div class="md-padding" layout="column">
 
@@ -16,11 +17,16 @@
                 </md-input-container>
 
                 <md-input-container flex>
+                    <label>Username</label>
+                    <input type="text" ng-model="username" />
+                </md-input-container>
+
+                <md-input-container flex>
                     <label>Password</label>
                     <input type="password" ng-model="password" />
                 </md-input-container>
 
-                <md-button type="submit" class="search-button md-raised md-primary">Login</md-button>
+                <md-button type="submit" class="search-button md-raised md-primary">Sign Up!</md-button>
             </div>
         </form>
     </main>
