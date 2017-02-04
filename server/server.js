@@ -24,10 +24,10 @@ mongoose.connect(mongoURI);
 
 // app.set('superSecret', keys.secret); // what does this do??
 // app.use(morgan('dev'));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
-app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client')));
 // app.use(routes); // may not need this because of passport.js
 
@@ -39,7 +39,8 @@ app.use(session({
   secret: 'amazingBongoBand',
   resave: false,
   saveUninitialized: true,
-  cookie : {}
+  // cookie: { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
+  // cookie: {}
 }));
 app.use(passport.initialize());
 app.use(passport.session());

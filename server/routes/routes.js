@@ -53,13 +53,15 @@ module.exports = function(app, passport) {
   * new routes for passport and auth *
   ************************************/
   app.post('/signup', function(req, res, next) {
+    console.log('routes.js  attempting to signup');
     passport.authenticate('local-signup', function(err, user, info) {
       if (err) return next(err); // will generate a 500 error
       // Generate a JSON response reflecting signup
       if (!user) {
-        return res.send({ success : false, message : 'signupfailed' });
+        return res.send({ success : false, message : 'signup failed' });
       }
-      return res.send({ success : true, message : 'signup succeeded' });
+      req.session.cookie.expires = false;
+      return res.send({ success : true, message : 'signup succeeded', user: user });
     })(req, res, next);
   });
 
@@ -71,7 +73,6 @@ module.exports = function(app, passport) {
   //     // `req.user` contains the authenticated user.
   //     res.redirect('/users/' + req.user.username);
   //   });
-
   app.post('/login', function(req, res, next) {
     passport.authenticate('local-login', function(err, user, info) {
       if (err) {
@@ -94,17 +95,32 @@ module.exports = function(app, passport) {
   });
 
   app.get('/logout', (req, res) => {
+    console.log('routes.js LOGGING OUT');
     req.logout();
+    passport.user = null;
     res.redirect('/');
   });
 
 
+  app.get('/api/isAuth', (req, res) => {
+    console.log('routes.js passport obj: ', passport);
+    console.log('routes.js passport.user obj: ', passport.user);
+    res.send(passport.user);
+  });
+
+
   app.post('/message', (req, res) => {
-    var phone = req.body.phoneNum;
-    var content = req.body.message;
-    twilio.sendMessage(phone, content);
-    res.status(200).send();
+      var time = 1000
+      req.body.forEach((num) => {
+          var phone = num.phoneNum;
+          var content = num.message;
+          setTimeout(twilio.sendMessage, time, phone, content);
+          time += 1000
+      })
+      res.status(200).send();
+
   })
+
 }
 
 // auth middleware for protected routes
