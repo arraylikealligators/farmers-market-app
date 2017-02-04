@@ -24,6 +24,19 @@ angular.module('farmer.services', [])
       })
   };
 
+  const sendNewComment = newCommentObject => {
+    return $http({
+      method: 'POST',
+      url: '/api/createComment',
+      data: newCommentObject
+    })
+      .then(response => {
+        console.log(response)
+        return response.data
+      })
+      .catch(err => console.error('sendNewComment failed!  ', err))
+  }
+
   // Retrives stored search results to be used in a controller
   const retrieveResults = () => {
     return searchResults;
@@ -38,7 +51,8 @@ angular.module('farmer.services', [])
   return {
     search: search,
     retrieveResults: retrieveResults,
-    sendMessage
+    sendMessage,
+    sendNewComment
   }
 })
 
