@@ -2,7 +2,7 @@
   "name": "fazzar",
   "version": "1.0.0",
   "description": "tells you where the closest farmers markets are in your area",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "start": "nodemon --ignore node_modules server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -31,14 +31,23 @@
   "dependencies": {
     "async": "^2.1.4",
     "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.4.7",
     "body-parser": "^1.16.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-session": "^1.15.0",
+    "jsonwebtoken": "^7.2.1",
     "jwt-simple": "^0.5.1",
     "mongoose": "^4.7.8",
+    "mongoose-geojson-schema": "^2.1.2",
+    "node-cron": "^1.1.2",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "q": "^1.4.1",
     "request": "^2.79.0",
-    "request-promise": "^4.1.1"
+    "request-promise": "^4.1.1",
+    "twilio": "^2.11.1"
   }
 }
