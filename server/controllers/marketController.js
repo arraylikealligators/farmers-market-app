@@ -31,9 +31,9 @@ module.exports = {
     console.log("obj received: ", req.body)
     const comment = req.body.comment
     const author = req.body.author
-    const ID = req.body.ID
+    const id = req.body.id
     createComment(
-        { "ID": ID},
+        { "ID": id},
           {"$push": {
             "Comments": {
               "author": author,

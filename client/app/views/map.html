@@ -42,11 +42,7 @@
                     </div>
 
                     <div><label>Address: </label> {{ market.Address }}</div>
-<<<<<<< HEAD
-                    <md-input-container flex="50" ng-show="user">
-=======
-                    <md-input-container flex="50" ng-controller="AccordianCtrl">
->>>>>>> add submitComment function to accordian controller
+                    <md-input-container flex="50" ng-show="user" ng-controller="AccordianCtrl">
                         <label>Enter a comment</label>
                         <input type="text" ng-model="comment">
                         <md-button ng-click="submitComment(market.ID)" md-no-ink class="md-primary">Submit</md-button>

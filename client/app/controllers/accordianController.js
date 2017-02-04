@@ -26,8 +26,7 @@ angular.module('farmer.accordianController', ['farmer.services'])
         author: $scope.author,
         comment: $scope.comment
       }
-
-      $scope.sendNewComment(newComment)
+      Search.sendNewComment(newComment)
         .then(data => {
           console.log('line 32:  ', data);
         })
