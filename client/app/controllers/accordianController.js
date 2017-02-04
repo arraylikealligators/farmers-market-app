@@ -28,12 +28,9 @@ angular.module('farmer.accordianController', ['farmer.services'])
         .then(data => {
           arr = data.Comment
           // console.log('line 30:  ', $scope.comments);
-         
+
         })
         .catch(err => console.error(err))
-         $scope.$apply(() => {
-            $scope.comments = arr
-          })
     }
 
   })
