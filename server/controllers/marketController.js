@@ -12,7 +12,6 @@ var queryById = Q.nbind(Market.findById, Market);
 var findAndUpdate = Q.nbind(Market.update, Market);
 var findAndRemove = Q.nbind(Market.remove, Market);
 var createMarket = Q.nbind(Market.create, Market);
-var createComment = Q.nbind(Market.createComment, Market);
 
 var zipQuery = Q.nbind(zip.find, zip);
 module.exports = {
@@ -28,13 +27,15 @@ module.exports = {
   },
 
   createComment: (req, res) => {
+    console.log("obj received: ", req.body);
     const comment = req.body.comment
     const author = req.body.author
-    console.log(`2) In marketController building new comment by:  Author= ${author}  Comment= ${comment}`)
     const newComment = {
       comment,
       author
     }
+    console.log(`2) In marketController building new comment: ${JSON.stringify(newComment)}`)
+
     // then -> currentMarket.comments.push(newComment)
   },
 
