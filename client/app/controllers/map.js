@@ -1,6 +1,6 @@
-angular.module('farmer.map', ['farmer.services', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
+angular.module('farmer.map', ['farmer.services', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'farmer.userServices'])
 
-.controller('MapController', function($scope, $location, Search, SampleData, GoogleMaps, $mdDialog) {
+.controller('MapController', function($scope, $location, $rootScope, Search, SampleData, GoogleMaps, $mdDialog, UserAuth) {
   $scope.address = ''; // Scope variable to store user address input
   $scope.radius = 2; // Scope variable to store search radius input
 
@@ -197,5 +197,24 @@ on ${market.Address}.`
       return obj;
     });
   };
+
+  $scope.login = (email, password) => {
+    console.log('maps.js login()', email, password);
+    $scope.error = false;
+
+    UserAuth.login({email: email, password: password})
+    .then(success => {
+      console.log(success);
+      if (success) {
+        $rootScope.user = success;
+      } else {
+        $scope.error = true;
+        $scope.errorMessage = "Invalid username or password"
+      }
+    })
+    .catch();
+  };
+
+
 
 });
