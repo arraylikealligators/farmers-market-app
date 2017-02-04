@@ -42,10 +42,11 @@ module.exports = {
             }
           }
         },
-        {"returnNewDocument": true}
+        {new: true}
       )
-      .then(newComment => {
-        res.json(newComment)
+      .then((newComment) => {
+        console.log('line 48    ', newComment.Comments[newComment.Comments.length - 1]);
+        res.send(newComment)
       })
       .catch(err => {
         console.error('new comment NOT created!  ', err)
