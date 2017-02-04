@@ -159,13 +159,14 @@ angular.module('farmer.services', [])
 
     // Zoom and centers map around all markers in storage
     const autoCenter = (map, storage) => {
+        console.log(map)
         let bounds = new google.maps.LatLngBounds();
 
         for (let i = 0; i < storage.length; i++) {
             bounds.extend(storage[i].position);
         }
-        map.setCenter(bounds.getCenter());
         map.fitBounds(bounds);
+        map.panToBounds(bounds);
     }
 
     return {

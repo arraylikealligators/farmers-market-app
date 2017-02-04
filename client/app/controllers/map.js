@@ -1,4 +1,4 @@
-angular.module('farmer.map', ['farmer.services'])
+angular.module('farmer.map', ['farmer.services', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
 
 .controller('MapController', function($scope, $location, Search, SampleData, GoogleMaps, $mdDialog) {
     $scope.address = ''; // Scope variable to store user address input
@@ -21,7 +21,7 @@ angular.module('farmer.map', ['farmer.services'])
                 // Centers map view on new markers
                 GoogleMaps.autoCenter($scope.map, $scope.markers);
 
-                allProducts = getProdList($scope.results);
+                // allProducts = getProdList($scope.results);
                 console.log(allProducts);
 
             })
@@ -113,8 +113,8 @@ angular.module('farmer.map', ['farmer.services'])
             return { name: chip, type: 'new' }
         }
         // Stores an array of unique product categories
-    let allProducts = getProdList($scope.results);
-    // See Angular Material Chip documentation - Refer to Custom Input example in Demo for more info on the variables belwow
+        // let allProducts = getProdList($scope.results);
+        // See Angular Material Chip documentation - Refer to Custom Input example in Demo for more info on the variables belwow
     $scope.selectedProducts = [];
 
     $scope.selectedItem = null;
@@ -177,6 +177,7 @@ angular.module('farmer.map', ['farmer.services'])
         let list = new Set();
 
         markets.forEach((market) => {
+            console.log(market.Products)
             let products = market.Products.split(/\s*;\s*/);
             for (let product of products) {
                 list.add(product);
