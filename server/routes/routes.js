@@ -73,6 +73,9 @@ module.exports = function(app, passport) {
   //     // `req.user` contains the authenticated user.
   //     res.redirect('/users/' + req.user.username);
   //   });
+
+
+
   app.post('/login', function(req, res, next) {
     passport.authenticate('local-login', function(err, user, info) {
       if (err) {
@@ -101,7 +104,6 @@ module.exports = function(app, passport) {
     res.redirect('/');
   });
 
-
   app.get('/api/isAuth', (req, res) => {
     console.log('routes.js passport obj: ', passport);
     console.log('routes.js passport.user obj: ', passport.user);
@@ -125,8 +127,8 @@ module.exports = function(app, passport) {
 
 // auth middleware for protected routes
 function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.redirect('/login');
+  if (req.isAuthenticated()) return next();
+  res.redirect('/login');
 }
 
 
