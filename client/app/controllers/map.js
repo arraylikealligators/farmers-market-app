@@ -136,16 +136,37 @@ angular.module('farmer.map', ['farmer.services'])
         }
     }
 
-    $scope.show = function(index, $event) {
+    $scope.show = function(market, $event) {
         $mdDialog.show({
             targetEvent: $event,
             scope: $scope,
             preserveScope: true,
             templateUrl: 'pop.html',
-            clickOutsudeToCLose: true,
+            clickOutsideToClose: true,
             controller: function DialogController($scope, $mdDialog) {
-                $scope.user = []
+                var message = `Lets Meet Up! @ ${market.Name},
+                on ${market.Address}.`
+                var counter = 0
+                $scope.messageArr = [{
+                    id: counter,
+                    message,
+                    phoneNum: ''
+                }];
 
+                $scope.addMore = function($event) {
+                    counter++;
+                    $scope.messageArr.push({
+                        id: counter,
+                        message,
+                        phoneNum: ''
+                    });
+                    $event.preventDefault();
+                }
+
+                $scope.send = function() {
+                    Search.sendMessage($scope.messageArr);
+                    $mdDialog.hide();
+                }
             }
         })
     }
