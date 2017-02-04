@@ -27,5 +27,11 @@ angular.module('farmer.search', ['farmer.services'])
   $scope.redirectToLogin = () => {
     $location.path('/login');
   }
+  $scope.redirectToSignup = () => {
+    $location.path('/signup');
+  }
+  $scope.redirectToProfile = () => {
+    $location.path('/profile');
+  }
 
 });

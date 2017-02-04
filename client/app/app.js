@@ -13,7 +13,8 @@ angular.module('farmer', [
     })
     .when('/map', {
       templateUrl: 'app/views/map.html',
-      controller: 'MapController'
+      controller: 'MapController',
+      authenticate: true
     })
     .when('/adminUpdate', {
       templateUrl: 'app/views/adminSubmit.html',
@@ -24,6 +25,7 @@ angular.module('farmer', [
       templateUrl: 'app/views/adminLogin.html',
       controller: 'LoginController',
     })
+     /*********************************************/
     /** new routes with addition of passportjs  **/
     .when('/login', {
       templateUrl: 'app/views/userLogin.html',
@@ -36,13 +38,20 @@ angular.module('farmer', [
     .when('/logout', {
       controller: 'UserController',
     })
+    .when('/profile', {
+      templateUrl: 'app/views/userProfile.html',
+      controller: 'UserController',
+      authenticate: true
+    })
     // end of new routes
+
     .otherwise({
       redirectTo: '/'
     });
 
     // an $httpProvider interceptor is added to all request calls so that all outgoing $http requests have the token attached
-    $httpProvider.interceptors.push('AttachTokens');
+
+    // $httpProvider.interceptors.push('AttachTokens');
 })
 .factory('AttachTokens', function($window) {
   var attach = {
@@ -57,13 +66,17 @@ angular.module('farmer', [
   };
   return attach;
 })
-.run(function($rootScope, $location, Auth) {
+.run(function($rootScope, $location, UserAuth) {
   // listen for when user wants to make a route change
   // make sure to send the token to the server with the route change request
   // redirect to admin login for the route(s) that require an 'authenticate'
   $rootScope.$on('$routeChangeStart', function(evt, next, current) {
-    if(next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
-      $location.path('/adminLogin');
-    }
+    console.log('route change triggered');
+    UserAuth.isAuth().then(authorized => {
+      console.log('front-end auth', authorized);
+      if (next.$$route && next.$$route.authenticate && !authorized.data) {
+        $location.path('/login');
+      }
+    })
   });
 });

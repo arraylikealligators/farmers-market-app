@@ -7,14 +7,19 @@ var User = require('../model/userModel');
 
 module.exports = function(passport) {
   passport.serializeUser(function (user, done) {
+    console.log('serializing User');
     done(null, user.id);
   });
 
   passport.deserializeUser(function(id, done) {
+    console.log('deserializing User');
     User.findById(id, function(err, user) {
+      console.log(user);
+      passport.user = user;
       done(err, user);
     });
   });
+
 
   passport.use('local-signup', new LocalStrategy({
     usernameField: 'email',
@@ -36,7 +41,9 @@ module.exports = function(passport) {
           newUser.local.password = newUser.generateHash(password);
 
           newUser.save()
-          .then(newUser => done(null, newUser))
+          .then(newUser => {
+            return done(null, newUser);
+          })
           .catch(err => done(err));
         }
       });
