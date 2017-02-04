@@ -35,8 +35,8 @@
         <md-content layout="row" flex layout-align="center" layout-fill>
             <uib-accordion close-others="true" style="width: 100%;">
                 <div uib-accordion-group class="panel-default" heading="{{market.Name}}" ng-repeat="market in results |filter: search track by $index">
+                    <button type="button" class="btn btn-info" ng-click="show(market, $event)">Share</button>
                     <div><label>Timing: </label> {{market.Schedule}}</div>
-                    <!--{{market.Products}}-->
                     <div><label>Products: </label>
                         <md-chips readonly="true" ng-model="market.Products">
                     </div>
@@ -98,9 +98,7 @@
             <md-toolbar>
                 <div class="md-toolbar-tools">
                     <h2>Share</h2>
-                    <!--<md-button class="md-icon-button" ng-click="cancel()">
-         <md-ico 
-        </md-buttom>-->
+
                 </div>
             </md-toolbar>
             <md-dialog-content>
