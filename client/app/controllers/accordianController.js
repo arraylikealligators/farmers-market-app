@@ -31,9 +31,6 @@ angular.module('farmer.accordianController', ['farmer.services'])
          
         })
         .catch(err => console.error(err))
-         $scope.$apply(() => {
-            $scope.comments = arr
-          })
     }
 
   })
