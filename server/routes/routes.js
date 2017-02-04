@@ -24,7 +24,6 @@ module.exports = function(app, passport) {
     marketController.createMarket(req, res);
   });
 
-<<<<<<< HEAD
   app.post('/api/getOne', (req,res) => {
     marketController.fetchOne(req, res);
   });
