@@ -24,6 +24,7 @@ module.exports = function(app, passport) {
     marketController.createMarket(req, res);
   });
 
+<<<<<<< HEAD
   app.post('/api/getOne', (req,res) => {
     marketController.fetchOne(req, res);
   });
@@ -73,6 +74,9 @@ module.exports = function(app, passport) {
   //     // `req.user` contains the authenticated user.
   //     res.redirect('/users/' + req.user.username);
   //   });
+
+
+
   app.post('/login', function(req, res, next) {
     passport.authenticate('local-login', function(err, user, info) {
       if (err) {
