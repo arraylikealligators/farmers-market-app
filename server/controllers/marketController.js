@@ -28,11 +28,10 @@ module.exports = {
   },
 
   createComment: (req, res) => {
-    console.log("obj received: ", req.body);
+    console.log("obj received: ", req.body)
     const comment = req.body.comment
     const author = req.body.author
     const ID = req.body.ID
-
     createComment(
         { "ID": ID},
           {"$push": {
@@ -42,10 +41,14 @@ module.exports = {
               "timestamp": new Date()
             }
           }
-        }
+        },
+        {"returnNewDocument": true}
       )
-      .then(data => {
-        console.log(`2) In marketController building new comment: ${JSON.stringify(data)}`)
+      .then(newComment => {
+        res.json(newComment)
+      })
+      .catch(err => {
+        console.error('new comment NOT created!  ', err)
       })
   },
 
