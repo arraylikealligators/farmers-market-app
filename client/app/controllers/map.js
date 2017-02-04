@@ -14,7 +14,7 @@ angular.module('farmer.map', ['farmer.services', 'ngAnimate', 'ngSanitize', 'ui.
         $scope.results = results;
 
         // Deletes markers currently on the map
-        GoogleMaps.Marker.deleteAll($scope.markers);
+        $scope.markers = GoogleMaps.Marker.deleteAll($scope.markers);
 
         // Adds markers from new results
         for (let i = 0; i < $scope.results.length; i++) {
@@ -25,7 +25,7 @@ angular.module('farmer.map', ['farmer.services', 'ngAnimate', 'ngSanitize', 'ui.
         GoogleMaps.autoCenter($scope.map, $scope.markers);
 
         // allProducts = getProdList($scope.results);
-        console.log(allProducts);
+        // console.log(allProducts);
 
       })
       .catch(function(error) {

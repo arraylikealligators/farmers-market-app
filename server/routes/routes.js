@@ -101,7 +101,6 @@ module.exports = function(app, passport) {
     res.redirect('/');
   });
 
-
   app.get('/api/isAuth', (req, res) => {
     console.log('routes.js passport obj: ', passport);
     console.log('routes.js passport.user obj: ', passport.user);
@@ -125,8 +124,8 @@ module.exports = function(app, passport) {
 
 // auth middleware for protected routes
 function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.redirect('/login');
+  if (req.isAuthenticated()) return next();
+  res.redirect('/login');
 }
 
 
