@@ -60,7 +60,7 @@ module.exports = function(passport) {
     User.findOne({ 'local.email': email })
     .catch(err => done(err))
     .then(user => {
-      console.log('user obj from db lookup: ', user);
+      // console.log('user obj from db lookup: ', user);
       if (!user) {
         console.log('user not found');
         return done(null, false, req.flash('loginMessage', 'User not found.'));
@@ -69,7 +69,7 @@ module.exports = function(passport) {
         console.log('incorrect password');
         return done(null, false, req.flash('loginMessage', 'Incorrect password.'))
       }
-      console.log(user);
+      console.log('passport.js user returned from local-login ', user);
       return done(null, user);
     });
   }));

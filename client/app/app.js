@@ -14,7 +14,6 @@ angular.module('farmer', [
     .when('/map', {
       templateUrl: 'app/views/map.html',
       controller: 'MapController',
-      authenticate: true
     })
     .when('/adminUpdate', {
       templateUrl: 'app/views/adminSubmit.html',
@@ -50,7 +49,6 @@ angular.module('farmer', [
     });
 
     // an $httpProvider interceptor is added to all request calls so that all outgoing $http requests have the token attached
-
     // $httpProvider.interceptors.push('AttachTokens');
 })
 .factory('AttachTokens', function($window) {
@@ -76,6 +74,9 @@ angular.module('farmer', [
       console.log('front-end auth', authorized);
       if (next.$$route && next.$$route.authenticate && !authorized.data) {
         $location.path('/login');
+      } else {
+        $rootScope.user = authorized.data;
+        console.log('rootScope user: ', $rootScope.user);
       }
     })
   });

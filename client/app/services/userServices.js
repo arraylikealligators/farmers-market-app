@@ -62,21 +62,23 @@ angular.module('farmer.userServices', [])
       var success = res.data.success;
       user = res.data.user
 
-      console.log('$http.post success', success, res);
-      console.log('$http.post success', res.data.success);
+      // console.log('$http.post success', success, res);
+      // console.log('$http.post success', res.data.success);
       deferred.resolve(user);
     })
     .catch(err => {
       console.log(err)
       deferred.reject(err);
     });
-    console.log('returning deferred promise');
+    // console.log('returning deferred promise');
     return deferred.promise;
   }
 
   var signout = function() {
     $http.get('/logout')
-    .then()
+    .then(res => {
+      console.log('logout api call response: ', res);
+    })
     .catch();
   }
 

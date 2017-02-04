@@ -1,6 +1,6 @@
 angular.module('farmer.search', ['farmer.services'])
 
-.controller('SearchController', function ($scope, $location, Search) {
+.controller('SearchController', function ($scope, $location, $rootScope, Search, UserAuth) {
   $scope.address = '';
   $scope.radius = 2;
   $scope.submit = () => {
@@ -32,6 +32,11 @@ angular.module('farmer.search', ['farmer.services'])
   }
   $scope.redirectToProfile = () => {
     $location.path('/profile');
+  }
+  $scope.logout = () => {
+    console.log('user.js LOGGING OUT');
+    UserAuth.signout();
+    $rootScope.user = undefined;
   }
 
 });

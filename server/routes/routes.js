@@ -81,6 +81,7 @@ module.exports = function(app, passport) {
       }
       console.log('routes.js: login successful');
       req.login(user, function() {
+        console.log('user: ', user);
         return res.send({ success : true,
           message : 'login succeeded',
           user: user
@@ -90,13 +91,16 @@ module.exports = function(app, passport) {
   });
 
   app.get('/logout', (req, res) => {
+    console.log('routes.js LOGGING OUT');
     req.logout();
+    passport.user = null;
     res.redirect('/');
   });
 
 
   app.get('/api/isAuth', (req, res) => {
-    console.log('passport', passport.user);
+    console.log('routes.js passport obj: ', passport);
+    console.log('routes.js passport.user obj: ', passport.user);
     res.send(passport.user);
   });
 
