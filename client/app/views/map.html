@@ -22,6 +22,7 @@
       </form>
     </div>
   </header>
+
 </div>
 <div class="results-display" layout="row">
   <!-- Product Filter Input -->
@@ -45,6 +46,29 @@
             <input type="text" ng-model="user.name">
             <md-button ng-submit="submitComment()" md-no-ink class="md-primary">Submit</md-button>
           </md-input-container>
+
+          <div style="margin-top: 1em;" ng-show="!user">
+            <div><label>Log in to leave a comment!</label></div>
+            <md-input-container flex="50" >
+              <span>
+                <label>Email</label>
+                <input type="text" ng-model="email">
+              </span>
+            </md-input-container>
+            <md-input-container flex="50">
+              <span>
+                <label>Password</label>
+                <input type="password" ng-model="password">
+              </span>
+            </md-input-container>
+            <md-button ng-click="login(email, password)" md-no-ink class="md-primary">Login</md-button>
+            <label ng-show="error">{{ errorMessage }}<label>
+          </div>
+
+
+
+
+
         </div>
       </uib-accordion>
       <!--<div ng-controller="AccordianCtrl" flex="100" class="content" ui-view>

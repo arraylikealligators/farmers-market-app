@@ -1,6 +1,6 @@
 angular.module('farmer.userServices', [])
 
-.factory('UserAuth', function($q, $timeout, $http) {
+.factory('UserAuth', function($q, $timeout, $http, $rootScope) {
   var user = null;
 
   var isAuth = function() {
@@ -33,6 +33,7 @@ angular.module('farmer.userServices', [])
     .then(function(res) {
       var success = res.data.success;
       user = res.data.user
+      $rootScope.user = user;
 
       console.log('$http.post success', success, res);
       console.log('$http.post success', res.data.success);
@@ -75,6 +76,9 @@ angular.module('farmer.userServices', [])
   }
 
   var signout = function() {
+    user = null;
+    $rootScope.user = user;
+    
     $http.get('/logout')
     .then(res => {
       console.log('logout api call response: ', res);

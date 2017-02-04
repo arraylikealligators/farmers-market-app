@@ -101,7 +101,6 @@ module.exports = function(app, passport) {
     console.log('routes.js LOGGING OUT');
     req.logout();
     passport.user = null;
-    res.redirect('/');
   });
 
   app.get('/api/isAuth', (req, res) => {
