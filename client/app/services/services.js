@@ -128,6 +128,7 @@ angular.module('farmer.services', [])
     deleteAll: (storage) => {
       Marker.clearAll(storage);
       storage = [];
+      return storage;
     },
 
     // Creates a marker and inserts in the storage array
@@ -159,10 +160,9 @@ angular.module('farmer.services', [])
 
   // Zoom and centers map around all markers in storage
   const autoCenter = (map, storage) => {
-    console.log(map)
     let bounds = new google.maps.LatLngBounds();
-
     for (let i = 0; i < storage.length; i++) {
+      console.log(storage[i].getPosition().lng())
       bounds.extend(storage[i].position);
     }
     map.fitBounds(bounds);
