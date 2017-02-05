@@ -14,6 +14,8 @@ angular.module('farmer.accordianController', ['farmer.services'])
     };
 
     $scope.comment = ''
+    
+    // TODO: add author field
     $scope.author = 'Peter'
     $scope.comments = []
     var arr
