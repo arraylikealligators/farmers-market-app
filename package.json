@@ -5,7 +5,8 @@
   "main": "server/server.js",
   "scripts": {
     "start": "nodemon --ignore node_modules server/server.js",
-    "test": "protractor test/e2e/conf.js "
+    "test": "npm run webdriver & protractor test/e2e/conf.js",
+    "webdriver": "webdriver-manager start & wait"
   },
   "repository": {
     "type": "git",
