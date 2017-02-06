@@ -40,3 +40,5 @@ jspm_packages
 # KEYS
 API_KEYS.js
 
+# ENV
+.env

@@ -1,3 +1,4 @@
+require('dotenv').config()
 var express = require('express');
 var session = require('express-session');
 var passport = require('passport');
@@ -10,7 +11,6 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var cron = require('node-cron');
 var routes = require('./routes/routes.js');
-
 
 var app = express();
 var port = process.env.PORT || 8080;
