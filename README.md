@@ -2,6 +2,9 @@
 Where are the closest farmers' markets?!?!?
 
 ## Team
+- Tony Xu
+- Rishi Shah
+- Nino Rekhviashvili
 - Kevin Fung
 - RJ Mohammad
 - Peter Schussheim
